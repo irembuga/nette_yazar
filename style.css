@@ -1,68 +1,163 @@
-.survey {
-    background: #f8f8f8;
+:root {
+    --navy: #1a237e;
+    --light-navy: #303f9f;
+    --beige: #f5f5dc;
+    --cream: #fff8e1;
+    --white: #ffffff;
+    --gold: #ffc107;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--cream);
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(135deg, var(--navy), var(--light-navy));
+    color: var(--white);
+    text-align: center;
+    padding: 1.5rem 1rem;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    margin-bottom: 0.3rem;
+}
+
+.subtitle {
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.author {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* Hakkımda Bölümü */
+.about-me {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 220px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    font-size: 0.85rem;
+}
+
+.profile-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 0.5rem;
+    border: 2px solid var(--white);
+    object-fit: cover;
+}
+
+/* Anket Bölümü */
+.survey-section {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: var(--white);
     border-radius: 10px;
-    padding: 25px;
-    margin: 30px auto;
-    max-width: 500px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
-.survey h3 {
+.star-rating {
+    direction: rtl;
+    unicode-bidi: bidi-override;
     text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-    font-size: 1.3rem;
+    margin: 1.5rem 0;
 }
 
-.rating {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.rating-stars {
-    display: flex;
-    direction: rtl; /* Sağdan sola sıralama */
-    font-size: 2rem;
-}
-
-.rating-stars input {
+.star-rating input {
     display: none;
 }
 
-.rating-stars label {
+.star-rating label {
+    font-size: 2rem;
     color: #ddd;
     cursor: pointer;
-    padding: 0 5px;
+    padding: 0 3px;
 }
 
-.rating-stars input:checked ~ label,
-.rating-stars label:hover,
-.rating-stars label:hover ~ label {
-    color: #ffc107; /* Altın rengi */
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: var(--gold);
 }
 
-.rating-labels {
+/* Blog Grid */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.blog-card {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    font-size: 0.85rem;
-    color: #666;
+    align-items: center;
 }
 
-button[type="submit"] {
-    display: block;
-    margin: 20px auto 0;
-    padding: 8px 25px;
-    background: #1a237e;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background 0.3s;
+.card-header h2 {
+    font-size: 1.2rem;
 }
 
-button[type="submit"]:hover {
-    background: #303f9f;
+.card-header time {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.card-content {
+    padding: 1.2rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 3rem;
+    background: var(--navy);
+    color: var(--white);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .about-me {
+        position: static;
+        width: 100%;
+        margin: 1rem auto;
+    }
+    
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
 }
