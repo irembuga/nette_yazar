@@ -1,82 +1,95 @@
+/* TEMEL STİLLER */
 :root {
-    --navy: #1a237e;
-    --light-navy: #303f9f;
-    --beige: #f5f5dc;
-    --cream: #fff8e1;
-    --white: #ffffff;
-    --gold: #ffc107;
+    --lacivert: #1a237e;
+    --pastel-mavi: #e3f2fd;
+    --bej: #f5f5dc;
+    --krem: #fff8e1;
+    --beyaz: #ffffff;
+    --altin: #ffc107;
 }
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: var(--cream);
+    background-color: var(--krem);
     color: #333;
     line-height: 1.6;
+    margin: 0;
 }
 
+/* BAŞLIK */
 header {
-    background: linear-gradient(135deg, var(--navy), var(--light-navy));
-    color: var(--white);
+    background: linear-gradient(135deg, var(--lacivert), #303f9f);
+    color: var(--beyaz);
     text-align: center;
-    padding: 1.5rem 1rem;
+    padding: 1.8rem 1rem;
     position: relative;
-    margin-bottom: 2rem;
+    border-bottom: 3px solid var(--altin);
 }
 
 h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    margin-bottom: 0.3rem;
-}
-
-.subtitle {
-    font-style: italic;
-    margin-bottom: 0.5rem;
-}
-
-.author {
-    font-size: 0.9rem;
+    font-size: 2.3rem;
+    margin: 0;
     letter-spacing: 1px;
 }
 
-/* Hakkımda Bölümü */
+.subtitle {
+    font-size: 1.2rem;
+    margin: 0.3rem 0;
+    font-style: italic;
+    color: rgba(255,255,255,0.9);
+}
+
+.author {
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+    color: rgba(255,255,255,0.8);
+}
+
+/* HAKKIMDA */
 .about-me {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 220px;
-    background: rgba(255, 255, 255, 0.9);
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 230px;
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 8px;
     padding: 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    font-size: 0.85rem;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    font-size: 0.9rem;
+    line-height: 1.5;
 }
 
 .profile-img {
-    width: 70px;
-    height: 70px;
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
     display: block;
-    margin: 0 auto 0.5rem;
-    border: 2px solid var(--white);
-    object-fit: cover;
+    margin: 0 auto 0.7rem;
+    border: 2px solid var(--lacivert);
 }
 
-/* Anket Bölümü */
+/* ANKET */
 .survey-section {
     max-width: 600px;
-    margin: 2rem auto;
-    padding: 1.5rem;
-    background: var(--white);
+    margin: 2.5rem auto;
+    padding: 1.8rem;
+    background: var(--beyaz);
     border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.survey-section h3 {
+    text-align: center;
+    color: var(--lacivert);
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
 }
 
 .star-rating {
     direction: rtl;
-    unicode-bidi: bidi-override;
     text-align: center;
-    margin: 1.5rem 0;
+    margin: 1.8rem 0;
 }
 
 .star-rating input {
@@ -84,34 +97,51 @@ h1 {
 }
 
 .star-rating label {
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: #ddd;
     cursor: pointer;
-    padding: 0 3px;
+    padding: 0 5px;
+    transition: all 0.2s;
 }
 
 .star-rating input:checked ~ label,
 .star-rating label:hover,
 .star-rating label:hover ~ label {
-    color: var(--gold);
+    color: var(--altin);
 }
 
-/* Blog Grid */
+button[type="submit"] {
+    display: block;
+    margin: 1.5rem auto 0;
+    padding: 0.6rem 2rem;
+    background: var(--lacivert);
+    color: var(--beyaz);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+button[type="submit"]:hover {
+    background: #0d1b6b;
+}
+
+/* BLOG YAZILARI */
 .blog-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 1.5rem;
-    padding: 1rem;
+    gap: 1.8rem;
+    padding: 1.5rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .blog-card {
-    background: var(--white);
+    background: var(--beyaz);
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s;
 }
 
 .blog-card:hover {
@@ -119,16 +149,17 @@ h1 {
 }
 
 .card-header {
-    background: var(--navy);
-    color: var(--white);
-    padding: 1rem;
+    background: var(--lacivert);
+    color: var(--beyaz);
+    padding: 1.2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .card-header h2 {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
+    margin: 0;
 }
 
 .card-header time {
@@ -137,24 +168,24 @@ h1 {
 }
 
 .card-content {
-    padding: 1.2rem;
+    padding: 1.5rem;
+    color: #555;
 }
 
-/* Footer */
+/* FOOTER */
 footer {
     text-align: center;
-    padding: 1.5rem;
-    margin-top: 3rem;
-    background: var(--navy);
-    color: var(--white);
+    padding: 1.8rem;
+    background: var(--lacivert);
+    color: var(--beyaz);
 }
 
-/* Responsive */
+/* MOBİL */
 @media (max-width: 768px) {
     .about-me {
         position: static;
-        width: 100%;
-        margin: 1rem auto;
+        width: 85%;
+        margin: 1.5rem auto;
     }
     
     .blog-grid {
