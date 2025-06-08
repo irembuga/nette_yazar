@@ -6,67 +6,102 @@
     <title>Nette Yazar | Yokuş Hikayesi</title>
     <meta name="description" content="İrem BUĞA'nın kişisel blogu. Yokuş Hikayesi ile hayata dair notlar...">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Mini CSS Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+    </style>
 </head>
 <body>
-    <!-- Başlık ve Etnik Desenli Header -->
+    <!-- Başlık ve Menü -->
     <header>
-        <div class="header-pattern"></div>
         <div class="header-content">
             <h1>Nette Yazar</h1>
             <p class="subtitle">Yokuş Hikayesi</p>
             <p class="author">İrem BUĞA</p>
         </div>
+        <nav>
+            <a href="#">Ana Sayfa</a>
+            <a href="#">Arşiv</a>
+            <a href="#">İletişim</a>
+        </nav>
     </header>
+
+    <!-- Hakkımda (Sağ Üst) -->
+    <aside class="about-me">
+        <img src="images/profile.jpg" alt="İrem BUĞA" class="profile-img">
+        <div class="about-content">
+            <p>Yazmak bana şu hayatta en iyi gelen şey... Yazdıklarımı sizlerle paylaşıp, üzerine konuşmak eminim daha da zevkli olacaktır. Daha umutlu yarınlar için... Keyifli Okumalar!</p>
+        </div>
+    </aside>
 
     <!-- Ana İçerik -->
     <main>
-        <!-- Hakkımda (Sağ Üst Köşe) -->
-        <aside class="about-me">
-            <img src="images/profile-photo.jpg" alt="İrem BUĞA">
-            <h3>Hakkımda</h3>
-            <p>34 yazılık bu serüvende benimle yokuşları tırmanmaya hazır mısınız?</p>
-        </aside>
-
-        <!-- Anket -->
-        <section class="survey">
-            <form name="memnuniyet-anketi" netlify>
-                <h3>Bu yazıyı nasıl buldunuz?</h3>
-                <div class="survey-options">
-                    <label><input type="radio" name="rating" value="5"> ★★★★★</label>
-                    <label><input type="radio" name="rating" value="4"> ★★★★</label>
-                    <label><input type="radio" name="rating" value="3"> ★★★</label>
-                    <label><input type="radio" name="rating" value="2"> ★★</label>
-                    <label><input type="radio" name="rating" value="1"> ★</label>
+        <!-- Modern Anket -->
+        <section class="survey-section">
+            <form name="yazi-degerlendirme" netlify>
+                <h3>Yazılarımı nasıl buldunuz?</h3>
+                <div class="star-rating">
+                    <input type="radio" id="5-stars" name="rating" value="5">
+                    <label for="5-stars" title="Mükemmel">★</label>
+                    
+                    <input type="radio" id="4-stars" name="rating" value="4">
+                    <label for="4-stars" title="Çok İyi">★</label>
+                    
+                    <input type="radio" id="3-stars" name="rating" value="3">
+                    <label for="3-stars" title="İyi">★</label>
+                    
+                    <input type="radio" id="2-stars" name="rating" value="2">
+                    <label for="2-stars" title="Orta">★</label>
+                    
+                    <input type="radio" id="1-star" name="rating" value="1">
+                    <label for="1-star" title="Zayıf">★</label>
                 </div>
-                <button type="submit">Puanla</button>
+                <button type="submit">Değerlendirmeyi Gönder</button>
             </form>
         </section>
 
-        <!-- 2 Sütunlu Yazılar -->
+        <!-- Blog Yazıları Gridi -->
         <div class="blog-grid">
             <!-- Örnek Yazı 1 -->
             <article class="blog-card">
                 <div class="card-header">
-                    <h2>İlk Yokuş</h2>
-                    <time datetime="2023-10-15">15 Ekim 2023</time>
+                    <h2>Yolun Başı</h2>
+                    <time datetime="2023-10-01">1 Ekim 2023</time>
                 </div>
-                <p>Bu yolculuk nasıl başladı? İşte tüm hikayesi...</p>
+                <div class="card-content">
+                    <p>Bu serüvene nasıl başladığımı anlatacağım ilk yazım. Küçük bir adımla başlayan her yolculuk gibi...</p>
+                </div>
             </article>
 
             <!-- Örnek Yazı 2 -->
             <article class="blog-card">
                 <div class="card-header">
-                    <h2>Mola Noktası</h2>
-                    <time datetime="2023-10-20">20 Ekim 2023</time>
+                    <h2>Manzaralar</h2>
+                    <time datetime="2023-10-08">8 Ekim 2023</time>
                 </div>
-                <p>Bazen durup nefes almak gerekir.</p>
+                <div class="card-content">
+                    <p>Yokuş tırmanırken karşılaştığım güzellikleri paylaştığım yazı dizisi. Doğa, insan ve hayata dair...</p>
+                </div>
             </article>
+            
+            <!-- Diğer yazıları buraya ekleyebilirsiniz -->
         </div>
     </main>
 
+    <!-- Footer -->
     <footer>
         <p>© 2023 Nette Yazar | Tüm hakları saklıdır.</p>
     </footer>
+
+    <script>
+        // Yıldız rating sistemi için mini JS
+        document.querySelectorAll('.star-rating input').forEach(star => {
+            star.addEventListener('change', () => {
+                const ratingValue = star.value;
+                console.log(`Seçilen puan: ${ratingValue}`);
+            });
+        });
+    </script>
 </body>
 </html>
