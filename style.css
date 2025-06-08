@@ -1,53 +1,145 @@
+/* Renk Paleti */
+:root {
+    --navy: #1a237e;
+    --pastel-blue: #e3f2fd;
+    --beige: #f5f5dc;
+    --cream: #fff8e1;
+    --white: #ffffff;
+}
+
 /* Temel Stiller */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--cream);
     color: #333;
+    margin: 0;
+    line-height: 1.6;
 }
 
+/* Başlık ve Etnik Desen */
 header {
-    background: #6200ee;
-    color: white;
+    background: linear-gradient(rgba(26, 35, 126, 0.8), rgba(26, 35, 126, 0.9)), 
+                url('images/ethnic-pattern.png');
+    color: var(--white);
+    text-align: center;
+    padding: 3rem 1rem;
+    position: relative;
+}
+
+.header-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.3;
+    background-size: cover;
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    margin: 0;
+    color: var(--white);
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+    font-style: italic;
+}
+
+.author {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    letter-spacing: 2px;
+}
+
+/* Hakkımda Bölümü */
+.about-me {
+    background: var(--pastel-blue);
     padding: 1rem;
-    text-align: center;
+    border-radius: 8px;
+    width: 200px;
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-nav a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
+.about-me img {
+    width: 100%;
+    border-radius: 50%;
+    margin-bottom: 1rem;
 }
 
-main {
+/* Blog Grid */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.blog-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--beige);
+    padding-bottom: 0.5rem;
+}
+
+.card-header h2 {
+    color: var(--navy);
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+time {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Anket */
+.survey {
+    background: var(--pastel-blue);
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border-radius: 8px;
     max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.anket {
-    background: #f0f0f0;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
+.survey-options {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
 }
 
-.anket h3 {
-    margin-top: 0;
-}
-
-.blog-post {
-    margin-bottom: 30px;
-}
-
+/* Footer */
 footer {
+    background: var(--navy);
+    color: var(--white);
     text-align: center;
-    padding: 10px;
-    background: #333;
-    color: white;
+    padding: 1.5rem;
+    margin-top: 3rem;
 }
