@@ -1,48 +1,45 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Nette Yazar - İrem BUĞA'nın kişisel blogu. Şiirler, duygular, düşünceler ve daha fazlası...">
-  <meta name="author" content="İrem BUĞA">
-  <title>Nette Yazar - Anasayfa</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetSeyazar | Kişisel Blog</title>
+    <meta name="description" content="Ücretsiz kişisel blogum. Yeni yazılar ve anketler burada!">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
-    <h1 class="logo">Nette Yazar</h1>
-    <p class="tagline">duygulara yazılan notlar</p>
-  </header>
+    <header>
+        <h1>NetSeyazar</h1>
+        <nav>
+            <a href="#">Ana Sayfa</a>
+            <a href="#">Hakkımda</a>
+            <a href="#">İletişim</a>
+        </nav>
+    </header>
 
-  <section class="feedback-section">
-    <h2>Site Hakkında Ne Düşünüyorsun?</h2>
-    <textarea placeholder="Düşünceleriniz..." rows="3"></textarea>
-    <input type="text" placeholder="Öneriniz varsa buraya yazın...">
-    <button>Gönder</button>
-  </section>
+    <main>
+        <!-- Anket Formu (Netlify Entegreli) -->
+        <section class="anket">
+            <form name="memnuniyet-anketi" netlify>
+                <h3>Sitemi nasıl buldunuz?</h3>
+                <label><input type="radio" name="memnuniyet" value="cok-iyi" required> Çok İyi</label>
+                <label><input type="radio" name="memnuniyet" value="iyi"> İyi</label>
+                <label><input type="radio" name="memnuniyet" value="orta"> Orta</label>
+                <label><input type="radio" name="memnuniyet" value="kotu"> Kötü</label>
+                <label><input type="radio" name="memnuniyet" value="cok-kotu"> Çok Kötü</label>
+                <button type="submit">Gönder</button>
+            </form>
+        </section>
 
-  <main class="post-list">
-    <article class="post-preview">
-      <h2><a href="kimizbiz.html">Kimiz Biz?</a></h2>
-      <p class="post-meta">Yayınlanma: 01 Haziran 2025, 20:30</p>
-      <p>Bir kimlik arayışının şiirle ifadesi...</p>
-    </article>
+        <!-- Blog Gönderileri -->
+        <article class="blog-post">
+            <h2>İlk Yazım!</h2>
+            <p>Bugün blogumu açtım. Yakında daha fazla içerik gelecek...</p>
+        </article>
+    </main>
 
-    <article class="post-preview">
-      <h2><a href="#">Yalnızlık Bir Şehir Gibi</a></h2>
-      <p class="post-meta">Yayınlanma: 28 Mayıs 2025, 18:00</p>
-      <p>Yalnızlığın sokaklarında yürürken kalbin sesi...</p>
-    </article>
-
-    <article class="post-preview">
-      <h2><a href="#">Gökyüzüne Bakan Kadın</a></h2>
-      <p class="post-meta">Yayınlanma: 24 Mayıs 2025, 14:10</p>
-      <p>Hayallerin ardındaki gerçeğe şiirsel bir dokunuş...</p>
-    </article>
-  </main>
-
-  <footer class="site-footer">
-    <p>&copy; 2025 İrem BUĞA - Nette Yazar</p>
-  </footer>
+    <footer>
+        <p>© 2023 NetSeyazar | Tüm hakları saklıdır.</p>
+    </footer>
 </body>
 </html>
