@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nette Yazar | Yokuş Hikayesi</title>
-    <meta name="description" content="İrem BUĞA'nın kişisel blogu. Yokuş Hikayesi ile hayata dair notlar...">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Başlık -->
@@ -15,72 +14,60 @@
             <h1>Nette Yazar</h1>
             <p class="subtitle">Yokuş Hikayesi</p>
             <p class="author">İrem BUĞA</p>
+            <button class="about-btn">Hakkımda</button>
         </div>
-        
-        <!-- Hakkımda -->
-        <aside class="about-me">
-            <img src="images/profile.jpg" alt="İrem BUĞA" class="profile-img">
-            <div class="about-content">
-                <p>Yazmak bana şu hayatta en iyi gelen şey... Yazdıklarımı sizlerle paylaşıp, üzerine konuşmak eminim daha da zevkli olacaktır. Daha umutlu yarınlar için... Keyifli Okumalar!</p>
-            </div>
-        </aside>
     </header>
+
+    <!-- Hakkımda Modal -->
+    <div class="modal-overlay">
+        <div class="modal">
+            <button class="close-modal">&times;</button>
+            <h3>Hakkımda</h3>
+            <p>Yazmak bana şu hayatta en iyi gelen şey... Yazdıklarımı sizlerle paylaşıp, üzerine konuşmak eminim daha da zevkli olacaktır. Daha umutlu yarınlar için... Keyifli Okumalar!</p>
+        </div>
+    </div>
 
     <!-- Ana İçerik -->
     <main>
-        <!-- Anket -->
-        <section class="survey-section">
-            <form name="yazi-degerlendirme" netlify>
-                <h3>Yazılarımı nasıl buldunuz?</h3>
+        <!-- Mini Anket -->
+        <section class="mini-survey">
+            <form name="feedback" netlify>
+                <p class="survey-question">Yazılarımı nasıl buldunuz?</p>
                 <div class="star-rating">
-                    <input type="radio" id="5-stars" name="rating" value="5">
-                    <label for="5-stars" title="Mükemmel">★</label>
-                    
-                    <input type="radio" id="4-stars" name="rating" value="4">
-                    <label for="4-stars" title="Çok İyi">★</label>
-                    
-                    <input type="radio" id="3-stars" name="rating" value="3">
-                    <label for="3-stars" title="İyi">★</label>
-                    
-                    <input type="radio" id="2-stars" name="rating" value="2">
-                    <label for="2-stars" title="Orta">★</label>
-                    
-                    <input type="radio" id="1-star" name="rating" value="1">
-                    <label for="1-star" title="Zayıf">★</label>
+                    ★★★★★
+                    <input type="range" name="rating" min="1" max="5" value="3">
                 </div>
-                <button type="submit">Değerlendirmeyi Gönder</button>
             </form>
         </section>
 
         <!-- Blog Yazıları -->
         <div class="blog-grid">
-            <!-- Örnek Yazı 1 -->
             <article class="blog-card">
-                <div class="card-header">
-                    <h2>Yolun Başı</h2>
-                    <time datetime="2023-10-01">1 Ekim 2023</time>
-                </div>
-                <div class="card-content">
-                    <p>Bu serüvene nasıl başladığımı anlatacağım ilk yazım. Küçük bir adımla başlayan her yolculuk gibi...</p>
-                </div>
+                <h2>Yolun Başı</h2>
+                <time>1 Ekim 2023</time>
+                <p>Bu serüvene nasıl başladığımı anlatacağım ilk yazım...</p>
             </article>
-
-            <!-- Örnek Yazı 2 -->
             <article class="blog-card">
-                <div class="card-header">
-                    <h2>Manzaralar</h2>
-                    <time datetime="2023-10-08">8 Ekim 2023</time>
-                </div>
-                <div class="card-content">
-                    <p>Yokuş tırmanırken karşılaştığım güzellikleri paylaştığım yazı dizisi. Doğa, insan ve hayata dair...</p>
-                </div>
+                <h2>Manzaralar</h2>
+                <time>8 Ekim 2023</time>
+                <p>Yokuş tırmanırken karşılaştığım güzellikler...</p>
             </article>
         </div>
     </main>
 
-    <!-- Footer -->
     <footer>
-        <p>© 2023 Nette Yazar | Tüm hakları saklıdır.</p>
+        <p>© 2023 Nette Yazar</p>
     </footer>
+
+    <script>
+        // Modal işlevselliği
+        const modal = document.querySelector('.modal-overlay');
+        document.querySelector('.about-btn').addEventListener('click', () => {
+            modal.style.display = 'flex';
+        });
+        document.querySelector('.close-modal').addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
