@@ -3,43 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NetSeyazar | Kişisel Blog</title>
-    <meta name="description" content="Ücretsiz kişisel blogum. Yeni yazılar ve anketler burada!">
+    <title>Nette Yazar | Yokuş Hikayesi</title>
+    <meta name="description" content="İrem BUĞA'nın kişisel blogu. Yokuş Hikayesi ile hayata dair notlar...">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Başlık ve Etnik Desenli Header -->
     <header>
-        <h1>NetSeyazar</h1>
-        <nav>
-            <a href="#">Ana Sayfa</a>
-            <a href="#">Hakkımda</a>
-            <a href="#">İletişim</a>
-        </nav>
+        <div class="header-pattern"></div>
+        <div class="header-content">
+            <h1>Nette Yazar</h1>
+            <p class="subtitle">Yokuş Hikayesi</p>
+            <p class="author">İrem BUĞA</p>
+        </div>
     </header>
 
+    <!-- Ana İçerik -->
     <main>
-        <!-- Anket Formu (Netlify Entegreli) -->
-        <section class="anket">
+        <!-- Hakkımda (Sağ Üst Köşe) -->
+        <aside class="about-me">
+            <img src="images/profile-photo.jpg" alt="İrem BUĞA">
+            <h3>Hakkımda</h3>
+            <p>34 yazılık bu serüvende benimle yokuşları tırmanmaya hazır mısınız?</p>
+        </aside>
+
+        <!-- Anket -->
+        <section class="survey">
             <form name="memnuniyet-anketi" netlify>
-                <h3>Sitemi nasıl buldunuz?</h3>
-                <label><input type="radio" name="memnuniyet" value="cok-iyi" required> Çok İyi</label>
-                <label><input type="radio" name="memnuniyet" value="iyi"> İyi</label>
-                <label><input type="radio" name="memnuniyet" value="orta"> Orta</label>
-                <label><input type="radio" name="memnuniyet" value="kotu"> Kötü</label>
-                <label><input type="radio" name="memnuniyet" value="cok-kotu"> Çok Kötü</label>
-                <button type="submit">Gönder</button>
+                <h3>Bu yazıyı nasıl buldunuz?</h3>
+                <div class="survey-options">
+                    <label><input type="radio" name="rating" value="5"> ★★★★★</label>
+                    <label><input type="radio" name="rating" value="4"> ★★★★</label>
+                    <label><input type="radio" name="rating" value="3"> ★★★</label>
+                    <label><input type="radio" name="rating" value="2"> ★★</label>
+                    <label><input type="radio" name="rating" value="1"> ★</label>
+                </div>
+                <button type="submit">Puanla</button>
             </form>
         </section>
 
-        <!-- Blog Gönderileri -->
-        <article class="blog-post">
-            <h2>İlk Yazım!</h2>
-            <p>Bugün blogumu açtım. Yakında daha fazla içerik gelecek...</p>
-        </article>
+        <!-- 2 Sütunlu Yazılar -->
+        <div class="blog-grid">
+            <!-- Örnek Yazı 1 -->
+            <article class="blog-card">
+                <div class="card-header">
+                    <h2>İlk Yokuş</h2>
+                    <time datetime="2023-10-15">15 Ekim 2023</time>
+                </div>
+                <p>Bu yolculuk nasıl başladı? İşte tüm hikayesi...</p>
+            </article>
+
+            <!-- Örnek Yazı 2 -->
+            <article class="blog-card">
+                <div class="card-header">
+                    <h2>Mola Noktası</h2>
+                    <time datetime="2023-10-20">20 Ekim 2023</time>
+                </div>
+                <p>Bazen durup nefes almak gerekir.</p>
+            </article>
+        </div>
     </main>
 
     <footer>
-        <p>© 2023 NetSeyazar | Tüm hakları saklıdır.</p>
+        <p>© 2023 Nette Yazar | Tüm hakları saklıdır.</p>
     </footer>
 </body>
 </html>
