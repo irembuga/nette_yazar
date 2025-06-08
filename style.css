@@ -1,194 +1,162 @@
-/* TEMEL STİLLER */
+/* Renk Paleti */
 :root {
-    --lacivert: #1a237e;
-    --pastel-mavi: #e3f2fd;
-    --bej: #f5f5dc;
-    --krem: #fff8e1;
-    --beyaz: #ffffff;
-    --altin: #ffc107;
+    --soft-blue: #a8d8ea;
+    --light-beige: #f8f3e6;
+    --white: #ffffff;
+    --light-gray: #f0f0f0;
+    --text-color: #555;
 }
 
+/* Temel Stiller */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: var(--krem);
-    color: #333;
+    background-color: var(--light-beige);
+    color: var(--text-color);
     line-height: 1.6;
     margin: 0;
+    padding: 0;
 }
 
-/* BAŞLIK */
+/* Başlık */
 header {
-    background: linear-gradient(135deg, var(--lacivert), #303f9f);
-    color: var(--beyaz);
+    background-color: var(--soft-blue);
+    padding: 1.5rem;
     text-align: center;
-    padding: 1.8rem 1rem;
     position: relative;
-    border-bottom: 3px solid var(--altin);
 }
 
 h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 2.3rem;
+    font-size: 1.8rem;
     margin: 0;
-    letter-spacing: 1px;
+    color: #333;
 }
 
-.subtitle {
-    font-size: 1.2rem;
-    margin: 0.3rem 0;
-    font-style: italic;
-    color: rgba(255,255,255,0.9);
-}
-
-.author {
-    font-size: 0.95rem;
-    margin-top: 0.5rem;
-    color: rgba(255,255,255,0.8);
-}
-
-/* HAKKIMDA */
-.about-me {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    width: 230px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+.subtitle, .author {
     font-size: 0.9rem;
-    line-height: 1.5;
+    margin: 0.3rem 0;
+    color: #666;
 }
 
-.profile-img {
-    width: 75px;
-    height: 75px;
-    border-radius: 50%;
-    display: block;
-    margin: 0 auto 0.7rem;
-    border: 2px solid var(--lacivert);
-}
-
-/* ANKET */
-.survey-section {
-    max-width: 600px;
-    margin: 2.5rem auto;
-    padding: 1.8rem;
-    background: var(--beyaz);
-    border-radius: 10px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-}
-
-.survey-section h3 {
-    text-align: center;
-    color: var(--lacivert);
-    margin-bottom: 1.5rem;
-    font-size: 1.25rem;
-}
-
-.star-rating {
-    direction: rtl;
-    text-align: center;
-    margin: 1.8rem 0;
-}
-
-.star-rating input {
-    display: none;
-}
-
-.star-rating label {
-    font-size: 2.2rem;
-    color: #ddd;
-    cursor: pointer;
-    padding: 0 5px;
-    transition: all 0.2s;
-}
-
-.star-rating input:checked ~ label,
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-    color: var(--altin);
-}
-
-button[type="submit"] {
-    display: block;
-    margin: 1.5rem auto 0;
-    padding: 0.6rem 2rem;
-    background: var(--lacivert);
-    color: var(--beyaz);
-    border: none;
-    border-radius: 20px;
+.about-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: 1px solid #fff;
+    color: #333;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
     cursor: pointer;
     transition: all 0.3s;
 }
 
-button[type="submit"]:hover {
-    background: #0d1b6b;
+.about-btn:hover {
+    background: rgba(255,255,255,0.3);
 }
 
-/* BLOG YAZILARI */
+/* Modal */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+}
+
+.close-modal {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.8rem;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #999;
+}
+
+/* Mini Anket */
+.mini-survey {
+    text-align: center;
+    margin: 1.5rem auto;
+    max-width: 300px;
+}
+
+.survey-question {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: #666;
+}
+
+.star-rating {
+    font-size: 1.2rem;
+    color: #ffc107;
+    letter-spacing: 3px;
+}
+
+.star-rating input {
+    width: 100%;
+    margin-top: 0.5rem;
+    opacity: 0;
+}
+
+/* Blog Kartları */
 .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 1.8rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
     padding: 1.5rem;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
 .blog-card {
-    background: var(--beyaz);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    transition: all 0.3s;
-}
-
-.blog-card:hover {
-    transform: translateY(-5px);
-}
-
-.card-header {
-    background: var(--lacivert);
-    color: var(--beyaz);
+    background: var(--white);
     padding: 1.2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-.card-header h2 {
-    font-size: 1.25rem;
-    margin: 0;
+.blog-card h2 {
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem 0;
+    color: #333;
 }
 
-.card-header time {
+.blog-card time {
     font-size: 0.8rem;
-    opacity: 0.9;
+    color: #999;
+    display: block;
+    margin-bottom: 0.5rem;
 }
 
-.card-content {
-    padding: 1.5rem;
-    color: #555;
-}
-
-/* FOOTER */
+/* Footer */
 footer {
     text-align: center;
-    padding: 1.8rem;
-    background: var(--lacivert);
-    color: var(--beyaz);
+    padding: 1.5rem;
+    font-size: 0.8rem;
+    color: #999;
 }
 
-/* MOBİL */
+/* Mobil Uyum */
 @media (max-width: 768px) {
-    .about-me {
-        position: static;
-        width: 85%;
-        margin: 1.5rem auto;
-    }
-    
     .blog-grid {
         grid-template-columns: 1fr;
+        padding: 1rem;
     }
 }
