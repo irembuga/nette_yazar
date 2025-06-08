@@ -5,39 +5,247 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nette Yazar | Yokuş Hikayesi</title>
     <meta name="description" content="İrem BUĞA'nın kişisel blogu. Yokuş Hikayesi ile hayata dair notlar...">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* Mini CSS Reset */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* TEMEL STİLLER */
+        :root {
+            --lacivert: #1a237e;
+            --pastel-mavi: #e3f2fd;
+            --bej: #f5f5dc;
+            --krem: #fff8e1;
+            --beyaz: #ffffff;
+            --altin: #ffc107;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--krem);
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        /* BAŞLIK */
+        header {
+            background: linear-gradient(rgba(26, 35, 126, 0.9), rgba(26, 35, 126, 0.95));
+            color: var(--beyaz);
+            text-align: center;
+            padding: 1.8rem 1rem;
+            position: relative;
+            border-bottom: 3px solid var(--altin);
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.3rem;
+            margin: 0;
+            letter-spacing: 1px;
+            color: var(--beyaz);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin: 0.3rem 0;
+            font-style: italic;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .author {
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        /* HAKKIMDA */
+        .about-me {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 230px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border: 1px solid var(--bej);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #555;
+        }
+        
+        .profile-img {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 0.7rem;
+            border: 2px solid var(--lacivert);
+            object-fit: cover;
+        }
+        
+        /* ANKET */
+        .survey-section {
+            max-width: 600px;
+            margin: 2.5rem auto;
+            padding: 1.8rem;
+            background: var(--beyaz);
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .survey-section h3 {
+            text-align: center;
+            color: var(--lacivert);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .star-rating {
+            direction: rtl;
+            text-align: center;
+            margin: 1.8rem 0;
+        }
+        
+        .star-rating input {
+            display: none;
+        }
+        
+        .star-rating label {
+            font-size: 2.2rem;
+            color: #ddd;
+            cursor: pointer;
+            padding: 0 5px;
+            transition: all 0.2s;
+        }
+        
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: var(--altin);
+            text-shadow: 0 0 5px rgba(255,193,7,0.3);
+        }
+        
+        button[type="submit"] {
+            display: block;
+            margin: 1.5rem auto 0;
+            padding: 0.6rem 2rem;
+            background: var(--lacivert);
+            color: var(--beyaz);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+        
+        button[type="submit"]:hover {
+            background: #0d1b6b;
+            transform: translateY(-2px);
+        }
+        
+        /* BLOG YAZILARI */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.8rem;
+            padding: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .blog-card {
+            background: var(--beyaz);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: all 0.3s;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        
+        .card-header {
+            background: var(--lacivert);
+            color: var(--beyaz);
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-header h2 {
+            font-size: 1.25rem;
+            margin: 0;
+            font-weight: 500;
+        }
+        
+        .card-header time {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+            color: #555;
+        }
+        
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 1.8rem;
+            margin-top: 3rem;
+            background: var(--lacivert);
+            color: var(--beyaz);
+            font-size: 0.9rem;
+        }
+        
+        /* MOBİL UYUMLULUK */
+        @media (max-width: 768px) {
+            .about-me {
+                position: static;
+                width: 85%;
+                margin: 1.5rem auto;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            header {
+                padding: 1.5rem 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Başlık ve Menü -->
+    <!-- BAŞLIK -->
     <header>
         <div class="header-content">
             <h1>Nette Yazar</h1>
             <p class="subtitle">Yokuş Hikayesi</p>
             <p class="author">İrem BUĞA</p>
         </div>
-        <nav>
-            <a href="#">Ana Sayfa</a>
-            <a href="#">Arşiv</a>
-            <a href="#">İletişim</a>
-        </nav>
+        
+        <!-- HAKKIMDA -->
+        <aside class="about-me">
+            <img src="images/profile.jpg" alt="İrem BUĞA" class="profile-img">
+            <div class="about-content">
+                <p>Yazmak bana şu hayatta en iyi gelen şey... Yazdıklarımı sizlerle paylaşıp, üzerine konuşmak eminim daha da zevkli olacaktır. Daha umutlu yarınlar için... Keyifli Okumalar!</p>
+            </div>
+        </aside>
     </header>
 
-    <!-- Hakkımda (Sağ Üst) -->
-    <aside class="about-me">
-        <img src="images/profile.jpg" alt="İrem BUĞA" class="profile-img">
-        <div class="about-content">
-            <p>Yazmak bana şu hayatta en iyi gelen şey... Yazdıklarımı sizlerle paylaşıp, üzerine konuşmak eminim daha da zevkli olacaktır. Daha umutlu yarınlar için... Keyifli Okumalar!</p>
-        </div>
-    </aside>
-
-    <!-- Ana İçerik -->
+    <!-- ANA İÇERİK -->
     <main>
-        <!-- Modern Anket -->
+        <!-- ANKET -->
         <section class="survey-section">
             <form name="yazi-degerlendirme" netlify>
                 <h3>Yazılarımı nasıl buldunuz?</h3>
@@ -61,7 +269,7 @@
             </form>
         </section>
 
-        <!-- Blog Yazıları Gridi -->
+        <!-- BLOG YAZILARI -->
         <div class="blog-grid">
             <!-- Örnek Yazı 1 -->
             <article class="blog-card">
@@ -84,24 +292,12 @@
                     <p>Yokuş tırmanırken karşılaştığım güzellikleri paylaştığım yazı dizisi. Doğa, insan ve hayata dair...</p>
                 </div>
             </article>
-            
-            <!-- Diğer yazıları buraya ekleyebilirsiniz -->
         </div>
     </main>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer>
         <p>© 2023 Nette Yazar | Tüm hakları saklıdır.</p>
     </footer>
-
-    <script>
-        // Yıldız rating sistemi için mini JS
-        document.querySelectorAll('.star-rating input').forEach(star => {
-            star.addEventListener('change', () => {
-                const ratingValue = star.value;
-                console.log(`Seçilen puan: ${ratingValue}`);
-            });
-        });
-    </script>
 </body>
 </html>
