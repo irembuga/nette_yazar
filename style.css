@@ -1,4 +1,3 @@
-/* TEMEL STİLLER */
 :root {
     --soft-blue: #a8d8ea;
     --light-beige: #f8f3e6;
@@ -12,15 +11,23 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: var(--light-beige);
     color: var(--text-color);
     line-height: 1.6;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+
+    /* Şeffaf desenli arka plan */
+    background-color: var(--light-beige);
+    background-image:
+        linear-gradient(45deg, rgba(128, 128, 128, 0.05) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(128, 128, 128, 0.05) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(128, 128, 128, 0.05) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(128, 128, 128, 0.05) 75%);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 0, 20px -20px, -20px 20px;
 }
 
-/* BAŞLIK */
 header {
     background-color: var(--soft-blue);
     padding: 1.5rem;
@@ -42,7 +49,6 @@ h1 {
     color: #666;
 }
 
-/* HAKKIMDA BUTONU */
 .about-btn {
     position: absolute;
     top: 50%;
@@ -67,7 +73,6 @@ h1 {
     background: linear-gradient(45deg, var(--peach), var(--lavender));
 }
 
-/* MODAL */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -121,7 +126,6 @@ h1 {
     transform: rotate(90deg);
 }
 
-/* MİNİ ANKET */
 .mini-survey {
     text-align: center;
     margin: 1.5rem auto;
@@ -155,7 +159,6 @@ h1 {
     cursor: pointer;
 }
 
-/* BLOG KARTLARI */
 .blog-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -192,7 +195,6 @@ h1 {
     margin-bottom: 0.5rem;
 }
 
-/* FOOTER */
 footer {
     text-align: center;
     padding: 1.5rem;
@@ -201,7 +203,6 @@ footer {
     margin-top: 2rem;
 }
 
-/* MOBİL UYUMLULUK */
 @media (max-width: 768px) {
     .about-btn {
         position: static;
