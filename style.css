@@ -159,4 +159,52 @@ footer {
         grid-template-columns: 1fr;
         padding: 1rem;
     }
+    /* ... (Diğer stiller aynı) ... */
+
+/* Hakkımda Butonu */
+.about-btn {
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+    border: none;
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    font-weight: bold;
+    z-index: 10;
+}
+
+.about-btn:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Modal Animasyonu */
+.modal {
+    animation: modalFadeIn 0.4s ease-out;
+    background: white;
+    border: 2px solid #fad0c4;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Konfeti Etkisi İçin Boşluk */
+body {
+    overflow-x: hidden;
+}
 }
