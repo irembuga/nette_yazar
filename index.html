@@ -1,150 +1,133 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nette Yazar | Yokuş Hikayesi</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nette Yazar | Yokuş Hikayesi</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <h1>Nette Yazar</h1>
-            <p class="subtitle">Yokuş Hikayesi</p>
-            <p class="author">İrem BUĞA</p>
-            <button class="about-btn">🌟 Hakkımda</button>
-        </div>
-    </header>
-
-    <div class="modal-overlay">
-        <div class="modal">
-            <button class="close-modal">&times;</button>
-            <h3>Hakkımda</h3>
-            <p>Yazmak bana şu hayatta en iyi gelen şey... Yazdıklarımı sizlerle paylaşıp, üzerine konuşmak eminim daha da zevkli olacaktır. Daha umutlu yarınlar için... Keyifli Okumalar!</p>
-        </div>
+  <header>
+    <div class="header-content">
+      <h1>Nette Yazar</h1>
+      <p class="subtitle">Yokuş Hikayesi</p>
+      <p class="author">İrem BUĞA</p>
+      <button class="about-btn">🌟 Hakkımda</button>
     </div>
+  </header>
 
-    <section class="mini-survey">
-        <form name="feedback" netlify>
-            <p class="survey-question">Yazılarımı nasıl buldunuz?</p>
-            <div class="star-rating">
-                ★★★★★
-                <input type="range" name="rating" min="1" max="5" value="3">
-            </div>
-        </form>
-    </section>
-
-    <div class="blog-grid">
-        <article class="blog-card">
-            <h2>NEYLERSİN BENİM DELİ GÖNLÜM</h2>
-            <time datetime="2023-10-01">1 Ekim 2023</time>
-            <p>Dinmedi mi denizindeki dalgalar,
-
-Bitmedi mi çölündeki fırtınalar ?
-
-Durmadı mı gözündeki yaşlar,
-
-Batmadı mı ayağına yolundaki taşlar ?
-
-
-
-Ah, şu benim deli gönlüm...
-
-Varsın dinmesin dalgalar,
-
-Varsın batmaya devam etsin taşlar,
-
-Varsın sürüklesin rüzgârlar hiç bilmediğin yerlere.
-
-
-
-Benim deli gönlüm, neyleyip âh eylese de,
-
-Dinginlik sevmez zaten onun yüreği...
-
-                                                                                      ~İrem BUĞA 
-
-</p>
-        </article>
-        <article class="blog-card">
-            <h2>KAYBOLUŞ</h2>
-            <time datetime="2023-10-08">8 Ekim 2023</time>
-            <p>O güzel şiirler neden sustu?
-Hani kalemler ışık olurdu?
-Döner durur aynı çarklar,
-Yol kaybolur, iz unutulur.
-Bir rüzgâr eser, silinir ses,
-Bir yağmur yağar, kaybolur yaş gözden,
-Ve zaman derin bir sır olur, 
-Akıp gider usul usul... 
-
-                                                          ~İrem</p>
-        </article>
+  <div class="modal-overlay">
+    <div class="modal">
+      <button class="close-modal">&times;</button>
+      <h3>Hakkımda</h3>
+      <p>Yazmak bana şu hayatta en iyi gelen şey... Yazdıklarımı sizlerle paylaşıp, üzerine konuşmak eminim daha da zevkli olacaktır. Daha umutlu yarınlar için... Keyifli Okumalar!</p>
     </div>
-    </p>
-        </article>
-        <article class="blog-card">
-            <h2>İçimde Ilık Bir Hatıra</h2>
-            <time datetime="2023-10-08">8 Ekim 2023</time>
-            <p>Güneş tepede ama soğuk ağır basıyor,
-ellerim ceplerimde, üşüyorum.
-Ara sokaklarda yankılanıyor ayak seslerim,
-inşaat gürültüsü var,
-kafamın içindeki sesi bastıran.
+  </div>
 
-Bir kafe buldum,
-kapısını araladım,
-içeride kaybolan sohbetler,
-tahta masalara sinmiş kahve kokusu.
-Çay bardağına yansıyan siluetimle göz göze geldim,
-"Merhaba," dedim içimden.
+  <section class="mini-survey">
+    <form name="feedback" netlify>
+      <p class="survey-question">Yazılarımı nasıl buldunuz?</p>
+      <div class="star-rating">
+        ★★★★★
+        <input type="range" name="rating" min="1" max="5" value="3" />
+      </div>
+    </form>
+  </section>
 
-Dışarıda ufak bir koşuşturma,
-zamana yetişmeye çalışan adımlar.
-Bense bir anın içine sığındım.
-Öylesine bir an mıydı?
-
-İçimde ılık bir hatıra,
-ellerimi ısıtan,
-yüzüme bir tebessüm bırakan.
-Koca şehirde, küçük bir an.   
-                                                          ~İrem</p>
-        </article>
-    </div>
+  <div class="blog-grid">
+    <article class="blog-card">
+      <h2>NEYLERSİN BENİM DELİ GÖNLÜM</h2>
+      <time datetime="2023-10-01">1 Ekim 2023</time>
+      <p>
+        Dinmedi mi denizindeki dalgalar,<br />
+        Bitmedi mi çölündeki fırtınalar ?<br />
+        Durmadı mı gözündeki yaşlar,<br />
+        Batmadı mı ayağına yolundaki taşlar ?<br /><br />
+        Ah, şu benim deli gönlüm...<br />
+        Varsın dinmesin dalgalar,<br />
+        Varsın batmaya devam etsin taşlar,<br />
+        Varsın sürüklesin rüzgârlar hiç bilmediğin yerlere.<br /><br />
+        Benim deli gönlüm, neyleyip âh eylese de,<br />
+        Dinginlik sevmez zaten onun yüreği...<br /><br />
+        <em>~İrem BUĞA</em>
+      </p>
     </article>
-    </div>
-    </p>
-        </article>
-        <article class="blog-card">
-            <h2>Nergis</h2>
-            <time datetime="2023-10-08">8 Ekim 2023</time>
-            <p>Bir çiçek gibi, içimde başlar,
-Bazen kırılgan, bazen yenilik.
-Zaman geçer, ben değişirim,
-Ama içimde büyür, bir nergis,
-Ve kışın içinde, bahar gibi açar.  
-                                                      ~İrem</p>
 
-    <footer>
-        <p>© 2023 Nette Yazar | Tüm hakları saklıdır.</p>
-    </footer>
+    <article class="blog-card">
+      <h2>KAYBOLUŞ</h2>
+      <time datetime="2023-10-08">8 Ekim 2023</time>
+      <p>
+        O güzel şiirler neden sustu?<br />
+        Hani kalemler ışık olurdu?<br />
+        Döner durur aynı çarklar,<br />
+        Yol kaybolur, iz unutulur.<br /><br />
+        Bir rüzgâr eser, silinir ses,<br />
+        Bir yağmur yağar, kaybolur yaş gözden,<br />
+        Ve zaman derin bir sır olur,<br />
+        Akıp gider usul usul...<br /><br />
+        <em>~İrem</em>
+      </p>
+    </article>
 
-    <script>
-        const modal = document.querySelector('.modal-overlay');
-        const aboutBtn = document.querySelector('.about-btn');
-        
-        aboutBtn.addEventListener('click', () => {
-            modal.style.display = 'flex';
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#ff9a9e', '#fad0c4', '#fbc2eb'] });
-            setTimeout(() => { confetti({ particleCount: 50, angle: 60, spread: 55, origin: { x: 0 } }); }, 250);
-            setTimeout(() => { confetti({ particleCount: 50, angle: 120, spread: 55, origin: { x: 1 } }); }, 400);
-        });
+    <article class="blog-card">
+      <h2>İçimde Ilık Bir Hatıra</h2>
+      <time datetime="2023-10-08">8 Ekim 2023</time>
+      <p>
+        Güneş tepede ama soğuk ağır basıyor,<br />
+        ellerim ceplerimde, üşüyorum.<br />
+        Ara sokaklarda yankılanıyor ayak seslerim,<br />
+        inşaat gürültüsü var,<br />
+        kafamın içindeki sesi bastıran.<br /><br />
+        Bir kafe buldum,<br />
+        kapısını araladım,<br />
+        içeride kaybolan sohbetler,<br />
+        tahta masalara sinmiş kahve kokusu.<br />
+        Çay bardağına yansıyan siluetimle göz göze geldim,<br />
+        "Merhaba," dedim içimden.<br /><br />
+        Dışarıda ufak bir koşuşturma,<br />
+        zamana yetişmeye çalışan adımlar.<br />
+        Bense bir anın içine sığındım.<br />
+        Öylesine bir an mıydı?<br /><br />
+        İçimde ılık bir hatıra,<br />
+        ellerimi ısıtan,<br />
+        yüzüme bir tebessüm bırakan.<br />
+        Koca şehirde, küçük bir an.<br /><br />
+        <em>~İrem</em>
+      </p>
+    </article>
 
-        document.querySelector('.close-modal').addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-    </script>
+    <article class="blog-card">
+      <h2>Nergis</h2>
+      <time datetime="2023-10-08">8 Ekim 2023</time>
+      <p>
+        Bir çiçek gibi, içimde başlar,<br />
+        Bazen kırılgan, bazen yenilik.<br />
+        Zaman geçer, ben değişirim,<br />
+        Ama içimde büyür, bir nergis,<br />
+        Ve kışın içinde, bahar gibi açar.<br /><br />
+        <em>~İrem</em>
+      </p>
+    </article>
+  </div>
+
+  <footer>
+    <p>© 2023 Nette Yazar | Tüm hakları saklıdır.</p>
+  </footer>
+
+  <script>
+    const modal = document.querySelector('.modal-overlay');
+    const aboutBtn = document.querySelector('.about-btn');
+    aboutBtn.addEventListener('click', () => {
+      modal.style.display = 'flex';
+      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#ff9a9e', '#fad0c4', '#fbc2eb'] });
+      setTimeout(() => { confetti({ particleCount: 50, angle: 60, spread: 55, origin: { x: 0 } }); }, 250);
+      setTimeout(() => { confetti({ particleCount: 50, angle: 120, spread: 55, origin: { x: 1 } }); }, 400);
+    });
+    document.querySelector('.close-modal').addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+  </script>
 </body>
 </html>
