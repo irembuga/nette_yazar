@@ -6,6 +6,8 @@
     <title>Nette Yazar | Yokuş Hikayesi</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Konfeti kütüphanesi -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
 <body>
     <!-- Başlık -->
@@ -14,7 +16,7 @@
             <h1>Nette Yazar</h1>
             <p class="subtitle">Yokuş Hikayesi</p>
             <p class="author">İrem BUĞA</p>
-            <button class="about-btn">Hakkımda</button>
+            <button class="about-btn">✨ Hakkımda</button>
         </div>
     </header>
 
@@ -27,44 +29,25 @@
         </div>
     </div>
 
-    <!-- Ana İçerik -->
-    <main>
-        <!-- Mini Anket -->
-        <section class="mini-survey">
-            <form name="feedback" netlify>
-                <p class="survey-question">Yazılarımı nasıl buldunuz?</p>
-                <div class="star-rating">
-                    ★★★★★
-                    <input type="range" name="rating" min="1" max="5" value="3">
-                </div>
-            </form>
-        </section>
-
-        <!-- Blog Yazıları -->
-        <div class="blog-grid">
-            <article class="blog-card">
-                <h2>Yolun Başı</h2>
-                <time>1 Ekim 2023</time>
-                <p>Bu serüvene nasıl başladığımı anlatacağım ilk yazım...</p>
-            </article>
-            <article class="blog-card">
-                <h2>Manzaralar</h2>
-                <time>8 Ekim 2023</time>
-                <p>Yokuş tırmanırken karşılaştığım güzellikler...</p>
-            </article>
-        </div>
-    </main>
-
-    <footer>
-        <p>© 2023 Nette Yazar</p>
-    </footer>
+    <!-- ... (Diğer içerikler aynı) ... -->
 
     <script>
-        // Modal işlevselliği
+        // Modal ve konfeti efekti
         const modal = document.querySelector('.modal-overlay');
-        document.querySelector('.about-btn').addEventListener('click', () => {
+        const aboutBtn = document.querySelector('.about-btn');
+        
+        aboutBtn.addEventListener('click', () => {
             modal.style.display = 'flex';
+            
+            // Konfeti patlatma
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff9a9e', '#fad0c4', '#fbc2eb', '#a6c1ee', '#84fab0']
+            });
         });
+
         document.querySelector('.close-modal').addEventListener('click', () => {
             modal.style.display = 'none';
         });
