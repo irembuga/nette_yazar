@@ -1,215 +1,180 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display&display=swap');
+/* TEMEL STİLLER */
+:root {
+    --light-gray: #f8f9fa;
+    --white: #ffffff;
+    --text-color: #333;
+    --light-text: #666;
+}
 
-/* Genel Stiller */
 body {
-  font-family: 'Roboto', sans-serif;
-  line-height: 1.6;
-  color: #333;
-  background-color: #f8f5f2;
-  margin: 0;
-  padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
 }
 
-/* Başlık Stilleri */
-header {
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-  color: white;
-  text-align: center;
-  padding: 4rem 1rem;
-  margin-bottom: 2rem;
+/* BAŞLIK */
+.site-header {
+    background: #ffffff;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
-.header-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
+.site-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    margin: 0;
+    color: #2c3e50;
 }
 
 .subtitle {
-  font-size: 1.5rem;
-  font-weight: 300;
-  margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    margin: 0.3rem 0;
+    color: var(--light-text);
+    font-style: italic;
 }
 
 .author {
-  font-size: 1.2rem;
-  font-weight: 400;
-  margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+    color: var(--light-text);
 }
 
-/* Blog Grid */
-.blog-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-  padding: 0 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+/* YAZI LİSTESİ */
+.post-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* Blog Kartları */
-.blog-card {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  overflow: hidden;
+.post-card {
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s;
+    overflow: hidden;
 }
 
-.blog-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.blog-card h2 {
-  font-family: 'Playfair Display', serif;
-  color: #2c3e50;
-  margin-top: 0;
+.card-content {
+    padding: 1.5rem;
 }
 
-/* Tarih */
-.blog-card time {
-  display: block;
-  color: #7f8c8d;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-}
-
-/* İçerik: Başta gizli */
-.blog-card .content {
-  display: none;
-  margin-top: 1rem;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: #444;
-  transition: max-height 0.4s ease, opacity 0.4s ease;
-}
-
-.blog-card.active .content {
-  display: block;
-}
-
-/* Şiirsel stil ve imza */
-.blog-card .content p {
-  white-space: pre-line;
-  margin-bottom: 1.5rem;
-}
-
-.blog-card .content em {
-  display: block;
-  margin-top: 20px;
-  text-align: right;
-  font-style: italic;
-  color: #555;
-}
-
-/* Modal */
-.modal-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  max-width: 500px;
-  width: 90%;
-  position: relative;
-}
-
-.close-modal {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-/* Anket */
-.mini-survey {
-  background: #f1f1f1;
-  padding: 1.5rem;
-  margin: 2rem auto;
-  max-width: 600px;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.survey-question {
-  font-weight: 500;
-  margin-bottom: 1rem;
-}
-
-.star-rating {
-  font-size: 2rem;
-  color: #f1c40f;
-  position: relative;
-  display: inline-block;
-}
-
-.star-rating input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 2rem;
-  margin-top: 3rem;
-  background: #2c3e50;
-  color: white;
-}
-
-/* Buton */
-.about-btn {
-  background: #ff9a9e;
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 50px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.about-btn:hover {
-  background: #fad0c4;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2.5rem;
-  }
-  .subtitle {
+.post-card h2 {
     font-size: 1.2rem;
-  }
-  .blog-grid {
-    grid-template-columns: 1fr;
-    padding: 0 1rem;
-  }
+    margin: 0 0 0.5rem 0;
+    color: #2c3e50;
+}
+
+.post-card time {
+    font-size: 0.85rem;
+    color: var(--light-text);
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.post-card button {
+    background: transparent;
+    border: 1px solid #a8d8ea;
+    color: #2c3e50;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.post-card button:hover {
+    background: #a8d8ea;
+    color: white;
+}
+
+/* YAZI DETAY */
+.post-detail {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: #7ac1d8;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.post-content {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.post-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-top: 0;
+}
+
+.post-content time {
+    font-size: 0.9rem;
+    color: var(--light-text);
+    display: block;
+    margin: 0.5rem 0 2rem 0;
+}
+
+.post-text {
+    line-height: 1.8;
+}
+
+.post-text p {
+    margin-bottom: 1.5rem;
+}
+
+/* FOOTER */
+.site-footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+    background: #ffffff;
+    color: var(--light-text);
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* MOBİL UYUMLULUK */
+@media (max-width: 768px) {
+    .post-list {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+    
+    .post-detail {
+        padding: 1rem;
+    }
+    
+    .post-content {
+        padding: 1.5rem;
+    }
+    
+    .post-content h2 {
+        font-size: 1.5rem;
+    }
 }
