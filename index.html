@@ -6,36 +6,78 @@
     <title>Nette Yazar | Yokuş Hikayesi</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header class="site-header">
+    <!-- Ana Başlık -->
+    <header class="main-header">
         <div class="header-content">
             <h1>Nette Yazar</h1>
             <p class="subtitle">Yokuş Hikayesi</p>
-            <p class="author">İrem BUĞA</p>
+            <button class="about-btn">Hakkımda</button>
         </div>
     </header>
 
-    <main class="content-area">
-        <!-- Yazı Listesi -->
-        <div class="post-list" id="postList">
-            <!-- Yazı kartları burada oluşturulacak -->
+    <!-- Hakkımda Modal -->
+    <div class="modal-overlay" id="aboutModal">
+        <div class="modal">
+            <button class="close-modal">&times;</button>
+            <h3>Hakkımda</h3>
+            <p>Merhaba ben İrem... Yazmak bana şu hayatta en iyi gelen şey... Yazdıklarımı sizlerle paylaşıp, üzerine konuşmak eminim daha da zevkli olacaktır. Daha umutlu yarınlar için... Keyifli Okumalar!</p>
         </div>
+    </div>
 
-        <!-- Yazı Detay Sayfası (Başlangıçta gizli) -->
-        <div class="post-detail" id="postDetail" style="display:none">
-            <button class="back-button" onclick="hidePostDetail()">← Tüm Yazılar</button>
-            <div class="post-content">
-                <h2 id="detailTitle"></h2>
-                <time id="detailDate"></time>
-                <div class="post-text" id="detailContent"></div>
-            </div>
+    <!-- Memnuniyet Anketi -->
+    <section class="feedback-section">
+        <p>Yazılarım hakkında ne düşünüyorsunuz?</p>
+        <div class="emoji-rating">
+            <span>😞</span>
+            <span>😐</span>
+            <span>😊</span>
+            <span>🤩</span>
         </div>
+    </section>
+
+    <!-- Yazı Listesi -->
+    <main class="post-grid" id="postGrid">
+        <!-- Örnek Yazı 1 -->
+        <article class="post-card" data-id="1" style="background-color: #e3f2fd;">
+            <div class="post-preview">
+                <h2>NEYLERSİN BENİM DELİ GÖNLÜM</h2>
+                <time datetime="2023-10-01">1 Ekim 2023</time>
+                <p class="author">İrem BUĞA</p>
+            </div>
+        </article>
+
+        <!-- Örnek Yazı 2 -->
+        <article class="post-card" data-id="2" style="background-color: #bbdefb;">
+            <div class="post-preview">
+                <h2>KAYBOLUŞ</h2>
+                <time datetime="2023-10-08">8 Ekim 2023</time>
+                <p class="author">İrem BUĞA</p>
+            </div>
+        </article>
+
+        <!-- Diğer yazılar buraya eklenecek -->
     </main>
 
-    <footer class="site-footer">
-        <p>© 2023 Nette Yazar | Tüm hakları saklıdır.</p>
-    </footer>
+    <!-- Yazı Detay Gösterimi -->
+    <div class="post-overlay" id="postOverlay">
+        <div class="post-container">
+            <button class="close-post">&times;</button>
+            <div class="post-header">
+                <h2 id="postTitle"></h2>
+                <div class="post-meta">
+                    <time id="postDate"></time>
+                    <span id="postAuthor"></span>
+                </div>
+            </div>
+            <div class="post-content" id="postContent"></div>
+            <div class="post-actions">
+                <button class="like-btn"><i class="far fa-heart"></i> Beğen</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Yazı verileri
@@ -44,6 +86,7 @@
                 id: 1,
                 title: "NEYLERSİN BENİM DELİ GÖNLÜM",
                 date: "1 Ekim 2023",
+                author: "İrem BUĞA",
                 content: `Dinmedi mi denizindeki dalgalar,<br>
                 Bitmedi mi çölündeki fırtınalar?<br>
                 Durmadı mı gözündeki yaşlar,<br>
@@ -54,51 +97,77 @@
                 Varsın sürüklesin rüzgârlar hiç bilmediğin yerlere.<br><br>
                 <em>~İrem BUĞA</em>`
             },
-            // Diğer tüm yazılar bu formatta eklenecek
+            {
+                id: 2,
+                title: "KAYBOLUŞ",
+                date: "8 Ekim 2023",
+                author: "İrem BUĞA",
+                content: `O güzel şiirler neden sustu?<br>
+                Hani kalemler ışık olurdu?<br>
+                Döner durur aynı çarklar,<br>
+                Yol kaybolur, iz unutulur.<br><br>
+                Bir rüzgâr eser, silinir ses,<br>
+                Bir yağmur yağar, kaybolur yaş gözden,<br>
+                Ve zaman derin bir sır olur,<br>
+                Akıp gider usul usul...<br><br>
+                <em>~İrem BUĞA</em>`
+            }
         ];
 
-        // Yazı listesini oluştur
-        function renderPostList() {
-            const postList = document.getElementById('postList');
-            postList.innerHTML = '';
-            
-            posts.forEach(post => {
-                const colors = ['#a8d8ea', '#7ac1d8', '#a6c1ee', '#879bc8', '#92c5de'];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                const postCard = document.createElement('article');
-                postCard.className = 'post-card';
-                postCard.style.borderTop = `4px solid ${randomColor}`;
-                postCard.innerHTML = `
-                    <div class="card-content">
-                        <h2>${post.title}</h2>
-                        <time>${post.date}</time>
-                        <button onclick="showPostDetail(${post.id})">Oku</button>
-                    </div>
-                `;
-                postList.appendChild(postCard);
+        // Hakkımda modalı
+        const aboutBtn = document.querySelector('.about-btn');
+        const aboutModal = document.getElementById('aboutModal');
+        const closeModal = document.querySelector('.close-modal');
+
+        aboutBtn.addEventListener('click', () => {
+            aboutModal.style.display = 'flex';
+            // Konfeti efekti
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff9a9e', '#fad0c4', '#fbc2eb', '#a6c1ee']
             });
-        }
+        });
 
-        // Yazı detayını göster
-        function showPostDetail(postId) {
-            const post = posts.find(p => p.id === postId);
-            document.getElementById('postList').style.display = 'none';
-            document.getElementById('postDetail').style.display = 'block';
-            document.getElementById('detailTitle').textContent = post.title;
-            document.getElementById('detailDate').textContent = post.date;
-            document.getElementById('detailContent').innerHTML = post.content;
-            window.scrollTo(0, 0);
-        }
+        closeModal.addEventListener('click', () => {
+            aboutModal.style.display = 'none';
+        });
 
-        // Listeye dön
-        function hidePostDetail() {
-            document.getElementById('postDetail').style.display = 'none';
-            document.getElementById('postList').style.display = 'grid';
-        }
+        // Yazı detay gösterimi
+        const postCards = document.querySelectorAll('.post-card');
+        const postOverlay = document.getElementById('postOverlay');
+        const closePostBtn = document.querySelector('.close-post');
 
-        // Sayfa yüklendiğinde yazı listesini oluştur
-        window.onload = renderPostList;
+        postCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (!e.target.classList.contains('post-actions')) {
+                    const postId = parseInt(card.getAttribute('data-id'));
+                    const post = posts.find(p => p.id === postId);
+                    
+                    document.getElementById('postTitle').textContent = post.title;
+                    document.getElementById('postDate').textContent = post.date;
+                    document.getElementById('postAuthor').textContent = post.author;
+                    document.getElementById('postContent').innerHTML = post.content;
+                    
+                    postOverlay.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        closePostBtn.addEventListener('click', () => {
+            postOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Beğen butonu
+        const likeBtn = document.querySelector('.like-btn');
+        likeBtn.addEventListener('click', () => {
+            likeBtn.innerHTML = '<i class="fas fa-heart"></i> Beğendiniz!';
+            likeBtn.style.color = '#ff6b6b';
+        });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </body>
 </html>
