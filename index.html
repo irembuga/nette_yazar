@@ -1,364 +1,157 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nette Yazar | Şiir Dünyası</title>
-    <style>
-        /* Renk Paleti */
-        :root {
-            --pastel-lacivert: #6a7ba2;
-            --koyu-lacivert: #3c4f6e;
-            --acik-renk: #f8f9fa;
-            --beyaz: #ffffff;
-            --yazi-renk: #333333;
-            --acik-yazi: #777777;
-        }
-        
-        /* Temel Stil */
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--acik-renk);
-            color: var(--yazi-renk);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30,50 Q50,30 70,50 T110,50" fill="none" stroke="%236a7ba2" stroke-width="1.2" opacity="0.2"/></svg>');
-            background-size: 150px;
-        }
-        
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--koyu-lacivert), var(--pastel-lacivert));
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        h1 {
-            margin: 0;
-            font-size: 2rem;
-        }
-        
-        .subtitle {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-        
-        /* Menü */
-        .menu {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1.5rem;
-        }
-        
-        .menu a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        
-        .menu a:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
-        
-        /* Şiir Kartları */
-        .poem-container {
-            flex: 1;
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-            width: 100%;
-        }
-        
-        .poem-card {
-            background: var(--beyaz);
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            border-left: 4px solid var(--pastel-lacivert);
-        }
-        
-        .poem-title {
-            color: var(--koyu-lacivert);
-            margin-top: 0;
-            font-weight: 600;
-        }
-        
-        .poem-date {
-            color: var(--acik-yazi);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-        
-        .poem-content {
-            white-space: pre-line;
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-        
-        /* Emoji Değerlendirme */
-        .feedback {
-            text-align: center;
-            margin: 2rem 0;
-            padding: 1.5rem;
-            background: var(--beyaz);
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        
-        .feedback p {
-            margin-bottom: 1rem;
-            font-weight: 500;
-            color: var(--koyu-lacivert);
-        }
-        
-        .emoji-rating {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-        
-        .emoji-rating span {
-            font-size: 2rem;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        
-        .emoji-rating span:hover {
-            transform: scale(1.2);
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--koyu-lacivert);
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-            margin-top: auto;
-        }
-        
-        .footer-links {
-            margin-top: 1rem;
-        }
-        
-        .footer-links a {
-            color: white;
-            margin: 0 1rem;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(3px);
-        }
-        
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--acik-yazi);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .menu {
-                gap: 1rem;
-            }
-            
-            .poem-card {
-                padding: 1.5rem;
-            }
-            
-            .emoji-rating {
-                gap: 1rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>NETTE YAZAR</h1>
-        <div class="subtitle">Yokuş Hikâyesi...</div>
-        <div class="menu">
-            <a href="#" id="anasayfa-link">Anasayfa</a>
-            <a href="#" id="hakkinda-link">Hakkımda</a>
-        </div>
-    </header>
+<!-- ÜST BAŞLIK ve GİRİŞ ANİMASYONU -->
+<header class="site-header">
+  <h1>Nette Yazar</h1>
+  <p class="subtitle">Bir yokuş hikayesi...</p>
+</header>
 
-    
-    
-    <div class="poem-container" id="anasayfa">
-       <!-- Yazı Listesi -->
-    <main class="post-grid" id="postGrid">
-        <!-- Örnek Yazı 1 -->
-        <article class="post-card" data-id="1" style="background-color: #e3f2fd;">
-            <div class="post-preview">
-                <h2>NEYLERSİN BENİM DELİ GÖNLÜM</h2>
-                <time datetime="2023-10-01">1 Ekim 2023</time>
-                <p class="author">İrem BUĞA</p>
-            </div>
-        </article>
+<!-- GİRİŞTE KULLANICI GERİ BİLDİRİMİ -->
+<div class="emoji-feedback" id="emojiFeedback">
+  <p>Sitem hakkında ne düşünüyorsunuz?</p>
+  <div class="emojis">
+    <span class="emoji" data-reaction="😍">😍</span>
+    <span class="emoji" data-reaction="🤩">🤩</span>
+    <span class="emoji" data-reaction="🙂">🙂</span>
+    <span class="emoji" data-reaction="😕">😕</span>
+  </div>
+</div>
 
-        <!-- Örnek Yazı 2 -->
-        <article class="post-card" data-id="2" style="background-color: #bbdefb;">
-            <div class="post-preview">
-                <h2>KAYBOLUŞ</h2>
-                <time datetime="2023-10-08">8 Ekim 2023</time>
-                <p class="author">İrem BUĞA</p>
-            </div>
-        </article>
-
-        <!-- Diğer yazılar buraya eklenecek -->
-    </main>
-
-    <!-- Yazı Detay Gösterimi -->
-    <div class="post-overlay" id="postOverlay">
-        <div class="post-container">
-            <button class="close-post">&times;</button>
-            <div class="post-header">
-                <h2 id="postTitle"></h2>
-                <div class="post-meta">
-                    <time id="postDate"></time>
-                    <span id="postAuthor"></span>
-                </div>
-            </div>
-            <div class="post-content" id="postContent"></div>
-            <div class="post-actions">
-                <button class="like-btn"><i class="far fa-heart"></i> Beğen</button>
-            </div>
-        </div>
+<!-- Yazı Listesi -->
+<main class="post-grid" id="postGrid">
+  <article class="post-card" data-id="1" style="background-color: #e3f2fd;">
+    <div class="post-preview">
+      <h2>NEYLERSİN BENİM DELİ GÖNLÜM</h2>
+      <time datetime="2023-10-01">1 Ekim 2023</time>
+      <p class="author">İrem BUĞA</p>
     </div>
-    
-    <form id="subscribeForm">
-  <input type="email" id="email" placeholder="E-posta ile takip et" required>
-  <button type="submit">Takip Et</button>
-</form>
-
-    <script>
-        // Yazı verileri
-        const posts = [
-            {
-                id: 1,
-                title: "NEYLERSİN BENİM DELİ GÖNLÜM",
-                date: "1 Ekim 2023",
-                author: "İrem BUĞA",
-                content: `Dinmedi mi denizindeki dalgalar,<br>
-                Bitmedi mi çölündeki fırtınalar?<br>
-                Durmadı mı gözündeki yaşlar,<br>
-                Batmadı mı ayağına yolundaki taşlar?<br><br>
-                Ah, şu benim deli gönlüm...<br>
-                Varsın dinmesin dalgalar,<br>
-                Varsın batmaya devam etsin taşlar,<br>
-                Varsın sürüklesin rüzgârlar hiç bilmediğin yerlere.<br><br>
-                <em>~İrem BUĞA</em>`
-            },
-            {
-                id: 2,
-                title: "KAYBOLUŞ",
-                date: "8 Ekim 2023",
-                author: "İrem BUĞA",
-                content: `O güzel şiirler neden sustu?<br>
-                Hani kalemler ışık olurdu?<br>
-                Döner durur aynı çarklar,<br>
-                Yol kaybolur, iz unutulur.<br><br>
-                Bir rüzgâr eser, silinir ses,<br>
-                Bir yağmur yağar, kaybolur yaş gözden,<br>
-                Ve zaman derin bir sır olur,<br>
-                Akıp gider usul usul...<br><br>
-                <em>~İrem BUĞA</em>`
-            }
-        ];
-    
-    <div id="hakkinda" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2 style="color: var(--koyu-lacivert);">Hakkımda</h2>
-            <p>Merhaba ben İrem... Yazmak bana şu hayatta en iyi gelen şey... Yazdıklarımı sizlerle paylaşıp, üzerine konuşmak eminim daha da zevkli olacaktır. Daha umutlu yarınlar için... Keyifli Okumalar!</p>
-        </div>
+  </article>
+  <article class="post-card" data-id="2" style="background-color: #bbdefb;">
+    <div class="post-preview">
+      <h2>KAYBOLUŞ</h2>
+      <time datetime="2023-10-08">8 Ekim 2023</time>
+      <p class="author">İrem BUĞA</p>
     </div>
-     <!-- Memnuniyet Anketi -->
-    <section class="feedback-section">
-        <p>Yazılarım hakkında ne düşünüyorsunuz?</p>
-        <div class="emoji-rating">
-            <span>😞</span>
-            <span>😐</span>
-            <span>😊</span>
-            <span>🤩</span>
-        </div>
-    </section>
-    <footer>
-        <div>© 2023 İrem BUĞA. Tüm hakları saklıdır.</div>
-        <div class="footer-links">
-            <a href="#">Gizlilik Politikası</a>
-            <a href="#">Kullanım Şartları</a>
-        </div>
-    </footer>
+  </article>
+</main>
 
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <script>
-        // Menü işlevselliği
-        document.getElementById('anasayfa-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('hakkinda').style.display = 'none';
-            document.getElementById('anasayfa').style.display = 'block';
-        });
-        
-        document.getElementById('hakkinda-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('hakkinda').style.display = 'flex';
-            document.getElementById('anasayfa').style.display = 'none';
-            
-            // Konfeti efekti
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#6a7ba2', '#3c4f6e', '#f8f9fa', '#ffffff']
-            });
-        });
-        
-        document.querySelector('.close-modal').addEventListener('click', function() {
-            document.getElementById('hakkinda').style.display = 'none';
-        });
-    </script>
-</body>
-</html>
+<!-- Yazı Detay Gösterimi -->
+<div class="post-overlay" id="postOverlay">
+  <div class="post-container">
+    <button class="close-post">&times;</button>
+    <div class="post-header">
+      <h2 id="postTitle"></h2>
+      <div class="post-meta">
+        <time id="postDate"></time>
+        <span id="postAuthor"></span>
+      </div>
+    </div>
+    <div class="post-content" id="postContent"></div>
+    <div class="post-actions">
+      <button class="like-btn"><i class="far fa-heart"></i> Beğen</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.site-header {
+  text-align: center;
+  margin: 20px 0;
+}
+.subtitle {
+  font-style: italic;
+  color: #555;
+}
+.emoji-feedback {
+  text-align: center;
+  margin: 20px 0;
+}
+.emojis span {
+  font-size: 2rem;
+  cursor: pointer;
+  margin: 0 10px;
+  transition: transform 0.3s;
+}
+.emojis span:hover {
+  transform: scale(1.3);
+}
+.confetti {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4rem;
+  animation: pop 0.5s ease-in-out forwards;
+}
+@keyframes pop {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(3); }
+}
+</style>
+
+<script>
+const posts = [
+  {
+    id: 1,
+    title: "NEYLERSİN BENİM DELİ GÖNLÜM",
+    date: "1 Ekim 2023",
+    author: "İrem BUĞA",
+    content: `Dinmedi mi denizindeki dalgalar,<br>
+    Bitmedi mi çölündeki fırtınalar?<br>
+    Durmadı mı gözündeki yaşlar,<br>
+    Batmadı mı ayağına yolundaki taşlar?<br><br>
+    Ah, şu benim deli gönlüm...<br>
+    Varsın dinmesin dalgalar,<br>
+    Varsın batmaya devam etsin taşlar,<br>
+    Varsın sürüklesin rüzgârlar hiç bilmediğin yerlere.<br><br>
+    <em>~İrem BUĞA</em>`
+  },
+  {
+    id: 2,
+    title: "KAYBOLUŞ",
+    date: "8 Ekim 2023",
+    author: "İrem BUĞA",
+    content: `O güzel şiirler neden sustu?<br>
+    Hani kalemler ışık olurdu?<br>
+    Döner durur aynı çarklar,<br>
+    Yol kaybolur, iz unutulur.<br><br>
+    Bir rüzgâr eser, silinir ses,<br>
+    Bir yağmur yağar, kaybolur yaş gözden,<br>
+    Ve zaman derin bir sır olur,<br>
+    Akıp gider usul usul...<br><br>
+    <em>~İrem BUĞA</em>`
+  }
+];
+
+// Yazıya tıklanınca detay göster
+const cards = document.querySelectorAll('.post-card');
+const overlay = document.getElementById('postOverlay');
+cards.forEach(card => {
+  card.addEventListener('click', () => {
+    const postId = card.getAttribute('data-id');
+    const post = posts.find(p => p.id == postId);
+    if (post) {
+      document.getElementById('postTitle').innerHTML = post.title;
+      document.getElementById('postDate').innerHTML = post.date;
+      document.getElementById('postAuthor').innerHTML = post.author;
+      document.getElementById('postContent').innerHTML = post.content;
+      overlay.style.display = 'block';
+    }
+  });
+});
+
+document.querySelector('.close-post').addEventListener('click', () => {
+  overlay.style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Emoji geri bildirim
+const emojis = document.querySelectorAll('.emoji');
+emojis.forEach(emoji => {
+  emoji.addEventListener('click', () => {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti';
+    confetti.textContent = emoji.dataset.reaction;
+    document.body.appendChild(confetti);
+    setTimeout(() => document.body.removeChild(confetti), 2000);
+  });
+});
+</script>
