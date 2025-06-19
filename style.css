@@ -107,6 +107,17 @@ body {
     cursor: pointer;
     color: var(--light-text);
 }
+.modal {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: var(--shadow);
+    animation: fadeIn 0.3s;
+    position: relative; /* EKLENMELİ */
+}
+
 
 /* ANKET */
 .feedback-section {
