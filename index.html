@@ -13,8 +13,6 @@
             --beyaz: #ffffff;
             --yazi-renk: #333333;
             --acik-yazi: #777777;
-            --card-blue: #e3f2fd;
-            --card-light-blue: #bbdefb;
         }
         
         /* Temel Stil */
@@ -25,252 +23,120 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30,50 Q50,30 70,50 T110,50" fill="none" stroke="%236a7ba2" stroke-width="1.2" opacity="0.15"/></svg>');
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30,50 Q50,30 70,50 T110,50" fill="none" stroke="%236a7ba2" stroke-width="1.2" opacity="0.2"/></svg>');
             background-size: 150px;
         }
         
         /* Header */
-        .main-header {
+        header {
             background: linear-gradient(135deg, var(--koyu-lacivert), var(--pastel-lacivert));
+            color: white;
             padding: 1.5rem;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
-        .header-content {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .main-header h1 {
+        h1 {
             margin: 0;
             font-size: 2rem;
-            color: white;
         }
         
         .subtitle {
             font-size: 1rem;
-            color: rgba(255,255,255,0.9);
-            margin: 0.3rem 0;
+            opacity: 0.9;
         }
         
-        .about-btn {
-            position: absolute;
-            top: 50%;
-            right: 1rem;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.3);
-            color: white;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .about-btn:hover {
-            background: rgba(255,255,255,0.3);
-        }
-        
-        /* Modal */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
+        /* Menü */
+        .menu {
+            display: flex;
             justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(3px);
+            gap: 2rem;
+            margin-top: 1.5rem;
         }
         
-        .modal {
-            background: var(--beyaz);
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: relative;
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
         }
         
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--acik-yazi);
+        .menu a:hover {
+            background-color: rgba(255,255,255,0.2);
         }
         
-        /* Feedback */
-        .feedback-section {
-            text-align: center;
+        /* Şiir Kartları */
+        .poem-container {
+            flex: 1;
+            max-width: 800px;
             margin: 2rem auto;
-            max-width: 600px;
-            padding: 1rem;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+        
+        .poem-card {
             background: var(--beyaz);
-            border-radius: 10px;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--pastel-lacivert);
+        }
+        
+        .poem-title {
+            color: var(--koyu-lacivert);
+            margin-top: 0;
+            font-weight: 600;
+        }
+        
+        .poem-date {
+            color: var(--acik-yazi);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .poem-content {
+            white-space: pre-line;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        /* Emoji Değerlendirme */
+        .feedback {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--beyaz);
+            border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .feedback p {
+            margin-bottom: 1rem;
+            font-weight: 500;
+            color: var(--koyu-lacivert);
         }
         
         .emoji-rating {
             display: flex;
             justify-content: center;
             gap: 1.5rem;
-            font-size: 1.8rem;
             margin-top: 1rem;
         }
         
         .emoji-rating span {
+            font-size: 2rem;
             cursor: pointer;
             transition: transform 0.2s;
         }
         
         .emoji-rating span:hover {
-            transform: scale(1.3);
-        }
-        
-        /* Yazı Listesi */
-        .post-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            padding: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .post-card {
-            background: var(--beyaz);
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            cursor: pointer;
-            overflow: hidden;
-            border-left: 4px solid var(--pastel-lacivert);
-        }
-        
-        .post-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .post-preview {
-            padding: 1.5rem;
-        }
-        
-        .post-card h2 {
-            font-size: 1.2rem;
-            margin: 0 0 0.5rem 0;
-            color: var(--koyu-lacivert);
-        }
-        
-        .post-card time {
-            font-size: 0.8rem;
-            color: var(--acik-yazi);
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-        
-        .post-card .author {
-            font-size: 0.85rem;
-            color: var(--acik-yazi);
-            font-style: italic;
-        }
-        
-        /* Yazı Detay */
-        .post-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.7);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            padding: 1rem;
-            backdrop-filter: blur(5px);
-        }
-        
-        .post-container {
-            background: var(--beyaz);
-            border-radius: 10px;
-            max-width: 800px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 2rem;
-            position: relative;
-            animation: fadeInUp 0.4s;
-        }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .close-post {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--acik-yazi);
-        }
-        
-        .post-header {
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        
-        .post-header h2 {
-            font-size: 1.8rem;
-            margin: 0 0 0.5rem 0;
-            color: var(--koyu-lacivert);
-        }
-        
-        .post-meta {
-            font-size: 0.9rem;
-            color: var(--acik-yazi);
-            margin-bottom: 1rem;
-        }
-        
-        .post-content {
-            line-height: 1.8;
-            padding-bottom: 2rem;
-        }
-        
-        .post-actions {
-            text-align: center;
-            margin-top: 2rem;
-        }
-        
-        .like-btn {
-            background: none;
-            border: 1px solid var(--pastel-lacivert);
-            color: var(--pastel-lacivert);
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-        
-        .like-btn:hover {
-            background: var(--pastel-lacivert);
-            color: white;
+            transform: scale(1.2);
         }
         
         /* Footer */
@@ -279,7 +145,7 @@
             color: white;
             padding: 1.5rem;
             text-align: center;
-            margin-top: 2rem;
+            margin-top: auto;
         }
         
         .footer-links {
@@ -291,95 +157,129 @@
             margin: 0 1rem;
             text-decoration: none;
             font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(3px);
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--acik-yazi);
         }
         
         /* Responsive */
         @media (max-width: 768px) {
-            .post-grid {
-                grid-template-columns: 1fr;
-                padding: 1rem;
+            .menu {
+                gap: 1rem;
             }
             
-            .about-btn {
-                position: static;
-                margin-top: 1rem;
-                transform: none;
+            .poem-card {
+                padding: 1.5rem;
+            }
+            
+            .emoji-rating {
+                gap: 1rem;
             }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Ana Başlık -->
-    <header class="main-header">
-        <div class="header-content">
-            <h1>Nette Yazar</h1>
-            <p class="subtitle">Yokuş Hikayesi</p>
-            <button class="about-btn">Hakkımda</button>
+    <header>
+        <h1>Nette Yazar</h1>
+        <div class="subtitle">Şiir Dünyası</div>
+        <div class="menu">
+            <a href="#" id="anasayfa-link">Anasayfa</a>
+            <a href="#" id="hakkinda-link">Hakkımda</a>
         </div>
     </header>
+    
+    <div class="poem-container" id="anasayfa">
+        <div class="poem-card">
+            <h2 class="poem-title">NEYLERSİN BENİM DELİ GÖNLÜM</h2>
+            <div class="poem-date">1 Ekim 2023</div>
+            <div class="poem-content">
+Dinmedi mi denizindeki dalgalar,
+Bitmedi mi çölündeki fırtınalar?
+Durmadı mı gözündeki yaşlar,
+Batmadı mı ayağına yolundaki taşlar?
 
-    <!-- Hakkımda Modal -->
-    <div class="modal-overlay" id="aboutModal">
-        <div class="modal">
-            <button class="close-modal">&times;</button>
-            <h3>Hakkımda</h3>
-            <p>Merhaba ben İrem... Yazmak bana şu hayatta en iyi gelen şey... Yazdıklarımı sizlerle paylaşıp, üzerine konuşmak eminim daha da zevkli olacaktır. Daha umutlu yarınlar için... Keyifli Okumalar!</p>
+Ah, şu benim deli gönlüm...
+Varsın dinmesin dalgalar,
+Varsın batmaya devam etsin taşlar,
+Varsın sürüklesin rüzgârlar hiç bilmediğin yerlere.
+
+~İrem BUĞA
+            </div>
         </div>
-    </div>
+        
+        <div class="poem-card">
+            <h2 class="poem-title">KAYBOLUŞ</h2>
+            <div class="poem-date">8 Ekim 2023</div>
+            <div class="poem-content">
+O güzel şiirler neden sustu?
+Hani kalemler ışık olurdu?
+Döner durur aynı çarklar,
+Yol kaybolur, iz unutulur.
 
-    <!-- Memnuniyet Anketi -->
-    <section class="feedback-section">
-        <p>Yazılarım hakkında ne düşünüyorsunuz?</p>
-        <div class="emoji-rating">
-            <span>😞</span>
-            <span>😐</span>
-            <span>😊</span>
-            <span>🤩</span>
+Bir rüzgâr eser, silinir ses,
+Bir yağmur yağar, kaybolur yaş gözden,
+Ve zaman derin bir sır olur,
+Akıp gider usul usul...
+
+~İrem BUĞA
+            </div>
         </div>
-    </section>
-
-    <!-- Yazı Listesi -->
-    <main class="post-grid" id="postGrid">
-        <!-- Örnek Yazı 1 -->
-        <article class="post-card" data-id="1" style="background-color: var(--card-blue);">
-            <div class="post-preview">
-                <h2>NEYLERSİN BENİM DELİ GÖNLÜM</h2>
-                <time datetime="2023-10-01">1 Ekim 2023</time>
-                <p class="author">İrem BUĞA</p>
-            </div>
-        </article>
-
-        <!-- Örnek Yazı 2 -->
-        <article class="post-card" data-id="2" style="background-color: var(--card-light-blue);">
-            <div class="post-preview">
-                <h2>KAYBOLUŞ</h2>
-                <time datetime="2023-10-08">8 Ekim 2023</time>
-                <p class="author">İrem BUĞA</p>
-            </div>
-        </article>
-    </main>
-
-    <!-- Yazı Detay Gösterimi -->
-    <div class="post-overlay" id="postOverlay">
-        <div class="post-container">
-            <button class="close-post">&times;</button>
-            <div class="post-header">
-                <h2 id="postTitle"></h2>
-                <div class="post-meta">
-                    <time id="postDate"></time>
-                    <span id="postAuthor"></span>
-                </div>
-            </div>
-            <div class="post-content" id="postContent"></div>
-            <div class="post-actions">
-                <button class="like-btn"><i class="far fa-heart"></i> Beğen</button>
+        
+        <div class="feedback">
+            <p>Bu şiir hakkında ne düşünüyorsunuz?</p>
+            <div class="emoji-rating">
+                <span>😞</span>
+                <span>😐</span>
+                <span>😊</span>
+                <span>🤩</span>
             </div>
         </div>
     </div>
     
-    <!-- Footer -->
+    <div id="hakkinda" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 style="color: var(--koyu-lacivert);">Hakkımda</h2>
+            <p>Merhaba ben İrem... Yazmak bana şu hayatta en iyi gelen şey... Yazdıklarımı sizlerle paylaşıp, üzerine konuşmak eminim daha da zevkli olacaktır. Daha umutlu yarınlar için... Keyifli Okumalar!</p>
+        </div>
+    </div>
+    
     <footer>
         <div>© 2023 İrem BUĞA. Tüm hakları saklıdır.</div>
         <div class="footer-links">
@@ -388,48 +288,20 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
-        // Yazı verileri
-        const posts = [
-            {
-                id: 1,
-                title: "NEYLERSİN BENİM DELİ GÖNLÜM",
-                date: "1 Ekim 2023",
-                author: "İrem BUĞA",
-                content: `Dinmedi mi denizindeki dalgalar,<br>
-                Bitmedi mi çölündeki fırtınalar?<br>
-                Durmadı mı gözündeki yaşlar,<br>
-                Batmadı mı ayağına yolundaki taşlar?<br><br>
-                Ah, şu benim deli gönlüm...<br>
-                Varsın dinmesin dalgalar,<br>
-                Varsın batmaya devam etsin taşlar,<br>
-                Varsın sürüklesin rüzgârlar hiç bilmediğin yerlere.<br><br>
-                <em>~İrem BUĞA</em>`
-            },
-            {
-                id: 2,
-                title: "KAYBOLUŞ",
-                date: "8 Ekim 2023",
-                author: "İrem BUĞA",
-                content: `O güzel şiirler neden sustu?<br>
-                Hani kalemler ışık olurdu?<br>
-                Döner durur aynı çarklar,<br>
-                Yol kaybolur, iz unutulur.<br><br>
-                Bir rüzgâr eser, silinir ses,<br>
-                Bir yağmur yağar, kaybolur yaş gözden,<br>
-                Ve zaman derin bir sır olur,<br>
-                Akıp gider usul usul...<br><br>
-                <em>~İrem BUĞA</em>`
-            }
-        ];
-
-        // Hakkımda modalı
-        const aboutBtn = document.querySelector('.about-btn');
-        const aboutModal = document.getElementById('aboutModal');
-        const closeModal = document.querySelector('.close-modal');
-
-        aboutBtn.addEventListener('click', () => {
-            aboutModal.style.display = 'flex';
+        // Menü işlevselliği
+        document.getElementById('anasayfa-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('hakkinda').style.display = 'none';
+            document.getElementById('anasayfa').style.display = 'block';
+        });
+        
+        document.getElementById('hakkinda-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('hakkinda').style.display = 'flex';
+            document.getElementById('anasayfa').style.display = 'none';
+            
             // Konfeti efekti
             confetti({
                 particleCount: 100,
@@ -438,68 +310,10 @@
                 colors: ['#6a7ba2', '#3c4f6e', '#f8f9fa', '#ffffff']
             });
         });
-
-        closeModal.addEventListener('click', () => {
-            aboutModal.style.display = 'none';
-        });
-
-        // Yazı detay gösterimi
-        const postCards = document.querySelectorAll('.post-card');
-        const postOverlay = document.getElementById('postOverlay');
-        const closePostBtn = document.querySelector('.close-post');
-
-        postCards.forEach(card => {
-            card.addEventListener('click', (e) => {
-                if (!e.target.classList.contains('post-actions')) {
-                    const postId = parseInt(card.getAttribute('data-id'));
-                    const post = posts.find(p => p.id === postId);
-                    
-                    document.getElementById('postTitle').textContent = post.title;
-                    document.getElementById('postDate').textContent = post.date;
-                    document.getElementById('postAuthor').textContent = post.author;
-                    document.getElementById('postContent').innerHTML = post.content;
-                    
-                    postOverlay.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
-                }
-            });
-        });
-
-        closePostBtn.addEventListener('click', () => {
-            postOverlay.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-
-        // Beğen butonu
-        const likeBtn = document.querySelector('.like-btn');
-        likeBtn.addEventListener('click', () => {
-            likeBtn.innerHTML = '<i class="fas fa-heart"></i> Beğendiniz!';
-            likeBtn.style.color = '#ff6b6b';
-        });
-
-        // Emoji rating efekti
-        const emojiSpans = document.querySelectorAll('.emoji-rating span');
-        emojiSpans.forEach(span => {
-            span.addEventListener('click', () => {
-                const emoji = span.textContent;
-                const tempDiv = document.createElement('div');
-                tempDiv.textContent = emoji;
-                tempDiv.style.position = 'fixed';
-                tempDiv.style.top = '50%';
-                tempDiv.style.left = '50%';
-                tempDiv.style.transform = 'translate(-50%, -50%)';
-                tempDiv.style.fontSize = '4rem';
-                tempDiv.style.zIndex = '2000';
-                tempDiv.style.transition = 'opacity 0.5s';
-                document.body.appendChild(tempDiv);
-
-                setTimeout(() => {
-                    tempDiv.style.opacity = '0';
-                    setTimeout(() => tempDiv.remove(), 500);
-                }, 1500);
-            });
+        
+        document.querySelector('.close-modal').addEventListener('click', function() {
+            document.getElementById('hakkinda').style.display = 'none';
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </body>
 </html>
