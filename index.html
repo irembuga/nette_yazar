@@ -216,61 +216,97 @@
 </head>
 <body>
     <header>
-        <h1>Nette Yazar</h1>
-        <div class="subtitle">Şiir Dünyası</div>
+        <h1>NETTE YAZAR</h1>
+        <div class="subtitle">Yokuş Hikâyesi...</div>
         <div class="menu">
             <a href="#" id="anasayfa-link">Anasayfa</a>
             <a href="#" id="hakkinda-link">Hakkımda</a>
         </div>
     </header>
+
+    
     
     <div class="poem-container" id="anasayfa">
-        <div class="poem-card">
-            <h2 class="poem-title">NEYLERSİN BENİM DELİ GÖNLÜM</h2>
-            <div class="poem-date">1 Ekim 2023</div>
-            <div class="poem-content">
-Dinmedi mi denizindeki dalgalar,
-Bitmedi mi çölündeki fırtınalar?
-Durmadı mı gözündeki yaşlar,
-Batmadı mı ayağına yolundaki taşlar?
-
-Ah, şu benim deli gönlüm...
-Varsın dinmesin dalgalar,
-Varsın batmaya devam etsin taşlar,
-Varsın sürüklesin rüzgârlar hiç bilmediğin yerlere.
-
-~İrem BUĞA
+       <!-- Yazı Listesi -->
+    <main class="post-grid" id="postGrid">
+        <!-- Örnek Yazı 1 -->
+        <article class="post-card" data-id="1" style="background-color: #e3f2fd;">
+            <div class="post-preview">
+                <h2>NEYLERSİN BENİM DELİ GÖNLÜM</h2>
+                <time datetime="2023-10-01">1 Ekim 2023</time>
+                <p class="author">İrem BUĞA</p>
             </div>
-        </div>
-        
-        <div class="poem-card">
-            <h2 class="poem-title">KAYBOLUŞ</h2>
-            <div class="poem-date">8 Ekim 2023</div>
-            <div class="poem-content">
-O güzel şiirler neden sustu?
-Hani kalemler ışık olurdu?
-Döner durur aynı çarklar,
-Yol kaybolur, iz unutulur.
+        </article>
 
-Bir rüzgâr eser, silinir ses,
-Bir yağmur yağar, kaybolur yaş gözden,
-Ve zaman derin bir sır olur,
-Akıp gider usul usul...
-
-~İrem BUĞA
+        <!-- Örnek Yazı 2 -->
+        <article class="post-card" data-id="2" style="background-color: #bbdefb;">
+            <div class="post-preview">
+                <h2>KAYBOLUŞ</h2>
+                <time datetime="2023-10-08">8 Ekim 2023</time>
+                <p class="author">İrem BUĞA</p>
             </div>
-        </div>
-        
-        <div class="feedback">
-            <p>Bu şiir hakkında ne düşünüyorsunuz?</p>
-            <div class="emoji-rating">
-                <span>😞</span>
-                <span>😐</span>
-                <span>😊</span>
-                <span>🤩</span>
+        </article>
+
+        <!-- Diğer yazılar buraya eklenecek -->
+    </main>
+
+    <!-- Yazı Detay Gösterimi -->
+    <div class="post-overlay" id="postOverlay">
+        <div class="post-container">
+            <button class="close-post">&times;</button>
+            <div class="post-header">
+                <h2 id="postTitle"></h2>
+                <div class="post-meta">
+                    <time id="postDate"></time>
+                    <span id="postAuthor"></span>
+                </div>
+            </div>
+            <div class="post-content" id="postContent"></div>
+            <div class="post-actions">
+                <button class="like-btn"><i class="far fa-heart"></i> Beğen</button>
             </div>
         </div>
     </div>
+    
+    <form id="subscribeForm">
+  <input type="email" id="email" placeholder="E-posta ile takip et" required>
+  <button type="submit">Takip Et</button>
+</form>
+
+    <script>
+        // Yazı verileri
+        const posts = [
+            {
+                id: 1,
+                title: "NEYLERSİN BENİM DELİ GÖNLÜM",
+                date: "1 Ekim 2023",
+                author: "İrem BUĞA",
+                content: `Dinmedi mi denizindeki dalgalar,<br>
+                Bitmedi mi çölündeki fırtınalar?<br>
+                Durmadı mı gözündeki yaşlar,<br>
+                Batmadı mı ayağına yolundaki taşlar?<br><br>
+                Ah, şu benim deli gönlüm...<br>
+                Varsın dinmesin dalgalar,<br>
+                Varsın batmaya devam etsin taşlar,<br>
+                Varsın sürüklesin rüzgârlar hiç bilmediğin yerlere.<br><br>
+                <em>~İrem BUĞA</em>`
+            },
+            {
+                id: 2,
+                title: "KAYBOLUŞ",
+                date: "8 Ekim 2023",
+                author: "İrem BUĞA",
+                content: `O güzel şiirler neden sustu?<br>
+                Hani kalemler ışık olurdu?<br>
+                Döner durur aynı çarklar,<br>
+                Yol kaybolur, iz unutulur.<br><br>
+                Bir rüzgâr eser, silinir ses,<br>
+                Bir yağmur yağar, kaybolur yaş gözden,<br>
+                Ve zaman derin bir sır olur,<br>
+                Akıp gider usul usul...<br><br>
+                <em>~İrem BUĞA</em>`
+            }
+        ];
     
     <div id="hakkinda" class="modal">
         <div class="modal-content">
@@ -279,7 +315,16 @@ Akıp gider usul usul...
             <p>Merhaba ben İrem... Yazmak bana şu hayatta en iyi gelen şey... Yazdıklarımı sizlerle paylaşıp, üzerine konuşmak eminim daha da zevkli olacaktır. Daha umutlu yarınlar için... Keyifli Okumalar!</p>
         </div>
     </div>
-    
+     <!-- Memnuniyet Anketi -->
+    <section class="feedback-section">
+        <p>Yazılarım hakkında ne düşünüyorsunuz?</p>
+        <div class="emoji-rating">
+            <span>😞</span>
+            <span>😐</span>
+            <span>😊</span>
+            <span>🤩</span>
+        </div>
+    </section>
     <footer>
         <div>© 2023 İrem BUĞA. Tüm hakları saklıdır.</div>
         <div class="footer-links">
