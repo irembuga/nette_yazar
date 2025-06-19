@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    
 </head>
 <body>
     <!-- Ana Başlık -->
@@ -29,21 +27,10 @@
         </div>
     </div>
 
-    <!-- Memnuniyet Anketi -->
-    <section class="feedback-section">
-        <p>Yazılarım hakkında ne düşünüyorsunuz?</p>
-        <div class="emoji-rating">
-            <span>😞</span>
-            <span>😐</span>
-            <span>😊</span>
-            <span>🤩</span>
-        </div>
-    </section>
-
     <!-- Yazı Listesi -->
     <main class="post-grid" id="postGrid">
         <!-- Örnek Yazı 1 -->
-        <article class="post-card" data-id="1" style="background-color: #e3f2fd;">
+        <article class="post-card" data-id="1">
             <div class="post-preview">
                 <h2>NEYLERSİN BENİM DELİ GÖNLÜM</h2>
                 <time datetime="2023-10-01">1 Ekim 2023</time>
@@ -52,15 +39,13 @@
         </article>
 
         <!-- Örnek Yazı 2 -->
-        <article class="post-card" data-id="2" style="background-color: #bbdefb;">
+        <article class="post-card" data-id="2">
             <div class="post-preview">
                 <h2>KAYBOLUŞ</h2>
                 <time datetime="2023-10-08">8 Ekim 2023</time>
                 <p class="author">İrem BUĞA</p>
             </div>
         </article>
-
-        <!-- Diğer yazılar buraya eklenecek -->
     </main>
 
     <!-- Yazı Detay Gösterimi -->
@@ -81,10 +66,17 @@
         </div>
     </div>
     
-    <form id="subscribeForm">
-  <input type="email" id="email" placeholder="E-posta ile takip et" required>
-  <button type="submit">Takip Et</button>
-</form>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2023 İrem BUĞA. Tüm hakları saklıdır.</p>
+            <div class="footer-links">
+                <a href="#">Gizlilik Politikası</a>
+                <a href="#">Kullanım Şartları</a>
+                <a href="#">İletişim</a>
+            </div>
+        </div>
+    </footer>
 
     <script>
         // Yazı verileri
@@ -128,12 +120,11 @@
 
         aboutBtn.addEventListener('click', () => {
             aboutModal.style.display = 'flex';
-            // Konfeti efekti
             confetti({
                 particleCount: 100,
                 spread: 70,
                 origin: { y: 0.6 },
-                colors: ['#ff9a9e', '#fad0c4', '#fbc2eb', '#a6c1ee']
+                colors: ['#a8e6cf', '#dcedc1', '#ffd3b6', '#ffaaa5']
             });
         });
 
@@ -176,30 +167,5 @@
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <script>
-        const emojiSpans = document.querySelectorAll('.emoji-rating span');
-
-        emojiSpans.forEach(span => {
-            span.addEventListener('click', () => {
-                const emoji = span.textContent;
-                const tempDiv = document.createElement('div');
-                tempDiv.textContent = emoji;
-                tempDiv.style.position = 'fixed';
-                tempDiv.style.top = '50%';
-                tempDiv.style.left = '50%';
-                tempDiv.style.transform = 'translate(-50%, -50%)';
-                tempDiv.style.fontSize = '4rem';
-                tempDiv.style.zIndex = '2000';
-                tempDiv.style.transition = 'opacity 0.5s';
-                document.body.appendChild(tempDiv);
-
-                setTimeout(() => {
-                    tempDiv.style.opacity = '0';
-                    setTimeout(() => tempDiv.remove(), 500);
-                }, 1500);
-            });
-        });
-    </script>
 </body>
-</html>
 </html>
