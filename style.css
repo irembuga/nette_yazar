@@ -1,13 +1,13 @@
 /* TEMEL STİLLER */
 :root {
-    --primary-mint: #a8e6cf;
-    --light-mint: #dcedc1;
-    --beige: #ffd3b6;
-    --light-beige: #ffefd5;
+    --mint-green: #b5ead7;
+    --light-mint: #e2f0cb;
+    --beige: #ffdac1;
+    --light-beige: #fff9f4;
     --white: #ffffff;
     --text-color: #2c3e50;
     --light-text: #7f8c8d;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 body {
@@ -17,18 +17,20 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M20,20 Q30,10 40,20 T60,20 Q70,10 80,20 T100,20 Q90,30 100,40 T100,60 Q90,70 100,80 T100,100 Q70,90 80,80 T60,80 Q50,90 40,80 T20,80 Q10,70 20,60 T20,40 Q10,30 20,20" fill="none" stroke="%23a8e6cf" stroke-width="0.8" opacity="0.15"/></svg>');
-    background-size: 300px;
+    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30,50 Q50,30 70,50 T90,50 Q70,70 50,50 T10,50 Q30,30 50,50 T90,50" fill="none" stroke="%23b5ead7" stroke-width="0.3" opacity="0.15"/></svg>');
+    background-size: 200px;
+    background-repeat: repeat;
+    background-attachment: fixed;
 }
 
 /* ANA BAŞLIK */
 .main-header {
-    background: linear-gradient(135deg, var(--primary-mint), var(--light-mint));
+    background: linear-gradient(135deg, var(--mint-green), var(--light-mint));
     padding: 1.5rem;
     text-align: center;
     box-shadow: var(--shadow);
     margin-bottom: 2rem;
-    border-bottom: 3px solid var(--beige);
+    position: relative;
 }
 
 .header-content {
@@ -43,7 +45,7 @@ body {
     margin: 0;
     color: var(--white);
     letter-spacing: 1px;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 .subtitle {
@@ -131,12 +133,12 @@ body {
     transition: all 0.3s;
     cursor: pointer;
     overflow: hidden;
-    border: 1px solid rgba(168, 230, 207, 0.3);
+    border: 1px solid rgba(181, 234, 215, 0.3);
 }
 
 .post-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
 }
 
 .post-preview {
@@ -147,6 +149,7 @@ body {
     font-size: 1.2rem;
     margin: 0 0 0.5rem 0;
     color: var(--text-color);
+    font-weight: 500;
 }
 
 .post-card time {
@@ -188,7 +191,7 @@ body {
     padding: 2rem;
     position: relative;
     animation: fadeInUp 0.4s;
-    border: 2px solid var(--primary-mint);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 @keyframes fadeInUp {
@@ -210,8 +213,8 @@ body {
 .post-header {
     margin-bottom: 1.5rem;
     text-align: center;
-    border-bottom: 1px dashed var(--beige);
     padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(181, 234, 215, 0.5);
 }
 
 .post-header h2 {
@@ -219,6 +222,7 @@ body {
     font-size: 1.8rem;
     margin: 0 0 0.5rem 0;
     color: var(--text-color);
+    font-weight: 600;
 }
 
 .post-meta {
@@ -240,8 +244,8 @@ body {
 
 .like-btn {
     background: none;
-    border: 1px solid var(--primary-mint);
-    color: var(--primary-mint);
+    border: 1px solid var(--mint-green);
+    color: var(--mint-green);
     padding: 0.5rem 1.5rem;
     border-radius: 20px;
     cursor: pointer;
@@ -250,13 +254,13 @@ body {
 }
 
 .like-btn:hover {
-    background: var(--primary-mint);
+    background: var(--mint-green);
     color: white;
 }
 
 /* FOOTER */
 .site-footer {
-    background-color: var(--primary-mint);
+    background-color: var(--mint-green);
     color: white;
     padding: 2rem 1rem;
     text-align: center;
@@ -277,6 +281,7 @@ body {
     margin: 0 1rem;
     text-decoration: none;
     transition: opacity 0.3s;
+    font-size: 0.9rem;
 }
 
 .footer-links a:hover {
