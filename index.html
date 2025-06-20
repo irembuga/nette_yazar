@@ -391,6 +391,40 @@
             background: var(--pastel-lacivert);
             color: white;
         }
+
+        /* Sayfalama Stili */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+            gap: 0.5rem;
+        }
+
+        .pagination button {
+            background-color: var(--pastel-lacivert);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1rem;
+        }
+
+        .pagination button:hover:not(.active) {
+            background-color: var(--koyu-lacivert);
+        }
+
+        .pagination button.active {
+            background-color: var(--koyu-lacivert);
+            cursor: default;
+        }
+
+        .pagination span {
+            font-weight: bold;
+            color: var(--koyu-lacivert);
+        }
         
         /* Footer - SAYFANIN EN ALTINDA */
         footer {
@@ -440,6 +474,11 @@
             .post-grid {
                 grid-template-columns: 1fr;
                 padding: 1rem;
+            }
+
+            .pagination button {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -502,213 +541,13 @@
         </section>
 
         <main class="post-grid" id="postGrid">
-            <article class="post-card" data-id="1" style="background-color: var(--card-blue);">
-                <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Şiir görseli" class="post-image">
-                <div class="post-preview">
-                    <h2>NEYLERSİN BENİM DELİ GÖNLÜM</h2>
-                    <time datetime="2025-05-04">4 Mayıs 2025</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
+            </main>
 
-            <article class="post-card" data-id="2" style="background-color: var(--card-light-blue);">
-                <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Şiir görseli" class="post-image">
-                <div class="post-preview">
-                    <h2>KAYBOLUŞ</h2>
-                    <time datetime="2025-03-09">9 Mart 2025</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="3" style="background-color: var(--card-blue);">
-                <img src="https://images.unsplash.com/photo-1510511232709-ce8071c1d7c3?auto=format&fit=crop&q=80&w=500&h=200" alt="Sıcak bir kafe atmosferi" class="post-image">
-                <div class="post-preview">
-                    <h2>İçimde Ilık Bir Hatıra</h2>
-                    <time datetime="2025-02-16">16 Şubat 2025</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="4" style="background-color: var(--card-light-blue);">
-                <img src="https://images.unsplash.com/photo-1549488349-e1673b3fbd36?auto=format&fit=crop&q=80&w=500&h=200" alt="Açan bir nergis çiçeği" class="post-image">
-                <div class="post-preview">
-                    <h2>Nergis</h2>
-                    <time datetime="2025-01-27">27 Ocak 2025</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="5" style="background-color: var(--card-blue);">
-                <img src="https://images.unsplash.com/photo-1533109721025-dc132de98451?auto=format&fit=crop&q=80&w=500&h=200" alt="Uzun bir yol" class="post-image">
-                <div class="post-preview">
-                    <h2>Yolda Olmak</h2>
-                    <time datetime="2025-01-17">17 Ocak 2025</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="6" style="background-color: var(--card-light-blue);">
-                <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Yeni yıl" class="post-image">
-                <div class="post-preview">
-                    <h2>Bu Yıl</h2>
-                    <time datetime="2024-12-30">30 Aralık 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="7" style="background-color: var(--card-blue);">
-                <img src="https://images.unsplash.com/photo-1539255860269-0268502ce0c2?auto=format&fit=crop&q=80&w=500&h=200" alt="Fırtınalı hava" class="post-image">
-                <div class="post-preview">
-                    <h2>Fırtına</h2>
-                    <time datetime="2024-12-21">21 Aralık 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="8" style="background-color: var(--card-light-blue);">
-                <img src="https://images.unsplash.com/photo-1506765515384-028b60a97423?auto=format&fit=crop&q=80&w=500&h=200" alt="Soyut dans figürü" class="post-image">
-                <div class="post-preview">
-                    <h2>Biriktirdiklerimizden Şekillendiklerimiz</h2>
-                    <time datetime="2024-12-06">6 Aralık 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="9" style="background-color: var(--card-blue);">
-                <img src="https://images.unsplash.com/photo-1557672172-e2634358826a?auto=format&fit=crop&q=80&w=500&h=200" alt="Soyut dans figürü" class="post-image">
-                <div class="post-preview">
-                    <h2>Duyguların Dansı</h2>
-                    <time datetime="2024-11-25">25 Kasım 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="10" style="background-color: var(--card-light-blue);">
-                <img src="https://images.unsplash.com/photo-1506765515384-028b60a97423?auto=format&fit=crop&q=80&w=500&h=200" alt="Güneş batımı" class="post-image">
-                <div class="post-preview">
-                    <h2>Bazı Anlar</h2>
-                    <time datetime="2024-11-20">20 Kasım 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="11" style="background-color: var(--card-blue);">
-                <img src="https://images.unsplash.com/photo-1526462723654-e09d184cf43d?auto=format&fit=crop&q=80&w=500&h=200" alt="Sahne ve perdeler" class="post-image">
-                <div class="post-preview">
-                    <h2>Shakespeare Müzikali</h2>
-                    <time datetime="2024-11-05">5 Kasım 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="12" style="background-color: var(--card-light-blue);">
-                <img src="https://images.unsplash.com/photo-1528459461239-ce3615456f91?auto=format&fit=crop&q=80&w=500&h=200" alt="Eski el yazması" class="post-image">
-                <div class="post-preview">
-                    <h2>Öyleyse</h2>
-                    <time datetime="2024-10-20">20 Ekim 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="13" style="background-color: var(--card-blue);">
-                <img src="https://images.unsplash.com/photo-1510253723380-f04b2b8e3a2f?auto=format&fit=crop&q=80&w=500&h=200" alt="Gülümseyen insan" class="post-image">
-                <div class="post-preview">
-                    <h2>Bir Tebessümlük Vakit</h2>
-                    <time datetime="2024-10-05">5 Ekim 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="14" style="background-color: var(--card-light-blue);">
-                <img src="https://images.unsplash.com/photo-1506765515384-028b60a97423?auto=format&fit=crop&q=80&w=500&h=200" alt="İnsan siluetleri" class="post-image">
-                <div class="post-preview">
-                    <h2>Kimiz Biz ?</h2>
-                    <time datetime="2024-09-20">20 Eylül 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="15" style="background-color: var(--card-blue);">
-                <img src="https://images.unsplash.com/photo-1506765515384-028b60a97423?auto=format&fit=crop&q=80&w=500&h=200" alt="Eski bir patika" class="post-image">
-                <div class="post-preview">
-                    <h2>Bir Zamanlar</h2>
-                    <time datetime="2024-09-05">5 Eylül 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="16" style="background-color: var(--card-light-blue);">
-                <img src="https://images.unsplash.com/photo-1506765515384-028b60a97423?auto=format&fit=crop&q=80&w=500&h=200" alt="Ufukta bekleyen figür" class="post-image">
-                <div class="post-preview">
-                    <h2>BEKLİYORUM</h2>
-                    <time datetime="2024-08-20">20 Ağustos 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="17" style="background-color: var(--card-blue);">
-                <img src="https://images.unsplash.com/photo-1506765515384-028b60a97423?auto=format&fit=crop&q=80&w=500&h=200" alt="Derin düşünen insan" class="post-image">
-                <div class="post-preview">
-                    <h2>Hasıl-ı Kelam Cancağızım...</h2>
-                    <time datetime="2024-08-05">5 Ağustos 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="18" style="background-color: var(--card-light-blue);">
-                <img src="https://images.unsplash.com/photo-1506765515384-028b60a97423?auto=format&fit=crop&q=80&w=500&h=200" alt="Taş bloklar" class="post-image">
-                <div class="post-preview">
-                    <h2>YAPI TAŞIMIZ...</h2>
-                    <time datetime="2024-07-20">20 Temmuz 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="19" style="background-color: var(--card-blue);">
-                <img src="https://images.unsplash.com/photo-1506765515384-028b60a97423?auto=format&fit=crop&q=80&w=500&h=200" alt="Hızlı büyüme" class="post-image">
-                <div class="post-preview">
-                    <h2>BÜYÜRÜZ ANİDEN</h2>
-                    <time datetime="2024-07-05">5 Temmuz 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="20" style="background-color: var(--card-light-blue);">
-                <img src="https://images.unsplash.com/photo-1506765515384-028b60a97423?auto=format&fit=crop&q=80&w=500&h=200" alt="Zamanı gösteren saat" class="post-image">
-                <div class="post-preview">
-                    <h2>Zaman</h2>
-                    <time datetime="2024-06-20">20 Haziran 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="21" style="background-color: var(--card-blue);">
-                <img src="https://images.unsplash.com/photo-1506765515384-028b60a97423?auto=format&fit=crop&q=80&w=500&h=200" alt="Ağustos güneşi" class="post-image">
-                <div class="post-preview">
-                    <h2>AĞUSTOS...</h2>
-                    <time datetime="2024-08-01">1 Ağustos 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="22" style="background-color: var(--card-light-blue);">
-                <img src="https://images.unsplash.com/photo-1506765515384-028b60a97423?auto=format&fit=crop&q=80&w=500&h=200" alt="Parlak gökyüzü" class="post-image">
-                <div class="post-preview">
-                    <h2>HİÇ UNUTULMAYACAKLARA…</h2>
-                    <time datetime="2024-05-20">20 Mayıs 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-
-            <article class="post-card" data-id="23" style="background-color: var(--card-blue);">
-                <img src="https://images.unsplash.com/photo-1506765515384-028b60a97423?auto=format&fit=crop&q=80&w=500&h=200" alt="Maske" class="post-image">
-                <div class="post-preview">
-                    <h2>-HAZİRAN-</h2>
-                    <time datetime="2024-06-01">1 Haziran 2024</time>
-                    <p class="author">İrem BUĞA</p>
-                </div>
-            </article>
-        </main>
+        <div class="pagination" id="pagination">
+            <button id="prevPage">Önceki</button>
+            <div id="pageNumbers"></div>
+            <button id="nextPage">Sonraki</button>
+        </div>
 
         <div class="post-overlay" id="postOverlay">
             <div class="post-container">
@@ -887,9 +726,9 @@
                 Yazarken kendi hikâyemi;<br>
                 Geçmişimle hesaplaşıyorum,&nbsp;<br>
                 Hayatın dalgalarında savrulurken kendi limanımı arıyorum,<br>
-                &nbsp;Kendi iç dünyamın derinliklerinde yolculuk ediyorum,&nbsp;<br>
+                &nbsp;Kendi iç dünyamın derinliklerinde yolculuk ediyorum,<nbsp;
                 Duygularımın dansında kendimi bulmaya çalışıyor...<br><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ~İrem`
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ~İrem`
             },
             {
                 id: 10,
@@ -962,7 +801,7 @@
                 content: `Bir tebessümlük vakit,<br><br>
                 Etrafta fısıldanan nağmeler,<br><br>
                 Başka bir şehirdeyim,<br><br>
-                Keşifteyim sürekli,&nbsp;<br><br>
+                Keşifteyim sürekli,<nbsp;
                 Sorarak buluyorum sokakları.<br><br>
                 Her adımda yeni bir hikaye oluşuyor zihnimde.<br><br>
                 Rafine zevkler ediniyorum,<br><br>
@@ -1182,7 +1021,77 @@
             }
         ];
 
-        // Modal işlevleri
+        const postsPerPage = 10;
+        let currentPage = 1;
+        let filteredPosts = posts; // Arama ve sayfalama için filtrelenmiş yazı dizisi
+        const postGrid = document.getElementById('postGrid');
+        const paginationDiv = document.getElementById('pagination');
+        const prevPageBtn = document.getElementById('prevPage');
+        const nextPageBtn = document.getElementById('nextPage');
+        const pageNumbersDiv = document.getElementById('pageNumbers');
+
+        function displayPosts(page) {
+            currentPage = page;
+            postGrid.innerHTML = ''; // Mevcut yazıları temizle
+            const startIndex = (currentPage - 1) * postsPerPage;
+            const endIndex = startIndex + postsPerPage;
+            const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
+
+            postsToDisplay.forEach(post => {
+                const card = document.createElement('article');
+                card.classList.add('post-card');
+                card.setAttribute('data-id', post.id);
+                // Kart rengini id'ye göre dinamik olarak belirle
+                card.style.backgroundColor = post.id % 2 === 1 ? 'var(--card-blue)' : 'var(--card-light-blue)';
+                
+                card.innerHTML = `
+                    <img src="${post.image}" alt="${post.title}" class="post-image">
+                    <div class="post-preview">
+                        <h2>${post.title}</h2>
+                        <time datetime="${post.date}">${post.date}</time>
+                        <p class="author">${post.author}</p>
+                    </div>
+                `;
+                postGrid.appendChild(card);
+            });
+
+            updatePaginationControls();
+            attachPostCardListeners(); // Yeni eklenen kartlara olay dinleyicisi ekle
+        }
+
+        function updatePaginationControls() {
+            const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+            pageNumbersDiv.innerHTML = ''; // Sayfa numaralarını temizle
+
+            prevPageBtn.disabled = currentPage === 1;
+            nextPageBtn.disabled = currentPage === totalPages;
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.textContent = i;
+                pageButton.classList.add('page-number');
+                if (i === currentPage) {
+                    pageButton.classList.add('active');
+                }
+                pageButton.addEventListener('click', () => displayPosts(i));
+                pageNumbersDiv.appendChild(pageButton);
+            }
+        }
+
+        prevPageBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                displayPosts(currentPage - 1);
+            }
+        });
+
+        nextPageBtn.addEventListener('click', () => {
+            const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+            if (currentPage < totalPages) {
+                displayPosts(currentPage + 1);
+            }
+        });
+
+        // Modallar ve diğer işlevler
         const aboutBtn = document.getElementById('about-btn');
         const aboutModal = document.getElementById('aboutModal');
         const contactLink = document.getElementById('contact-link');
@@ -1190,16 +1099,22 @@
         const closeModals = document.querySelectorAll('.close-modal');
         const homeLink = document.getElementById('home-link');
 
-        // Anasayfa linkine tıklandığında sayfayı yeniden yükle
         homeLink.addEventListener('click', (e) => {
             e.preventDefault();
-            window.location.reload(); // Sayfayı yeniden yükleyerek tüm filtreleri ve açık modalları kapatır
+            // Anasayfaya dönmek için filtrelemeyi sıfırla ve ilk sayfayı göster
+            filteredPosts = posts;
+            document.querySelector('.search-box input').value = ''; // Arama kutusunu temizle
+            displayPosts(1);
+            // Tüm açık modalları kapat
+            aboutModal.style.display = 'none';
+            contactModal.style.display = 'none';
+            postOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
         });
 
         aboutBtn.addEventListener('click', (e) => {
             e.preventDefault();
             aboutModal.style.display = 'flex';
-            // Konfeti efekti
             confetti({
                 particleCount: 100,
                 spread: 70,
@@ -1219,7 +1134,6 @@
             });
         });
 
-        // İletişim formu gönderimi
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Mesajınız gönderildi! Teşekkür ederiz.');
@@ -1228,42 +1142,45 @@
         });
 
         // Yazı detay gösterimi
-        const postCards = document.querySelectorAll('.post-card');
         const postOverlay = document.getElementById('postOverlay');
         const closePostBtn = document.querySelector('.close-post');
 
-        postCards.forEach(card => {
-            card.addEventListener('click', (e) => {
-                if (!e.target.classList.contains('post-actions')) {
-                    const postId = parseInt(card.getAttribute('data-id'));
-                    const post = posts.find(p => p.id === postId);
-                    
-                    document.getElementById('postTitle').textContent = post.title;
-                    document.getElementById('postDate').textContent = post.date;
-                    document.getElementById('postAuthor').textContent = post.author;
-                    document.getElementById('postContent').innerHTML = post.content;
-                    document.getElementById('postImage').src = post.image;
-                    document.getElementById('postImage').alt = post.title;
-                    
-                    postOverlay.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
-                }
+        function attachPostCardListeners() {
+            const postCards = document.querySelectorAll('.post-card');
+            postCards.forEach(card => {
+                card.removeEventListener('click', handlePostCardClick); // Önceki dinleyicileri kaldır
+                card.addEventListener('click', handlePostCardClick); // Yeni dinleyici ekle
             });
-        });
+        }
+
+        function handlePostCardClick(e) {
+            if (!e.target.classList.contains('post-actions') && !e.target.closest('.post-actions')) {
+                const postId = parseInt(this.getAttribute('data-id'));
+                const post = posts.find(p => p.id === postId); // Orijinal posts dizisinden bul
+
+                document.getElementById('postTitle').textContent = post.title;
+                document.getElementById('postDate').textContent = post.date;
+                document.getElementById('postAuthor').textContent = post.author;
+                document.getElementById('postContent').innerHTML = post.content;
+                document.getElementById('postImage').src = post.image;
+                document.getElementById('postImage').alt = post.title;
+
+                postOverlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
 
         closePostBtn.addEventListener('click', () => {
             postOverlay.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
 
-        // Beğen butonu
         const likeBtn = document.querySelector('.like-btn');
         likeBtn.addEventListener('click', () => {
             likeBtn.innerHTML = '<i class="fas fa-heart"></i> Beğendiniz!';
             likeBtn.style.color = '#ff6b6b';
         });
 
-        // Emoji rating efekti
         const emojiSpans = document.querySelectorAll('.emoji-rating span');
         emojiSpans.forEach(span => {
             span.addEventListener('click', () => {
@@ -1286,19 +1203,24 @@
             });
         });
 
-        // Arama fonksiyonu (basit örnek)
+        // Arama fonksiyonu
         document.querySelector('.search-box button').addEventListener('click', function() {
             const searchTerm = document.querySelector('.search-box input').value.toLowerCase();
-            const posts = document.querySelectorAll('.post-card');
-            
-            posts.forEach(post => {
-                const title = post.querySelector('h2').textContent.toLowerCase();
-                if (title.includes(searchTerm)) {
-                    post.style.display = 'block';
-                } else {
-                    post.style.display = 'none';
-                }
-            });
+            if (searchTerm) {
+                filteredPosts = posts.filter(post => 
+                    post.title.toLowerCase().includes(searchTerm) || 
+                    post.content.toLowerCase().includes(searchTerm) ||
+                    post.author.toLowerCase().includes(searchTerm)
+                );
+            } else {
+                filteredPosts = posts; // Arama boşsa tüm yazıları göster
+            }
+            displayPosts(1); // Aramadan sonra ilk sayfayı göster
+        });
+
+        // Sayfa yüklendiğinde ilk sayfayı göster
+        document.addEventListener('DOMContentLoaded', () => {
+            displayPosts(1);
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
