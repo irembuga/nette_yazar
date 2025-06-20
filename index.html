@@ -7,642 +7,644 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
-<style>
-    /* Renk Paleti */
-    :root {
-    --primary-dark: #1a1a1d; /* Derin Antrasit Siyah */
-    --secondary-dark: #2c2c31; /* Biraz daha açık antrasit */
-    --text-light: #f5f5dc; /* Kırık Beyaz (Cream) */
-    --accent-blue: #6a7ba2; /* Yumuşak Gri-Mavi, önceki gibi kullanılabilir */
-    --accent-indigo: #4a4e69; /* Yeni: Mistik bir hava katmak için derin indigo */
-    --card-dark: #3a3a40; /* Kartlar için koyu antrasit */
-    --card-light: #52525c; /* Kartlar için biraz daha açık antrasit */
-    --border-color: rgba(245, 245, 220, 0.1); /* Kırık beyazın şeffaf tonu */
-    --shadow-color: rgba(0, 0, 0, 0.4); /* Derin gölge */
-    --selection-bg: var(--accent-indigo);
-    --selection-text: var(--text-light);
-}
-
-::selection {
-    background-color: var(--selection-bg);
-    color: var(--selection-text);
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--primary-dark);
-    color: var(--text-light);
-    line-height: 1.6;
-    overflow-x: hidden;
-    /* Bulanık desenli mistik arka plan */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23000' stroke-width='6.7' stroke-opacity='0.08'%3E%3Cpath fill='%231a1a1d' d='M-3.3 90.7C104 57 266 22.3 400 0s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1504 57 1603.3 90.7 1756 22.3 1900 0s260-22.3 400 0S2496 57 2595.3 90.7'/%3E%3Cpath fill='%232c2c31' d='M-13.3 170.7C94 137 256 102.3 390 80s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1494 137 1593.3 170.7 1746 102.3 1890 80s260-22.3 400 0S2486 137 2585.3 170.7'/%3E%3Cpath fill='%233a3a40' d='M-23.3 250.7C84 217 246 182.3 380 160s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1484 217 1583.3 250.7 1736 182.3 1880 160s260-22.3 400 0S2476 217 2575.3 250.7'/%3E%3Cpath fill='%234a4a50' d='M-33.3 330.7C74 297 236 262.3 370 240s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1474 297 1573.3 330.7 1726 262.3 1870 240s260-22.3 400 0S2466 297 2565.3 330.7'/%3E%3Cpath fill='%235a5a60' d='M-43.3 410.7C64 377 226 342.3 360 320s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1464 377 1563.3 410.7 1716 342.3 1860 320s260-22.3 400 0S2456 377 2555.3 410.7'/%3E%3Cpath fill='%236a6a70' d='M-53.3 490.7C54 457 216 422.3 350 400s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1454 457 1553.3 490.7 1706 422.3 1850 400s260-22.3 400 0S2446 457 2545.3 490.7'/%3E%3Cpath fill='%237a7a80' d='M-63.3 570.7C44 537 206 502.3 340 480s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1444 537 1543.3 570.7 1696 502.3 1840 480s260-22.3 400 0S2436 537 2535.3 570.7'/%3E%3Cpath fill='%238a8a90' d='M-73.3 650.7C34 617 196 582.3 330 560s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1434 617 1533.3 650.7 1686 582.3 1830 560s260-22.3 400 0S2426 617 2525.3 650.7'/%3E%3Cpath fill='%239a9aa0' d='M-83.3 730.7C24 697 186 662.3 320 640s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1424 697 1523.3 730.7 1676 662.3 1820 640s260-22.3 400 0S2416 697 2515.3 730.7'/%3E%3Cpath fill='%23aaaaab' d='M-93.3 810.7C14 777 176 742.3 310 720s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1414 777 1513.3 810.7 1666 742.3 1810 720s260-22.3 400 0S2406 777 2505.3 810.7'/%3E%3C/g%3E%3C/svg%3E");
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
-}
-
-/* Scrollbar Stili */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--primary-dark);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--accent-indigo);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #5a5e80; /* İndigonun biraz daha koyusu */
-}
-
-/* Header */
-header {
-    background-color: var(--secondary-dark);
-    color: var(--text-light);
-    padding: 1rem 0;
-    box-shadow: 0 2px 10px var(--shadow-color);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    backdrop-filter: blur(5px); /* Hafif bulanıklık efekti */
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-}
-
-.logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--text-light);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.logo:hover {
-    color: var(--accent-indigo);
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-}
-
-.nav-links li a {
-    color: var(--text-light);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease, transform 0.2s ease;
-    padding: 0.5rem 0;
-    position: relative;
-}
-
-.nav-links li a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    background: var(--accent-indigo);
-    bottom: 0;
-    left: 0;
-    transition: width 0.3s ease;
-}
-
-.nav-links li a:hover::after {
-    width: 100%;
-}
-
-.nav-links li a:hover {
-    color: var(--accent-indigo);
-    transform: translateY(-2px);
-}
-
-/* Hero Section */
-.hero-section {
-    text-align: center;
-    padding: 4rem 1.5rem;
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://i.pinimg.com/736x/8f/3e/6a/8f3e6a4c2f6d0f8d9b1c7b2c0e7f7b3a.jpg') no-repeat center center/cover;
-    background-attachment: fixed; /* Parallax efekti */
-    min-height: 50vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: var(--text-light);
-    text-shadow: 0 0 10px rgba(0,0,0,0.7);
-}
-
-.hero-section h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    animation: fadeInDown 1s ease-out;
-}
-
-.hero-section p {
-    font-size: 1.3rem;
-    max-width: 700px;
-    margin: 0 auto;
-    opacity: 0.9;
-    animation: fadeInUp 1s ease-out 0.5s forwards;
-    opacity: 0; /* Başlangıçta gizli */
-}
-
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Search Box */
-.search-box {
-    max-width: 600px;
-    margin: 2rem auto;
-    display: flex;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px var(--shadow-color);
-}
-
-.search-box input {
-    flex-grow: 1;
-    padding: 0.8rem 1rem;
-    border: none;
-    outline: none;
-    font-size: 1rem;
-    background-color: var(--secondary-dark);
-    color: var(--text-light);
-}
-
-.search-box input::placeholder {
-    color: rgba(245, 245, 220, 0.5); /* Kırık beyazın şeffaf tonu */
-}
-
-.search-box button {
-    background-color: var(--accent-indigo);
-    color: var(--text-light);
-    border: none;
-    padding: 0.8rem 1.5rem;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.search-box button:hover {
-    background-color: #5a5e80; /* İndigonun biraz daha koyusu */
-    transform: scale(1.05);
-}
-
-/* Post Grid */
-.post-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 3rem auto;
-    padding: 0 1.5rem;
-}
-
-.post-card {
-    background-color: var(--card-dark); /* Koyu antrasit */
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 6px 20px var(--shadow-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-}
-
-.post-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-}
-
-.post-card .post-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.post-card .post-preview {
-    padding: 1.5rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.post-card .post-preview h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    margin-bottom: 0.75rem;
-    color: var(--text-light);
-}
-
-.post-card .post-preview time,
-.post-card .post-preview .author {
-    font-size: 0.9rem;
-    color: rgba(245, 245, 220, 0.7); /* Kırık beyazın şeffaf tonu */
-    margin-bottom: 0.5rem;
-}
-
-/* Pagination */
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin: 3rem 0;
-    padding: 0 1.5rem;
-}
-
-.pagination button {
-    background-color: var(--accent-indigo);
-    color: var(--text-light);
-    border: none;
-    padding: 0.8rem 1.2rem;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.pagination button:hover:not(:disabled) {
-    background-color: #5a5e80;
-    transform: translateY(-2px);
-}
-
-.pagination button:disabled {
-    background-color: var(--secondary-dark);
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-.pagination .page-number {
-    background-color: var(--secondary-dark);
-    color: var(--text-light);
-    border: 1px solid var(--border-color);
-}
-
-.pagination .page-number.active {
-    background-color: var(--accent-indigo);
-    border-color: var(--accent-indigo);
-    font-weight: bold;
-}
-
-.pagination .page-number:hover:not(.active) {
-    background-color: var(--card-dark);
-}
-
-/* Footer */
-footer {
-    background-color: var(--secondary-dark);
-    color: var(--text-light);
-    text-align: center;
-    padding: 2rem 1.5rem;
-    margin-top: 4rem;
-    box-shadow: 0 -2px 10px var(--shadow-color);
-}
-
-.social-links {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-top: 1rem;
-}
-
-.social-links li a {
-    color: var(--text-light);
-    font-size: 1.8rem;
-    transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.social-links li a:hover {
-    color: var(--accent-indigo);
-    transform: scale(1.2);
-}
-
-/* Modals (Hakkımda, İletişim, Yazı Detay) */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.85); /* Daha koyu şeffaf siyah */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    backdrop-filter: blur(5px);
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-content {
-    background-color: var(--secondary-dark);
-    padding: 2.5rem;
-    border-radius: 12px;
-    max-width: 700px;
-    width: 90%;
-    box-shadow: 0 10px 30px var(--shadow-color);
-    position: relative;
-    color: var(--text-light);
-    animation: modalSlideIn 0.4s ease-out;
-    border: 1px solid var(--border-color);
-}
-
-@keyframes modalSlideIn {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.close-modal, .close-post {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 2rem;
-    color: var(--text-light);
-    cursor: pointer;
-    transition: color 0.3s ease, transform 0.2s ease;
-    background: none;
-    border: none;
-}
-
-.close-modal:hover, .close-post:hover {
-    color: var(--accent-indigo);
-    transform: rotate(90deg);
-}
-
-.modal-content h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    color: var(--text-light);
-}
-
-.modal-content p {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    line-height: 1.8;
-}
-
-.modal-content ul {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 1.5rem;
-}
-
-.modal-content ul li {
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-}
-
-.contact-form label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-}
-
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form textarea {
-    width: 100%;
-    padding: 0.8rem;
-    margin-bottom: 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    background-color: var(--primary-dark);
-    color: var(--text-light);
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.3s ease;
-}
-
-.contact-form input[type="text"]:focus,
-.contact-form input[type="email"]:focus,
-.contact-form textarea:focus {
-    border-color: var(--accent-indigo);
-}
-
-.contact-form button {
-    background-color: var(--accent-indigo);
-    color: var(--text-light);
-    padding: 0.9rem 1.8rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    display: block;
-    width: 100%;
-    max-width: 200px;
-    margin: 1.5rem auto 0;
-}
-
-.contact-form button:hover {
-    background-color: #5a5e80;
-    transform: translateY(-2px);
-}
-
-/* Post Overlay (Yazı Detay) */
-#postOverlay .modal-content {
-    max-width: 900px;
-    max-height: 90vh; /* Ekran yüksekliğinin %90'ı */
-    overflow-y: auto; /* İçerik taşarsa kaydırma çubuğu */
-    padding-bottom: 80px; /* Alttaki butonlar için boşluk */
-}
-
-#postOverlay .modal-content h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-}
-
-#postOverlay .modal-content time,
-#postOverlay .modal-content .author {
-    display: block;
-    text-align: center;
-    font-size: 1rem;
-    color: rgba(245, 245, 220, 0.6);
-    margin-bottom: 0.5rem;
-}
-
-#postOverlay .modal-content .post-image {
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-}
-
-#postOverlay .modal-content .post-content {
-    font-family: 'Georgia', serif; /* Yazı içeriği için daha klasik bir font */
-    font-size: 1.15rem;
-    line-height: 1.9;
-    text-align: justify;
-    color: var(--text-light);
-    padding: 0 1rem; /* Yanlardan hafif boşluk */
-}
-
-#postOverlay .modal-content .post-content em {
-    font-style: normal; /* Normalde italik olan yazar isimleri için */
-    font-weight: bold;
-    color: var(--accent-indigo); /* Yazar ismini vurgula */
-}
-
-.post-actions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5rem;
-    margin-top: 2rem;
-    flex-wrap: wrap; /* Küçük ekranlarda alta geçsin */
-    position: sticky;
-    bottom: 0;
-    background-color: var(--secondary-dark); /* Butonların arkasını kapatmak için */
-    padding: 1rem 0;
-    border-top: 1px solid var(--border-color);
-}
-
-.like-btn {
-    background-color: var(--card-dark);
-    color: var(--text-light);
-    border: 1px solid var(--border-color);
-    padding: 0.8rem 1.5rem;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.like-btn i {
-    color: #ff6b6b; /* Kırmızı kalp */
-}
-
-.like-btn:hover {
-    background-color: var(--accent-indigo);
-    color: var(--text-light);
-    transform: translateY(-3px);
-}
-
-.emoji-rating span {
-    font-size: 1.8rem;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    padding: 0.5rem;
-}
-
-.emoji-rating span:hover {
-    transform: scale(1.3);
-}
-
-/* Responsive Düzenlemeler */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .nav-links {
-        margin-top: 1rem;
-        flex-direction: column;
-        gap: 0.8rem;
-    }
-
-    .logo {
-        font-size: 1.8rem;
-    }
-
-    .hero-section h1 {
-        font-size: 2.5rem;
-    }
-
-    .hero-section p {
-        font-size: 1rem;
-    }
-
-    .search-box {
-        margin: 1.5rem auto;
-    }
-
-    .post-grid {
-        grid-template-columns: 1fr; /* Küçük ekranlarda tek sütun */
-        padding: 0 1rem;
-    }
-
-    .modal-content {
-        padding: 1.5rem;
-        width: 95%;
-    }
-
-    .modal-content h2 {
-        font-size: 1.8rem;
-    }
-
-    .modal-content p, .contact-form label, .contact-form input, .contact-form textarea {
-        font-size: 0.95rem;
-    }
-
-    #postOverlay .modal-content h2 {
-        font-size: 2rem;
-    }
-
-    #postOverlay .modal-content .post-content {
-        font-size: 1rem;
-        padding: 0;
-    }
-
-    .post-actions {
-        flex-direction: column;
-        gap: 1rem;
-    }
-}
-</style>
-
+    <style>
+        /* Renk Paleti */
+        :root {
+            --primary-dark: #1a1a1d; /* Derin Antrasit Siyah */
+            --secondary-dark: #2c2c31; /* Biraz daha açık antrasit */
+            --text-light: #f5f5dc; /* Kırık Beyaz (Cream) */
+            --accent-blue: #6a7ba2; /* Yumuşak Gri-Mavi, önceki gibi kullanılabilir */
+            --accent-indigo: #4a4e69; /* Yeni: Mistik bir hava katmak için derin indigo */
+            --card-dark: #3a3a40; /* Kartlar için koyu antrasit */
+            --card-light: #52525c; /* Kartlar için biraz daha açık antrasit */
+            --border-color: rgba(245, 245, 220, 0.1); /* Kırık beyazın şeffaf tonu */
+            --shadow-color: rgba(0, 0, 0, 0.4); /* Derin gölge */
+            --selection-bg: var(--accent-indigo);
+            --selection-text: var(--text-light);
+        }
+
+        ::selection {
+            background-color: var(--selection-bg);
+            color: var(--selection-text);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            /* Bulanık desenli mistik arka plan */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23000' stroke-width='6.7' stroke-opacity='0.08'%3E%3Cpath fill='%231a1a1d' d='M-3.3 90.7C104 57 266 22.3 400 0s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1504 57 1603.3 90.7 1756 22.3 1900 0s260-22.3 400 0S2496 57 2595.3 90.7'/%3E%3Cpath fill='%232c2c31' d='M-13.3 170.7C94 137 256 102.3 390 80s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1494 137 1593.3 170.7 1746 102.3 1890 80s260-22.3 400 0S2486 137 2585.3 170.7'/%3E%3Cpath fill='%233a3a40' d='M-23.3 250.7C84 217 246 182.3 380 160s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1484 217 1583.3 250.7 1736 182.3 1880 160s260-22.3 400 0S2476 217 2575.3 250.7'/%3E%3Cpath fill='%234a4a50' d='M-33.3 330.7C74 297 236 262.3 370 240s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1474 297 1573.3 330.7 1726 262.3 1870 240s260-22.3 400 0S2466 297 2565.3 330.7'/%3E%3Cpath fill='%235a5a60' d='M-43.3 410.7C64 377 226 342.3 360 320s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1464 377 1563.3 410.7 1716 342.3 1860 320s260-22.3 400 0S2456 377 2555.3 410.7'/%3E%3Cpath fill='%236a6a70' d='M-53.3 490.7C54 457 216 422.3 350 400s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1454 457 1553.3 490.7 1706 422.3 1850 400s260-22.3 400 0S2446 457 2545.3 490.7'/%3E%3Cpath fill='%237a7a80' d='M-63.3 570.7C44 537 206 502.3 340 480s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1444 537 1543.3 570.7 1696 502.3 1840 480s260-22.3 400 0S2436 537 2535.3 570.7'/%3E%3Cpath fill='%238a8a90' d='M-73.3 650.7C34 617 196 582.3 330 560s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1434 617 1533.3 650.7 1686 582.3 1830 560s260-22.3 400 0S2426 617 2525.3 650.7'/%3E%3Cpath fill='%239a9aa0' d='M-83.3 730.7C24 697 186 662.3 320 640s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1424 697 1523.3 730.7 1676 662.3 1820 640s260-22.3 400 0S2416 697 2515.3 730.7'/%3E%3Cpath fill='%23aaaaab' d='M-93.3 810.7C14 777 176 742.3 310 720s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1414 777 1513.3 810.7 1666 742.3 1810 720s260-22.3 400 0S2406 777 2505.3 810.7'/%3E%3C/g%3E%3C/svg%3E");
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center center;
+        }
+
+        /* Scrollbar Stili */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-indigo);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5a5e80; /* İndigonun biraz daha koyusu */
+        }
+
+        /* Header */
+        header {
+            background-color: var(--secondary-dark);
+            color: var(--text-light);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px); /* Hafif bulanıklık efekti */
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--accent-indigo);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.2s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent-indigo);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links li a:hover {
+            color: var(--accent-indigo);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 4rem 1.5rem;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://i.pinimg.com/736x/8f/3e/6a/8f3e6a4c2f6d0f8d9b1c7b2c0e7f7b3a.jpg') no-repeat center center/cover;
+            background-attachment: fixed; /* Parallax efekti */
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-light);
+            text-shadow: 0 0 10px rgba(0,0,0,0.7);
+        }
+
+        .hero-section h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+            opacity: 0; /* Başlangıçta gizli */
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Search Box */
+        .search-box {
+            max-width: 600px;
+            margin: 2rem auto;
+            display: flex;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+
+        .search-box input {
+            flex-grow: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            background-color: var(--secondary-dark);
+            color: var(--text-light);
+        }
+
+        .search-box input::placeholder {
+            color: rgba(245, 245, 220, 0.5); /* Kırık beyazın şeffaf tonu */
+        }
+
+        .search-box button {
+            background-color: var(--accent-indigo);
+            color: var(--text-light);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .search-box button:hover {
+            background-color: #5a5e80; /* İndigonun biraz daha koyusu */
+            transform: scale(1.05);
+        }
+
+        /* Post Grid */
+        .post-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .post-card {
+            background-color: var(--card-dark); /* Koyu antrasit */
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .post-card .post-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .post-card .post-preview {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .post-card .post-preview h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-light);
+        }
+
+        .post-card .post-preview time,
+        .post-card .post-preview .author {
+            font-size: 0.9rem;
+            color: rgba(245, 245, 220, 0.7); /* Kırık beyazın şeffaf tonu */
+            margin-bottom: 0.5rem;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            padding: 0 1.5rem;
+        }
+
+        .pagination button {
+            background-color: var(--accent-indigo);
+            color: var(--text-light);
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background-color: #5a5e80;
+            transform: translateY(-2px);
+        }
+
+        .pagination button:disabled {
+            background-color: var(--secondary-dark);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .pagination .page-number {
+            background-color: var(--secondary-dark);
+            color: var(--text-light);
+            border: 1px solid var(--border-color);
+        }
+
+        .pagination .page-number.active {
+            background-color: var(--accent-indigo);
+            border-color: var(--accent-indigo);
+            font-weight: bold;
+        }
+
+        .pagination .page-number:hover:not(.active) {
+            background-color: var(--card-dark);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem 1.5rem;
+            margin-top: 4rem;
+            box-shadow: 0 -2px 10px var(--shadow-color);
+        }
+
+        .social-links {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-links li a {
+            color: var(--text-light);
+            font-size: 1.8rem;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .social-links li a:hover {
+            color: var(--accent-indigo);
+            transform: scale(1.2);
+        }
+
+        /* Modals (Hakkımda, İletişim, Yazı Detay) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85); /* Daha koyu şeffaf siyah */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: var(--secondary-dark);
+            padding: 2.5rem;
+            border-radius: 12px;
+            max-width: 700px;
+            width: 90%;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            position: relative;
+            color: var(--text-light);
+            animation: modalSlideIn 0.4s ease-out;
+            border: 1px solid var(--border-color);
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal, .close-post {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.2s ease;
+            background: none;
+            border: none;
+        }
+
+        .close-modal:hover, .close-post:hover {
+            color: var(--accent-indigo);
+            transform: rotate(90deg);
+        }
+
+        .modal-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .modal-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .modal-content ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-content ul li {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent-indigo);
+        }
+
+        .contact-form button {
+            background-color: var(--accent-indigo);
+            color: var(--text-light);
+            padding: 0.9rem 1.8rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: block;
+            width: 100%;
+            max-width: 200px;
+            margin: 1.5rem auto 0;
+        }
+
+        .contact-form button:hover {
+            background-color: #5a5e80;
+            transform: translateY(-2px);
+        }
+
+        /* Post Overlay (Yazı Detay) */
+        #postOverlay .modal-content {
+            max-width: 900px;
+            max-height: 90vh; /* Ekran yüksekliğinin %90'ı */
+            overflow-y: auto; /* İçerik taşarsa kaydırma çubuğu */
+            padding-bottom: 80px; /* Alttaki butonlar için boşluk */
+        }
+
+        #postOverlay .modal-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        #postOverlay .modal-content time,
+        #postOverlay .modal-content .author {
+            display: block;
+            text-align: center;
+            font-size: 1rem;
+            color: rgba(245, 245, 220, 0.6);
+            margin-bottom: 0.5rem;
+        }
+
+        #postOverlay .modal-content .post-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        #postOverlay .modal-content .post-content {
+            font-family: 'Georgia', serif; /* Yazı içeriği için daha klasik bir font */
+            font-size: 1.15rem;
+            line-height: 1.9;
+            text-align: justify;
+            color: var(--text-light);
+            padding: 0 1rem; /* Yanlardan hafif boşluk */
+        }
+
+        #postOverlay .modal-content .post-content em {
+            font-style: normal; /* Normalde italik olan yazar isimleri için */
+            font-weight: bold;
+            color: var(--accent-indigo); /* Yazar ismini vurgula */
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap; /* Küçük ekranlarda alta geçsin */
+            position: sticky;
+            bottom: 0;
+            background-color: var(--secondary-dark); /* Butonların arkasını kapatmak için */
+            padding: 1rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .like-btn {
+            background-color: var(--card-dark);
+            color: var(--text-light);
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .like-btn i {
+            color: #ff6b6b; /* Kırmızı kalp */
+        }
+
+        .like-btn:hover {
+            background-color: var(--accent-indigo);
+            color: var(--text-light);
+            transform: translateY(-3px);
+        }
+
+        .emoji-rating span {
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            padding: 0.5rem;
+        }
+
+        .emoji-rating span:hover {
+            transform: scale(1.3);
+        }
+
+        /* Responsive Düzenlemeler */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-links {
+                margin-top: 1rem;
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .search-box {
+                margin: 1.5rem auto;
+            }
+
+            .post-grid {
+                grid-template-columns: 1fr; /* Küçük ekranlarda tek sütun */
+                padding: 0 1rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+                width: 95%;
+            }
+
+            .modal-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .modal-content p, .contact-form label, .contact-form input, .contact-form textarea {
+                font-size: 0.95rem;
+            }
+
+            #postOverlay .modal-content h2 {
+                font-size: 2rem;
+            }
+
+            #postOverlay .modal-content .post-content {
+                font-size: 1rem;
+                padding: 0;
+            }
+
+            .post-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
         // Yazı verileri
         const posts = [
             {
@@ -702,7 +704,7 @@ footer {
                 ellerimi ısıtan,<br>
                 yüzüme bir tebessüm bırakan.<br>
                 Koca şehirde, küçük bir an. &nbsp; &nbsp;<br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ~İrem`
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ~İrem`
             },
             {
                 id: 4,
@@ -891,7 +893,7 @@ footer {
                 Kimlik, hep bir yolculuktur,<br>
                 Bulmak ya da kaybetmek değil,<br>
                 Bir dönüşümdür kimlik...<br>
-                Tam bulduk derken aslında tekrar kaybettiğimiz andır kimlik...&nbsp;<br>
+                Tam bulduk derken aslında tekrar kaybettiğimiz anıdır kimlik...&nbsp;<br>
                 &nbsp; &nbsp; &nbsp; &nbsp;<br>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ~ İrem`
             },
@@ -1078,47 +1080,62 @@ footer {
         const postsPerPage = 10;
         let currentPage = 1;
         let filteredPosts = posts; // Arama ve sayfalama için filtrelenmiş yazı dizisi
+        // Not: postGrid, paginationDiv, prevPageBtn, nextPageBtn, pageNumbersDiv gibi DOM elementlerinin HTML'de tanımlı olması gerekiyor.
+        // Eğer henüz eklenmediyse, bu elementleri body içinde uygun yerlere eklemelisiniz.
+        // Örneğin: <section id="postGrid" class="post-grid"></section>
+        // <div class="pagination" id="pagination">...</div> gibi.
         const postGrid = document.getElementById('postGrid');
         const paginationDiv = document.getElementById('pagination');
         const prevPageBtn = document.getElementById('prevPage');
         const nextPageBtn = document.getElementById('nextPage');
         const pageNumbersDiv = document.getElementById('pageNumbers');
 
+
         function displayPosts(page) {
             currentPage = page;
-            postGrid.innerHTML = ''; // Mevcut yazıları temizle
-            const startIndex = (currentPage - 1) * postsPerPage;
-            const endIndex = startIndex + postsPerPage;
-            const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
+            if (postGrid) { // postGrid elementinin varlığını kontrol et
+                postGrid.innerHTML = ''; // Mevcut yazıları temizle
+                const startIndex = (currentPage - 1) * postsPerPage;
+                const endIndex = startIndex + postsPerPage;
+                const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
 
-            postsToDisplay.forEach(post => {
-                const card = document.createElement('article');
-                card.classList.add('post-card');
-                card.setAttribute('data-id', post.id);
-                // Kart rengini id'ye göre dinamik olarak belirle
-                card.style.backgroundColor = post.id % 2 === 1 ? 'var(--card-blue)' : 'var(--card-light-blue)';
-                
-                card.innerHTML = `
-                    <img src="${post.image}" alt="${post.title}" class="post-image">
-                    <div class="post-preview">
-                        <h2>${post.title}</h2>
-                        <time datetime="${post.date}">${post.date}</time>
-                        <p class="author">${post.author}</p>
-                    </div>
-                `;
-                postGrid.appendChild(card);
-            });
-
+                postsToDisplay.forEach(post => {
+                    const card = document.createElement('article');
+                    card.classList.add('post-card');
+                    card.setAttribute('data-id', post.id);
+                    // Kart rengini id'ye göre dinamik olarak belirle (bu kısımda card-blue ve card-light-blue CSS değişkenleri tanımlı değil, varsayılan card-dark veya başka bir renk kullanabiliriz ya da dinamik renk atamasını iptal edebiliriz)
+                    // Şimdilik varsayılan card-dark'ı tutalım veya CSS'te bu değişkenleri tanımlamanız gerekir.
+                    // card.style.backgroundColor = post.id % 2 === 1 ? 'var(--card-blue)' : 'var(--card-light-blue)';
+                    
+                    card.innerHTML = `
+                        <img src="${post.image}" alt="${post.title}" class="post-image">
+                        <div class="post-preview">
+                            <h2>${post.title}</h2>
+                            <time datetime="${post.date}">${post.date}</time>
+                            <p class="author">${post.author}</p>
+                        </div>
+                    `;
+                    postGrid.appendChild(card);
+                });
+            } else {
+                console.error("postGrid elementi bulunamadı. Lütfen HTML yapınızı kontrol edin.");
+            }
             updatePaginationControls();
             attachPostCardListeners(); // Yeni eklenen kartlara olay dinleyicisi ekle
         }
 
         function updatePaginationControls() {
             const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-            pageNumbersDiv.innerHTML = ''; // Sayfa numaralarını temizle
+            if (pageNumbersDiv) { // pageNumbersDiv elementinin varlığını kontrol et
+                pageNumbersDiv.innerHTML = ''; // Sayfa numaralarını temizle
+            }
 
-            prevPageBtn.disabled = currentPage === 1;
-            nextPageBtn.disabled = currentPage === totalPages;
+            if (prevPageBtn) { // prevPageBtn elementinin varlığını kontrol et
+                prevPageBtn.disabled = currentPage === 1;
+            }
+            if (nextPageBtn) { // nextPageBtn elementinin varlığını kontrol et
+                nextPageBtn.disabled = currentPage === totalPages;
+            }
 
             for (let i = 1; i <= totalPages; i++) {
                 const pageButton = document.createElement('button');
@@ -1128,59 +1145,83 @@ footer {
                     pageButton.classList.add('active');
                 }
                 pageButton.addEventListener('click', () => displayPosts(i));
-                pageNumbersDiv.appendChild(pageButton);
+                if (pageNumbersDiv) { // pageNumbersDiv elementinin varlığını kontrol et
+                    pageNumbersDiv.appendChild(pageButton);
+                }
             }
         }
 
-        prevPageBtn.addEventListener('click', () => {
-            if (currentPage > 1) {
-                displayPosts(currentPage - 1);
-            }
-        });
+        if (prevPageBtn) { // prevPageBtn elementinin varlığını kontrol et
+            prevPageBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    displayPosts(currentPage - 1);
+                }
+            });
+        }
 
-        nextPageBtn.addEventListener('click', () => {
-            const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-            if (currentPage < totalPages) {
-                displayPosts(currentPage + 1);
-            }
-        });
+        if (nextPageBtn) { // nextPageBtn elementinin varlığını kontrol et
+            nextPageBtn.addEventListener('click', () => {
+                const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+                if (currentPage < totalPages) {
+                    displayPosts(currentPage + 1);
+                }
+            });
+        }
 
         // Modallar ve diğer işlevler
+        // aboutBtn, contactLink, aboutModal, contactModal, closeModals, homeLink, postOverlay, closePostBtn, likeBtn gibi DOM elementlerinin HTML'de tanımlı olması gerekiyor.
         const aboutBtn = document.getElementById('about-btn');
         const aboutModal = document.getElementById('aboutModal');
         const contactLink = document.getElementById('contact-link');
         const contactModal = document.getElementById('contactModal');
         const closeModals = document.querySelectorAll('.close-modal');
         const homeLink = document.getElementById('home-link');
+        const postOverlay = document.getElementById('postOverlay');
+        const closePostBtn = document.querySelector('.close-post');
+        const likeBtn = document.querySelector('.like-btn');
+        const emojiSpans = document.querySelectorAll('.emoji-rating span');
 
-        homeLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            // Anasayfaya dönmek için filtrelemeyi sıfırla ve ilk sayfayı göster
-            filteredPosts = posts;
-            document.querySelector('.search-box input').value = ''; // Arama kutusunu temizle
-            displayPosts(1);
-            // Tüm açık modalları kapat
-            aboutModal.style.display = 'none';
-            contactModal.style.display = 'none';
-            postOverlay.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
 
-        aboutBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            aboutModal.style.display = 'flex';
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#6a7ba2', '#3c4f6e', '#f8f9fa', '#ffffff']
+        if (homeLink) {
+            homeLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Anasayfaya dönmek için filtrelemeyi sıfırla ve ilk sayfayı göster
+                filteredPosts = posts;
+                const searchInput = document.querySelector('.search-box input');
+                if (searchInput) {
+                    searchInput.value = ''; // Arama kutusunu temizle
+                }
+                displayPosts(1);
+                // Tüm açık modalları kapat
+                if (aboutModal) aboutModal.style.display = 'none';
+                if (contactModal) contactModal.style.display = 'none';
+                if (postOverlay) postOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
             });
-        });
+        }
 
-        contactLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            contactModal.style.display = 'flex';
-        });
+        if (aboutBtn) {
+            aboutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (aboutModal) aboutModal.style.display = 'flex';
+                // confetti fonksiyonu external bir scriptten geliyor, yüklendiğinden emin olun.
+                if (typeof confetti !== 'undefined') {
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 },
+                        colors: ['#6a7ba2', '#3c4f6e', '#f8f9fa', '#ffffff']
+                    });
+                }
+            });
+        }
+
+        if (contactLink) {
+            contactLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (contactModal) contactModal.style.display = 'flex';
+            });
+        }
 
         closeModals.forEach(btn => {
             btn.addEventListener('click', function() {
@@ -1188,17 +1229,17 @@ footer {
             });
         });
 
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Mesajınız gönderildi! Teşekkür ederiz.');
-            contactModal.style.display = 'none';
-            this.reset();
-        });
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Mesajınız gönderildi! Teşekkür ederiz.');
+                if (contactModal) contactModal.style.display = 'none';
+                this.reset();
+            });
+        }
 
         // Yazı detay gösterimi
-        const postOverlay = document.getElementById('postOverlay');
-        const closePostBtn = document.querySelector('.close-post');
-
         function attachPostCardListeners() {
             const postCards = document.querySelectorAll('.post-card');
             postCards.forEach(card => {
@@ -1208,34 +1249,41 @@ footer {
         }
 
         function handlePostCardClick(e) {
+            // Tıklanan elementin bir aksiyon butonu olmadığını kontrol et
             if (!e.target.classList.contains('post-actions') && !e.target.closest('.post-actions')) {
                 const postId = parseInt(this.getAttribute('data-id'));
                 const post = posts.find(p => p.id === postId); // Orijinal posts dizisinden bul
 
-                document.getElementById('postTitle').textContent = post.title;
-                document.getElementById('postDate').textContent = post.date;
-                document.getElementById('postAuthor').textContent = post.author;
-                document.getElementById('postContent').innerHTML = post.content;
-                document.getElementById('postImage').src = post.image;
-                document.getElementById('postImage').alt = post.title;
+                if (post && postOverlay) { // post ve postOverlay elementlerinin varlığını kontrol et
+                    document.getElementById('postTitle').textContent = post.title;
+                    document.getElementById('postDate').textContent = post.date;
+                    document.getElementById('postAuthor').textContent = post.author;
+                    document.getElementById('postContent').innerHTML = post.content;
+                    document.getElementById('postImage').src = post.image;
+                    document.getElementById('postImage').alt = post.title;
 
-                postOverlay.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
+                    postOverlay.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
             }
         }
 
-        closePostBtn.addEventListener('click', () => {
-            postOverlay.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
+        if (closePostBtn) {
+            closePostBtn.addEventListener('click', () => {
+                if (postOverlay) postOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        }
 
-        const likeBtn = document.querySelector('.like-btn');
-        likeBtn.addEventListener('click', () => {
-            likeBtn.innerHTML = '<i class="fas fa-heart"></i> Beğendiniz!';
-            likeBtn.style.color = '#ff6b6b';
-        });
+        if (likeBtn) {
+            likeBtn.addEventListener('click', () => {
+                likeBtn.innerHTML = '<i class="fas fa-heart"></i> Beğendiniz!';
+                likeBtn.style.color = '#ff6b6b'; // Bu renk sadece ikon rengini değil, tüm butonun text rengini değiştirecek, dikkat.
+                // Eğer sadece ikonun rengi değişsin isterseniz, CSS'te .like-btn i { color: #ff6b6b; } kalmalı ve bu satırı kaldırmalısınız.
+                // Ve beğenildikten sonra eski haline dönmemesi için ek bir state yönetimi düşünebilirsiniz.
+            });
+        }
 
-        const emojiSpans = document.querySelectorAll('.emoji-rating span');
         emojiSpans.forEach(span => {
             span.addEventListener('click', () => {
                 const emoji = span.textContent;
@@ -1258,20 +1306,25 @@ footer {
         });
 
         // Arama fonksiyonu
-        document.querySelector('.search-box button').addEventListener('click', function() {
-            const searchTerm = document.querySelector('.search-box input').value.toLowerCase();
-            if (searchTerm) {
-                filteredPosts = posts.filter(post => 
-                    post.title.toLowerCase().includes(searchTerm) || 
-                    post.content.toLowerCase().includes(searchTerm) ||
-                    post.author.toLowerCase().includes(searchTerm)
-                );
-            } else {
-                filteredPosts = posts; // Arama boşsa tüm yazıları göster
-            }
-            displayPosts(1); // Aramadan sonra ilk sayfayı göster
-        });
-
+        const searchButton = document.querySelector('.search-box button');
+        if (searchButton) {
+            searchButton.addEventListener('click', function() {
+                const searchTermInput = document.querySelector('.search-box input');
+                const searchTerm = searchTermInput ? searchTermInput.value.toLowerCase() : '';
+                
+                if (searchTerm) {
+                    filteredPosts = posts.filter(post => 
+                        post.title.toLowerCase().includes(searchTerm) || 
+                        post.content.toLowerCase().includes(searchTerm) ||
+                        post.author.toLowerCase().includes(searchTerm)
+                    );
+                } else {
+                    filteredPosts = posts; // Arama boşsa tüm yazıları göster
+                }
+                displayPosts(1); // Aramadan sonra ilk sayfayı göster
+            });
+        }
+        
         // Sayfa yüklendiğinde ilk sayfayı göster
         document.addEventListener('DOMContentLoaded', () => {
             displayPosts(1);
