@@ -1,504 +1,646 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İrem BUĞA - Portföy Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
     /* Renk Paleti */
     :root {
-        --pastel-lacivert: #606060;   /* Orta Gri */
-        --koyu-lacivert: #303030;     /* Antrasit / Koyu Gri */
-        --acik-renk: #f0f0f0;         /* Kırık beyaz / Çok Açık Gri */
-        --beyaz: #ffffff;             /* Saf beyaz */
-        --yazi-renk: #333333;         /* Koyu gri yazı */
-        --acik-yazi: #888888;         /* Açık gri yazı */
-        --card-blue: #e0e0e0;         /* Kartlar için daha nötr, açık gri */
-        --card-light-blue: #d0d0d0;   /* Kartlar için biraz daha koyu açık gri */
-        --button-text-color: #ffffff; /* Buton yazı rengi */
-    }
-    
-    /* Temel Stil */
-    body {
-        font-family: 'Roboto', sans-serif;
-        background-color: var(--acik-renk); /* Temel arka plan rengi kırık beyaz */
-        color: var(--yazi-renk);
-        margin: 0;
-        padding: 0;
-        line-height: 1.6;
-        min-height: 100vh;
-        display: flex;
+    --primary-dark: #1a1a1d; /* Derin Antrasit Siyah */
+    --secondary-dark: #2c2c31; /* Biraz daha açık antrasit */
+    --text-light: #f5f5dc; /* Kırık Beyaz (Cream) */
+    --accent-blue: #6a7ba2; /* Yumuşak Gri-Mavi, önceki gibi kullanılabilir */
+    --accent-indigo: #4a4e69; /* Yeni: Mistik bir hava katmak için derin indigo */
+    --card-dark: #3a3a40; /* Kartlar için koyu antrasit */
+    --card-light: #52525c; /* Kartlar için biraz daha açık antrasit */
+    --border-color: rgba(245, 245, 220, 0.1); /* Kırık beyazın şeffaf tonu */
+    --shadow-color: rgba(0, 0, 0, 0.4); /* Derin gölge */
+    --selection-bg: var(--accent-indigo);
+    --selection-text: var(--text-light);
+}
+
+::selection {
+    background-color: var(--selection-bg);
+    color: var(--selection-text);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+    overflow-x: hidden;
+    /* Bulanık desenli mistik arka plan */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23000' stroke-width='6.7' stroke-opacity='0.08'%3E%3Cpath fill='%231a1a1d' d='M-3.3 90.7C104 57 266 22.3 400 0s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1504 57 1603.3 90.7 1756 22.3 1900 0s260-22.3 400 0S2496 57 2595.3 90.7'/%3E%3Cpath fill='%232c2c31' d='M-13.3 170.7C94 137 256 102.3 390 80s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1494 137 1593.3 170.7 1746 102.3 1890 80s260-22.3 400 0S2486 137 2585.3 170.7'/%3E%3Cpath fill='%233a3a40' d='M-23.3 250.7C84 217 246 182.3 380 160s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1484 217 1583.3 250.7 1736 182.3 1880 160s260-22.3 400 0S2476 217 2575.3 250.7'/%3E%3Cpath fill='%234a4a50' d='M-33.3 330.7C74 297 236 262.3 370 240s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1474 297 1573.3 330.7 1726 262.3 1870 240s260-22.3 400 0S2466 297 2565.3 330.7'/%3E%3Cpath fill='%235a5a60' d='M-43.3 410.7C64 377 226 342.3 360 320s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1464 377 1563.3 410.7 1716 342.3 1860 320s260-22.3 400 0S2456 377 2555.3 410.7'/%3E%3Cpath fill='%236a6a70' d='M-53.3 490.7C54 457 216 422.3 350 400s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1454 457 1553.3 490.7 1706 422.3 1850 400s260-22.3 400 0S2446 457 2545.3 490.7'/%3E%3Cpath fill='%237a7a80' d='M-63.3 570.7C44 537 206 502.3 340 480s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1444 537 1543.3 570.7 1696 502.3 1840 480s260-22.3 400 0S2436 537 2535.3 570.7'/%3E%3Cpath fill='%238a8a90' d='M-73.3 650.7C34 617 196 582.3 330 560s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1434 617 1533.3 650.7 1686 582.3 1830 560s260-22.3 400 0S2426 617 2525.3 650.7'/%3E%3Cpath fill='%239a9aa0' d='M-83.3 730.7C24 697 186 662.3 320 640s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1424 697 1523.3 730.7 1676 662.3 1820 640s260-22.3 400 0S2416 697 2515.3 730.7'/%3E%3Cpath fill='%23aaaaab' d='M-93.3 810.7C14 777 176 742.3 310 720s260 22.3 400 0 296.7-57 400-90.7 266-22.3 400 0S1414 777 1513.3 810.7 1666 742.3 1810 720s260-22.3 400 0S2406 777 2505.3 810.7'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+}
+
+/* Scrollbar Stili */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--primary-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-indigo);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5a5e80; /* İndigonun biraz daha koyusu */
+}
+
+/* Header */
+header {
+    background-color: var(--secondary-dark);
+    color: var(--text-light);
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(5px); /* Hafif bulanıklık efekti */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.logo:hover {
+    color: var(--accent-indigo);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links li a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.2s ease;
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.nav-links li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: var(--accent-indigo);
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+.nav-links li a:hover::after {
+    width: 100%;
+}
+
+.nav-links li a:hover {
+    color: var(--accent-indigo);
+    transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    padding: 4rem 1.5rem;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://i.pinimg.com/736x/8f/3e/6a/8f3e6a4c2f6d0f8d9b1c7b2c0e7f7b3a.jpg') no-repeat center center/cover;
+    background-attachment: fixed; /* Parallax efekti */
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-light);
+    text-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
+
+.hero-section h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: fadeInDown 1s ease-out;
+}
+
+.hero-section p {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+    animation: fadeInUp 1s ease-out 0.5s forwards;
+    opacity: 0; /* Başlangıçta gizli */
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Search Box */
+.search-box {
+    max-width: 600px;
+    margin: 2rem auto;
+    display: flex;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.search-box input {
+    flex-grow: 1;
+    padding: 0.8rem 1rem;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background-color: var(--secondary-dark);
+    color: var(--text-light);
+}
+
+.search-box input::placeholder {
+    color: rgba(245, 245, 220, 0.5); /* Kırık beyazın şeffaf tonu */
+}
+
+.search-box button {
+    background-color: var(--accent-indigo);
+    color: var(--text-light);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-box button:hover {
+    background-color: #5a5e80; /* İndigonun biraz daha koyusu */
+    transform: scale(1.05);
+}
+
+/* Post Grid */
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+}
+
+.post-card {
+    background-color: var(--card-dark); /* Koyu antrasit */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.post-card .post-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.post-card .post-preview {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.post-card .post-preview h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-light);
+}
+
+.post-card .post-preview time,
+.post-card .post-preview .author {
+    font-size: 0.9rem;
+    color: rgba(245, 245, 220, 0.7); /* Kırık beyazın şeffaf tonu */
+    margin-bottom: 0.5rem;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 3rem 0;
+    padding: 0 1.5rem;
+}
+
+.pagination button {
+    background-color: var(--accent-indigo);
+    color: var(--text-light);
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: #5a5e80;
+    transform: translateY(-2px);
+}
+
+.pagination button:disabled {
+    background-color: var(--secondary-dark);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.pagination .page-number {
+    background-color: var(--secondary-dark);
+    color: var(--text-light);
+    border: 1px solid var(--border-color);
+}
+
+.pagination .page-number.active {
+    background-color: var(--accent-indigo);
+    border-color: var(--accent-indigo);
+    font-weight: bold;
+}
+
+.pagination .page-number:hover:not(.active) {
+    background-color: var(--card-dark);
+}
+
+/* Footer */
+footer {
+    background-color: var(--secondary-dark);
+    color: var(--text-light);
+    text-align: center;
+    padding: 2rem 1.5rem;
+    margin-top: 4rem;
+    box-shadow: 0 -2px 10px var(--shadow-color);
+}
+
+.social-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.social-links li a {
+    color: var(--text-light);
+    font-size: 1.8rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.social-links li a:hover {
+    color: var(--accent-indigo);
+    transform: scale(1.2);
+}
+
+/* Modals (Hakkımda, İletişim, Yazı Detay) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Daha koyu şeffaf siyah */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--secondary-dark);
+    padding: 2.5rem;
+    border-radius: 12px;
+    max-width: 700px;
+    width: 90%;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    position: relative;
+    color: var(--text-light);
+    animation: modalSlideIn 0.4s ease-out;
+    border: 1px solid var(--border-color);
+}
+
+@keyframes modalSlideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-modal, .close-post {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 2rem;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+    background: none;
+    border: none;
+}
+
+.close-modal:hover, .close-post:hover {
+    color: var(--accent-indigo);
+    transform: rotate(90deg);
+}
+
+.modal-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: var(--text-light);
+}
+
+.modal-content p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+.modal-content ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+}
+
+.modal-content ul li {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+    border-color: var(--accent-indigo);
+}
+
+.contact-form button {
+    background-color: var(--accent-indigo);
+    color: var(--text-light);
+    padding: 0.9rem 1.8rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 1.5rem auto 0;
+}
+
+.contact-form button:hover {
+    background-color: #5a5e80;
+    transform: translateY(-2px);
+}
+
+/* Post Overlay (Yazı Detay) */
+#postOverlay .modal-content {
+    max-width: 900px;
+    max-height: 90vh; /* Ekran yüksekliğinin %90'ı */
+    overflow-y: auto; /* İçerik taşarsa kaydırma çubuğu */
+    padding-bottom: 80px; /* Alttaki butonlar için boşluk */
+}
+
+#postOverlay .modal-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+#postOverlay .modal-content time,
+#postOverlay .modal-content .author {
+    display: block;
+    text-align: center;
+    font-size: 1rem;
+    color: rgba(245, 245, 220, 0.6);
+    margin-bottom: 0.5rem;
+}
+
+#postOverlay .modal-content .post-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+#postOverlay .modal-content .post-content {
+    font-family: 'Georgia', serif; /* Yazı içeriği için daha klasik bir font */
+    font-size: 1.15rem;
+    line-height: 1.9;
+    text-align: justify;
+    color: var(--text-light);
+    padding: 0 1rem; /* Yanlardan hafif boşluk */
+}
+
+#postOverlay .modal-content .post-content em {
+    font-style: normal; /* Normalde italik olan yazar isimleri için */
+    font-weight: bold;
+    color: var(--accent-indigo); /* Yazar ismini vurgula */
+}
+
+.post-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap; /* Küçük ekranlarda alta geçsin */
+    position: sticky;
+    bottom: 0;
+    background-color: var(--secondary-dark); /* Butonların arkasını kapatmak için */
+    padding: 1rem 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.like-btn {
+    background-color: var(--card-dark);
+    color: var(--text-light);
+    border: 1px solid var(--border-color);
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.like-btn i {
+    color: #ff6b6b; /* Kırmızı kalp */
+}
+
+.like-btn:hover {
+    background-color: var(--accent-indigo);
+    color: var(--text-light);
+    transform: translateY(-3px);
+}
+
+.emoji-rating span {
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    padding: 0.5rem;
+}
+
+.emoji-rating span:hover {
+    transform: scale(1.3);
+}
+
+/* Responsive Düzenlemeler */
+@media (max-width: 768px) {
+    .navbar {
         flex-direction: column;
-        /* Bulanık desenli mistik arka plan */
-        background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30,50 Q50,30 70,50 T110,50" fill="none" stroke="%23909090" stroke-width="1.2" opacity="0.10"/></svg>');
-        background-size: 200px; /* Deseni biraz daha büyüterek daha belirgin ama yine de bulanık kalmasını sağladık */
-        background-blend-mode: multiply; /* Arka plan rengiyle karıştırarak daha derin bir etki */
-        /* background-attachment: fixed; */ /* Arka planın sabit kalmasını isterseniz bu satırı yorumdan çıkarın */
-    }
-    
-    /* Ana İçerik - Mevcut hali kalabilir */
-    .main-content {
-        flex: 1;
-        padding-bottom: 2rem;
-    }
-    
-    /* Header */
-    .main-header {
-        background: linear-gradient(135deg, var(--koyu-lacivert), var(--pastel-lacivert)); /* Koyu ve açık gri geçişi */
-        padding: 1.5rem;
         text-align: center;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        position: relative;
-    }
-    
-    /* Header İçerik - Mevcut hali kalabilir */
-    .header-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    
-    /* Header Sol - Mevcut hali kalabilir */
-    .header-left {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        flex-basis: auto;
-        margin-right: auto;
     }
 
-    /* Header Merkez - Mevcut hali kalabilir */
-    .header-center {
-        text-align: center;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        white-space: nowrap;
+    .nav-links {
+        margin-top: 1rem;
+        flex-direction: column;
+        gap: 0.8rem;
     }
-    
-    /* Header Sağ - Mevcut hali kalabilir */
-    .header-right {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        flex-basis: auto;
-        margin-left: auto;
+
+    .logo {
+        font-size: 1.8rem;
     }
-    
-    /* Header H1 - Mevcut hali kalabilir */
-    .main-header h1 {
-        margin: 0;
-        font-size: 2rem;
-        color: white; /* Başlık rengi beyaz kalabilir, koyu arka planla iyi gider */
+
+    .hero-section h1 {
+        font-size: 2.5rem;
     }
-    
-    /* Subtitle - Mevcut hali kalabilir */
-    .subtitle {
+
+    .hero-section p {
         font-size: 1rem;
-        color: rgba(255,255,255,0.9);
-        margin: 0.3rem 0;
-    }
-    
-    /* Navigasyon Linkleri - Mevcut hali kalabilir */
-    .nav-link {
-        color: white;
-        text-decoration: none;
-        font-weight: 500;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        transition: background-color 0.3s;
-    }
-    
-    .nav-link:hover {
-        background-color: rgba(255,255,255,0.2);
     }
 
-    /* Hakkımda Butonu */
-    #about-btn {
-        background-color: var(--pastel-lacivert); /* Buton rengi */
-        color: var(--button-text-color); /* Buton yazı rengi */
-        border: none;
-        padding: 0.75rem 1.25rem;
-        border-radius: 20px;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-        font-weight: 500;
-    }
-
-    #about-btn:hover {
-        background-color: var(--koyu-lacivert); /* Buton hover rengi */
-        color: var(--beyaz);
-    }
-    
-    /* Arama Kutusu - Mevcut hali kalabilir */
     .search-box {
-        display: flex;
-        align-items: center;
+        margin: 1.5rem auto;
     }
-    
-    .search-box input {
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 20px 0 0 20px;
-        outline: none;
-        width: 200px;
+
+    .post-grid {
+        grid-template-columns: 1fr; /* Küçük ekranlarda tek sütun */
+        padding: 0 1rem;
     }
-    
-    .search-box button {
-        background-color: var(--beyaz);
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 0 20px 20px 0;
-        cursor: pointer;
+
+    .modal-content {
+        padding: 1.5rem;
+        width: 95%;
     }
-    
-    /* Modal - Mevcut hali kalabilir */
-    .modal-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0,0,0,0.5);
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        backdrop-filter: blur(3px);
+
+    .modal-content h2 {
+        font-size: 1.8rem;
     }
-    
-    .modal {
-        background: var(--beyaz);
-        padding: 2rem;
-        border-radius: 10px;
-        max-width: 500px;
-        width: 90%;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        position: relative;
+
+    .modal-content p, .contact-form label, .contact-form input, .contact-form textarea {
+        font-size: 0.95rem;
     }
-    
-    .close-modal {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        font-size: 1.5rem;
-        background: none;
-        border: none;
-        cursor: pointer;
-        color: var(--acik-yazi);
+
+    #postOverlay .modal-content h2 {
+        font-size: 2rem;
     }
-    
-    /* İletişim Formu - Mevcut hali kalabilir */
-    .contact-form {
-        display: flex;
+
+    #postOverlay .modal-content .post-content {
+        font-size: 1rem;
+        padding: 0;
+    }
+
+    .post-actions {
         flex-direction: column;
         gap: 1rem;
     }
-    
-    .contact-form input,
-    .contact-form textarea {
-        padding: 0.8rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-family: 'Roboto', sans-serif;
-    }
-    
-    .contact-form textarea {
-        min-height: 120px;
-        resize: vertical;
-    }
-    
-    .contact-form button {
-        background-color: var(--pastel-lacivert);
-        color: white;
-        border: none;
-        padding: 0.8rem;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    
-    .contact-form button:hover {
-        background-color: var(--koyu-lacivert);
-    }
-    
-    /* Feedback - Mevcut hali kalabilir */
-    .feedback-section {
-        text-align: center;
-        margin: 2rem auto;
-        max-width: 600px;
-        padding: 1rem;
-        background: var(--beyaz);
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    
-    .emoji-rating {
-        display: flex;
-        justify-content: center;
-        gap: 1.5rem;
-        font-size: 1.8rem;
-        margin-top: 1rem;
-    }
-    
-    .emoji-rating span {
-        cursor: pointer;
-        transition: transform 0.2s;
-    }
-    
-    .emoji-rating span:hover {
-        transform: scale(1.3);
-    }
-    
-    /* Yazı Listesi - Mevcut hali kalabilir */
-    .post-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 1.5rem;
-        padding: 1.5rem;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    
-    /* Yazı Kartı */
-    .post-card {
-        background: var(--beyaz);
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        transition: all 0.3s;
-        cursor: pointer;
-        overflow: hidden;
-        border-left: 4px solid var(--pastel-lacivert); /* Gri bir kenarlık */
-    }
-    
-    .post-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-    
-    /* Yazı Resmi - Mevcut hali kalabilir */
-    .post-image {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-    }
-    
-    /* Yazı Önizleme - Mevcut hali kalabilir */
-    .post-preview {
-        padding: 1.5rem;
-    }
-    
-    /* Yazı Kartı Başlığı */
-    .post-card h2 {
-        font-size: 1.2rem;
-        margin: 0 0 0.5rem 0;
-        color: var(--koyu-lacivert); /* Başlık rengi koyu gri */
-    }
-    
-    /* Yazı Kartı Zamanı - Mevcut hali kalabilir */
-    .post-card time {
-        font-size: 0.8rem;
-        color: var(--acik-yazi);
-        display: block;
-        margin-bottom: 0.5rem;
-    }
-    
-    /* Yazı Kartı Yazar - Mevcut hali kalabilir */
-    .post-card .author {
-        font-size: 0.85rem;
-        color: var(--acik-yazi);
-        font-style: italic;
-    }
-    
-    /* Yazı Detay Overlay - Mevcut hali kalabilir */
-    .post-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0,0,0,0.7);
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        padding: 1rem;
-        backdrop-filter: blur(5px);
-    }
-    
-    /* Yazı Detay Container - Mevcut hali kalabilir */
-    .post-container {
-        background: var(--beyaz);
-        border-radius: 10px;
-        max-width: 800px;
-        width: 100%;
-        max-height: 90vh;
-        overflow-y: auto;
-        padding: 2rem;
-        position: relative;
-        animation: fadeInUp 0.4s;
-    }
-    
-    @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    
-    /* Yazı Kapatma Butonu - Mevcut hali kalabilir */
-    .close-post {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        font-size: 1.5rem;
-        background: none;
-        border: none;
-        cursor: pointer;
-        color: var(--acik-yazi);
-    }
-    
-    /* Yazı Başlığı - Mevcut hali kalabilir */
-    .post-header {
-        margin-bottom: 1.5rem;
-        text-align: center;
-    }
-    
-    .post-header h2 {
-        font-size: 1.8rem;
-        margin: 0 0 0.5rem 0;
-        color: var(--koyu-lacivert); /* Başlık rengi koyu gri */
-    }
-    
-    /* Yazı Meta - Mevcut hali kalabilir */
-    .post-meta {
-        font-size: 0.9rem;
-        color: var(--acik-yazi);
-        margin-bottom: 1rem;
-    }
-    
-    /* Yazı İçerik - Mevcut hali kalabilir */
-    .post-content {
-        line-height: 1.8;
-        padding-bottom: 2rem;
-    }
-    
-    /* Büyük Yazı Resmi - Mevcut hali kalabilir */
-    .post-image-large {
-        max-width: 100%;
-        height: auto;
-        margin-bottom: 1.5rem;
-        border-radius: 4px;
-    }
-    
-    /* Yazı Aksiyonları - Mevcut hali kalabilir */
-    .post-actions {
-        text-align: center;
-        margin-top: 2rem;
-    }
-    
-    /* Beğen Butonu */
-    .like-btn {
-        background: none;
-        border: 1px solid var(--pastel-lacivert); /* Gri bir çerçeve */
-        color: var(--pastel-lacivert); /* Gri yazı rengi */
-        padding: 0.5rem 1.5rem;
-        border-radius: 20px;
-        cursor: pointer;
-        transition: all 0.3s;
-        font-size: 0.9rem;
-    }
-    
-    .like-btn:hover {
-        background: var(--pastel-lacivert); /* Gri arka plan */
-        color: white;
-    }
-
-    /* Sayfalama Stili */
-    .pagination {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 2rem;
-        gap: 0.5rem;
-    }
-
-    .pagination button {
-        background-color: var(--pastel-lacivert); /* Gri buton rengi */
-        color: white;
-        border: none;
-        padding: 0.75rem 1.25rem;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        font-size: 1rem;
-    }
-
-    .pagination button:hover:not(.active) {
-        background-color: var(--koyu-lacivert); /* Koyu gri hover rengi */
-    }
-
-    .pagination button.active {
-        background-color: var(--koyu-lacivert); /* Aktif buton rengi koyu gri */
-        cursor: default;
-    }
-
-    .pagination span {
-        font-weight: bold;
-        color: var(--koyu-lacivert); /* Sayfa numarası rengi */
-    }
-    
-    /* Footer - SAYFANIN EN ALTINDA */
-    footer {
-        background-color: var(--koyu-lacivert); /* Koyu gri footer */
-        color: white;
-        padding: 1.5rem;
-        text-align: center;
-        margin-top: auto;
-        width: 100%;
-    }
-    
-    /* Footer Linkleri - Mevcut hali kalabilir */
-    .footer-links {
-        margin-top: 1rem;
-    }
-    
-    .footer-links a {
-        color: white;
-        margin: 0 1rem;
-        text-decoration: none;
-        font-size: 0.9rem;
-    }
-    
-    /* Responsive - Mevcut hali kalabilir */
-    @media (max-width: 768px) {
-        .header-content {
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .header-left, .header-right, .header-center {
-            position: static;
-            transform: none;
-            width: 100%;
-            justify-content: center;
-            margin: 0;
-        }
-        
-        .search-box {
-            margin-top: 1rem;
-            width: 100%;
-        }
-        
-        .search-box input {
-            width: 100%;
-        }
-        
-        .post-grid {
-            grid-template-columns: 1fr;
-            padding: 1rem;
-        }
-
-        .pagination button {
-            padding: 0.6rem 1rem;
-            font-size: 0.9rem;
-        }
-    }
+}
 </style>
 
         // Yazı verileri
