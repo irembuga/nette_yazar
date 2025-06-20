@@ -1,582 +1,506 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nette Yazar | Şiir Dünyası</title>
-    <style>
-        /* Renk Paleti */
-        :root {
-            --pastel-lacivert: #6a7ba2;
-            --koyu-lacivert: #3c4f6e;
-            --acik-renk: #f8f9fa;
-            --beyaz: #ffffff;
-            --yazi-renk: #333333;
-            --acik-yazi: #777777;
-            --card-blue: #e3f2fd;
-            --card-light-blue: #bbdefb;
-            --button-text-color: #ffffff; /* Buton yazı rengi için yeni değişken */
-        }
-        
-        /* Temel Stil */
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--acik-renk);
-            color: var(--yazi-renk);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30,50 Q50,30 70,50 T110,50" fill="none" stroke="%236a7ba2" stroke-width="1.2" opacity="0.15"/></svg>');
-            background-size: 150px;
-        }
-        
-        /* Ana İçerik */
-        .main-content {
-            flex: 1;
-            padding-bottom: 2rem;
-        }
-        
-        /* Header */
-        .main-header {
-            background: linear-gradient(135deg, var(--koyu-lacivert), var(--pastel-lacivert));
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        
+<style>
+    /* Renk Paleti */
+    :root {
+        --pastel-lacivert: #606060;   /* Orta Gri */
+        --koyu-lacivert: #303030;     /* Antrasit / Koyu Gri */
+        --acik-renk: #f0f0f0;         /* Kırık beyaz / Çok Açık Gri */
+        --beyaz: #ffffff;             /* Saf beyaz */
+        --yazi-renk: #333333;         /* Koyu gri yazı */
+        --acik-yazi: #888888;         /* Açık gri yazı */
+        --card-blue: #e0e0e0;         /* Kartlar için daha nötr, açık gri */
+        --card-light-blue: #d0d0d0;   /* Kartlar için biraz daha koyu açık gri */
+        --button-text-color: #ffffff; /* Buton yazı rengi */
+    }
+    
+    /* Temel Stil */
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: var(--acik-renk); /* Temel arka plan rengi kırık beyaz */
+        color: var(--yazi-renk);
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        /* Bulanık desenli mistik arka plan */
+        background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30,50 Q50,30 70,50 T110,50" fill="none" stroke="%23909090" stroke-width="1.2" opacity="0.10"/></svg>');
+        background-size: 200px; /* Deseni biraz daha büyüterek daha belirgin ama yine de bulanık kalmasını sağladık */
+        background-blend-mode: multiply; /* Arka plan rengiyle karıştırarak daha derin bir etki */
+        /* background-attachment: fixed; */ /* Arka planın sabit kalmasını isterseniz bu satırı yorumdan çıkarın */
+    }
+    
+    /* Ana İçerik - Mevcut hali kalabilir */
+    .main-content {
+        flex: 1;
+        padding-bottom: 2rem;
+    }
+    
+    /* Header */
+    .main-header {
+        background: linear-gradient(135deg, var(--koyu-lacivert), var(--pastel-lacivert)); /* Koyu ve açık gri geçişi */
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        position: relative;
+    }
+    
+    /* Header İçerik - Mevcut hali kalabilir */
+    .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    
+    /* Header Sol - Mevcut hali kalabilir */
+    .header-left {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        flex-basis: auto;
+        margin-right: auto;
+    }
+
+    /* Header Merkez - Mevcut hali kalabilir */
+    .header-center {
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+    }
+    
+    /* Header Sağ - Mevcut hali kalabilir */
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        flex-basis: auto;
+        margin-left: auto;
+    }
+    
+    /* Header H1 - Mevcut hali kalabilir */
+    .main-header h1 {
+        margin: 0;
+        font-size: 2rem;
+        color: white; /* Başlık rengi beyaz kalabilir, koyu arka planla iyi gider */
+    }
+    
+    /* Subtitle - Mevcut hali kalabilir */
+    .subtitle {
+        font-size: 1rem;
+        color: rgba(255,255,255,0.9);
+        margin: 0.3rem 0;
+    }
+    
+    /* Navigasyon Linkleri - Mevcut hali kalabilir */
+    .nav-link {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+    
+    .nav-link:hover {
+        background-color: rgba(255,255,255,0.2);
+    }
+
+    /* Hakkımda Butonu */
+    #about-btn {
+        background-color: var(--pastel-lacivert); /* Buton rengi */
+        color: var(--button-text-color); /* Buton yazı rengi */
+        border: none;
+        padding: 0.75rem 1.25rem;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+        font-weight: 500;
+    }
+
+    #about-btn:hover {
+        background-color: var(--koyu-lacivert); /* Buton hover rengi */
+        color: var(--beyaz);
+    }
+    
+    /* Arama Kutusu - Mevcut hali kalabilir */
+    .search-box {
+        display: flex;
+        align-items: center;
+    }
+    
+    .search-box input {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 20px 0 0 20px;
+        outline: none;
+        width: 200px;
+    }
+    
+    .search-box button {
+        background-color: var(--beyaz);
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0 20px 20px 0;
+        cursor: pointer;
+    }
+    
+    /* Modal - Mevcut hali kalabilir */
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        backdrop-filter: blur(3px);
+    }
+    
+    .modal {
+        background: var(--beyaz);
+        padding: 2rem;
+        border-radius: 10px;
+        max-width: 500px;
+        width: 90%;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        position: relative;
+    }
+    
+    .close-modal {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 1.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--acik-yazi);
+    }
+    
+    /* İletişim Formu - Mevcut hali kalabilir */
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .contact-form input,
+    .contact-form textarea {
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: 'Roboto', sans-serif;
+    }
+    
+    .contact-form textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+    
+    .contact-form button {
+        background-color: var(--pastel-lacivert);
+        color: white;
+        border: none;
+        padding: 0.8rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .contact-form button:hover {
+        background-color: var(--koyu-lacivert);
+    }
+    
+    /* Feedback - Mevcut hali kalabilir */
+    .feedback-section {
+        text-align: center;
+        margin: 2rem auto;
+        max-width: 600px;
+        padding: 1rem;
+        background: var(--beyaz);
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .emoji-rating {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        font-size: 1.8rem;
+        margin-top: 1rem;
+    }
+    
+    .emoji-rating span {
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+    
+    .emoji-rating span:hover {
+        transform: scale(1.3);
+    }
+    
+    /* Yazı Listesi - Mevcut hali kalabilir */
+    .post-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        padding: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    /* Yazı Kartı */
+    .post-card {
+        background: var(--beyaz);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: all 0.3s;
+        cursor: pointer;
+        overflow: hidden;
+        border-left: 4px solid var(--pastel-lacivert); /* Gri bir kenarlık */
+    }
+    
+    .post-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    /* Yazı Resmi - Mevcut hali kalabilir */
+    .post-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+    
+    /* Yazı Önizleme - Mevcut hali kalabilir */
+    .post-preview {
+        padding: 1.5rem;
+    }
+    
+    /* Yazı Kartı Başlığı */
+    .post-card h2 {
+        font-size: 1.2rem;
+        margin: 0 0 0.5rem 0;
+        color: var(--koyu-lacivert); /* Başlık rengi koyu gri */
+    }
+    
+    /* Yazı Kartı Zamanı - Mevcut hali kalabilir */
+    .post-card time {
+        font-size: 0.8rem;
+        color: var(--acik-yazi);
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Yazı Kartı Yazar - Mevcut hali kalabilir */
+    .post-card .author {
+        font-size: 0.85rem;
+        color: var(--acik-yazi);
+        font-style: italic;
+    }
+    
+    /* Yazı Detay Overlay - Mevcut hali kalabilir */
+    .post-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.7);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        padding: 1rem;
+        backdrop-filter: blur(5px);
+    }
+    
+    /* Yazı Detay Container - Mevcut hali kalabilir */
+    .post-container {
+        background: var(--beyaz);
+        border-radius: 10px;
+        max-width: 800px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 2rem;
+        position: relative;
+        animation: fadeInUp 0.4s;
+    }
+    
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Yazı Kapatma Butonu - Mevcut hali kalabilir */
+    .close-post {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 1.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--acik-yazi);
+    }
+    
+    /* Yazı Başlığı - Mevcut hali kalabilir */
+    .post-header {
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+    
+    .post-header h2 {
+        font-size: 1.8rem;
+        margin: 0 0 0.5rem 0;
+        color: var(--koyu-lacivert); /* Başlık rengi koyu gri */
+    }
+    
+    /* Yazı Meta - Mevcut hali kalabilir */
+    .post-meta {
+        font-size: 0.9rem;
+        color: var(--acik-yazi);
+        margin-bottom: 1rem;
+    }
+    
+    /* Yazı İçerik - Mevcut hali kalabilir */
+    .post-content {
+        line-height: 1.8;
+        padding-bottom: 2rem;
+    }
+    
+    /* Büyük Yazı Resmi - Mevcut hali kalabilir */
+    .post-image-large {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 1.5rem;
+        border-radius: 4px;
+    }
+    
+    /* Yazı Aksiyonları - Mevcut hali kalabilir */
+    .post-actions {
+        text-align: center;
+        margin-top: 2rem;
+    }
+    
+    /* Beğen Butonu */
+    .like-btn {
+        background: none;
+        border: 1px solid var(--pastel-lacivert); /* Gri bir çerçeve */
+        color: var(--pastel-lacivert); /* Gri yazı rengi */
+        padding: 0.5rem 1.5rem;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 0.9rem;
+    }
+    
+    .like-btn:hover {
+        background: var(--pastel-lacivert); /* Gri arka plan */
+        color: white;
+    }
+
+    /* Sayfalama Stili */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2rem;
+        gap: 0.5rem;
+    }
+
+    .pagination button {
+        background-color: var(--pastel-lacivert); /* Gri buton rengi */
+        color: white;
+        border: none;
+        padding: 0.75rem 1.25rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-size: 1rem;
+    }
+
+    .pagination button:hover:not(.active) {
+        background-color: var(--koyu-lacivert); /* Koyu gri hover rengi */
+    }
+
+    .pagination button.active {
+        background-color: var(--koyu-lacivert); /* Aktif buton rengi koyu gri */
+        cursor: default;
+    }
+
+    .pagination span {
+        font-weight: bold;
+        color: var(--koyu-lacivert); /* Sayfa numarası rengi */
+    }
+    
+    /* Footer - SAYFANIN EN ALTINDA */
+    footer {
+        background-color: var(--koyu-lacivert); /* Koyu gri footer */
+        color: white;
+        padding: 1.5rem;
+        text-align: center;
+        margin-top: auto;
+        width: 100%;
+    }
+    
+    /* Footer Linkleri - Mevcut hali kalabilir */
+    .footer-links {
+        margin-top: 1rem;
+    }
+    
+    .footer-links a {
+        color: white;
+        margin: 0 1rem;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+    
+    /* Responsive - Mevcut hali kalabilir */
+    @media (max-width: 768px) {
         .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between; /* Ögeler arası boşluğu koru */
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            flex-basis: auto; /* İçeriğine göre genişlik */
-            margin-right: auto; /* Sağdaki ögelerle arayı açar */
-        }
-
-        .header-center {
-            text-align: center;
-            position: absolute; /* Mutlak konumlandırma */
-            left: 50%; /* Ortaya hizala */
-            transform: translateX(-50%); /* Kendi genişliğinin yarısı kadar geri kaydırarak tam ortaya al */
-            white-space: nowrap; /* Başlığın tek satırda kalmasını sağlar */
-        }
-        
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            flex-basis: auto; /* İçeriğine göre genişlik */
-            margin-left: auto; /* Soldaki ögelerle arayı açar */
-        }
-        
-        .main-header h1 {
-            margin: 0;
-            font-size: 2rem;
-            color: white;
-        }
-        
-        .subtitle {
-            font-size: 1rem;
-            color: rgba(255,255,255,0.9);
-            margin: 0.3rem 0;
-        }
-        
-        /* Navigasyon */
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        
-        .nav-link:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
-
-        /* Hakkımda butonu */
-        #about-btn {
-            background-color: var(--pastel-lacivert); /* Buton rengi */
-            color: var(--button-text-color); /* Buton yazı rengi */
-            border: none;
-            padding: 0.75rem 1.25rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            font-weight: 500;
-        }
-
-        #about-btn:hover {
-            background-color: var(--koyu-lacivert);
-            color: var(--beyaz);
-        }
-        
-        /* Arama Kutusu */
-        .search-box {
-            display: flex;
-            align-items: center;
-        }
-        
-        .search-box input {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 20px 0 0 20px;
-            outline: none;
-            width: 200px;
-        }
-        
-        .search-box button {
-            background-color: var(--beyaz);
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 0 20px 20px 0;
-            cursor: pointer;
-        }
-        
-        /* Modal */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(3px);
-        }
-        
-        .modal {
-            background: var(--beyaz);
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--acik-yazi);
-        }
-        
-        /* İletişim Formu */
-        .contact-form {
-            display: flex;
             flex-direction: column;
             gap: 1rem;
         }
         
-        .contact-form input,
-        .contact-form textarea {
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-family: 'Roboto', sans-serif;
-        }
-        
-        .contact-form textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .contact-form button {
-            background-color: var(--pastel-lacivert);
-            color: white;
-            border: none;
-            padding: 0.8rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .contact-form button:hover {
-            background-color: var(--koyu-lacivert);
-        }
-        
-        /* Feedback */
-        .feedback-section {
-            text-align: center;
-            margin: 2rem auto;
-            max-width: 600px;
-            padding: 1rem;
-            background: var(--beyaz);
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        
-        .emoji-rating {
-            display: flex;
+        .header-left, .header-right, .header-center {
+            position: static;
+            transform: none;
+            width: 100%;
             justify-content: center;
-            gap: 1.5rem;
-            font-size: 1.8rem;
+            margin: 0;
+        }
+        
+        .search-box {
             margin-top: 1rem;
+            width: 100%;
         }
         
-        .emoji-rating span {
-            cursor: pointer;
-            transition: transform 0.2s;
+        .search-box input {
+            width: 100%;
         }
         
-        .emoji-rating span:hover {
-            transform: scale(1.3);
-        }
-        
-        /* Yazı Listesi */
         .post-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            padding: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .post-card {
-            background: var(--beyaz);
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            cursor: pointer;
-            overflow: hidden;
-            border-left: 4px solid var(--pastel-lacivert);
-        }
-        
-        .post-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .post-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        
-        .post-preview {
-            padding: 1.5rem;
-        }
-        
-        .post-card h2 {
-            font-size: 1.2rem;
-            margin: 0 0 0.5rem 0;
-            color: var(--koyu-lacivert);
-        }
-        
-        .post-card time {
-            font-size: 0.8rem;
-            color: var(--acik-yazi);
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-        
-        .post-card .author {
-            font-size: 0.85rem;
-            color: var(--acik-yazi);
-            font-style: italic;
-        }
-        
-        /* Yazı Detay */
-        .post-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.7);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
+            grid-template-columns: 1fr;
             padding: 1rem;
-            backdrop-filter: blur(5px);
-        }
-        
-        .post-container {
-            background: var(--beyaz);
-            border-radius: 10px;
-            max-width: 800px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 2rem;
-            position: relative;
-            animation: fadeInUp 0.4s;
-        }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .close-post {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--acik-yazi);
-        }
-        
-        .post-header {
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        
-        .post-header h2 {
-            font-size: 1.8rem;
-            margin: 0 0 0.5rem 0;
-            color: var(--koyu-lacivert);
-        }
-        
-        .post-meta {
-            font-size: 0.9rem;
-            color: var(--acik-yazi);
-            margin-bottom: 1rem;
-        }
-        
-        .post-content {
-            line-height: 1.8;
-            padding-bottom: 2rem;
-        }
-        
-        .post-image-large {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 1.5rem;
-            border-radius: 4px;
-        }
-        
-        .post-actions {
-            text-align: center;
-            margin-top: 2rem;
-        }
-        
-        .like-btn {
-            background: none;
-            border: 1px solid var(--pastel-lacivert);
-            color: var(--pastel-lacivert);
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-        
-        .like-btn:hover {
-            background: var(--pastel-lacivert);
-            color: white;
-        }
-
-        /* Sayfalama Stili */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 2rem;
-            gap: 0.5rem;
         }
 
         .pagination button {
-            background-color: var(--pastel-lacivert);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.25rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 1rem;
-        }
-
-        .pagination button:hover:not(.active) {
-            background-color: var(--koyu-lacivert);
-        }
-
-        .pagination button.active {
-            background-color: var(--koyu-lacivert);
-            cursor: default;
-        }
-
-        .pagination span {
-            font-weight: bold;
-            color: var(--koyu-lacivert);
-        }
-        
-        /* Footer - SAYFANIN EN ALTINDA */
-        footer {
-            background-color: var(--koyu-lacivert);
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-            margin-top: auto;
-            width: 100%;
-        }
-        
-        .footer-links {
-            margin-top: 1rem;
-        }
-        
-        .footer-links a {
-            color: white;
-            margin: 0 1rem;
-            text-decoration: none;
+            padding: 0.6rem 1rem;
             font-size: 0.9rem;
         }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .header-left, .header-right, .header-center {
-                position: static; /* Mobilde statik konumlandırma */
-                transform: none; /* Mobilde transform iptali */
-                width: 100%;
-                justify-content: center;
-                margin: 0; /* Mobilde marginleri sıfırla */
-            }
-            
-            .search-box {
-                margin-top: 1rem;
-                width: 100%;
-            }
-            
-            .search-box input {
-                width: 100%;
-            }
-            
-            .post-grid {
-                grid-template-columns: 1fr;
-                padding: 1rem;
-            }
+    }
+</style>
 
-            .pagination button {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-    <div class="main-content">
-        <header class="main-header">
-            <div class="header-content">
-                <div class="header-left">
-                    <a href="#" class="nav-link" id="home-link">Anasayfa</a>
-                    <a href="#" class="nav-link" id="contact-link">İletişim</a>
-                    <div class="search-box">
-                        <input type="text" placeholder="Şiir ara...">
-                        <button><i class="fas fa-search"></i></button>
-                    </div>
-                </div>
-                
-                <div class="header-center">
-                    <h1>Nette Yazar</h1>
-                    <p class="subtitle">Yokuş Hikayesi</p>
-                </div>
-                
-                <div class="header-right">
-                    <button class="nav-link" id="about-btn">Hakkımda</button>
-                </div>
-            </div>
-        </header>
-
-        <div class="modal-overlay" id="aboutModal">
-            <div class="modal">
-                <button class="close-modal">&times;</button>
-                <h3>Hakkımda</h3>
-                <p>Merhaba ben İrem... Yazmak bana şu hayatta en iyi gelen şey... Yazdıklarımı sizlerle paylaşıp, üzerine konuşmak eminim daha da zevkli olacaktır. Daha umutlu yarınlar için... Keyifli Okumalar!</p>
-            </div>
-        </div>
-
-        <div class="modal-overlay" id="contactModal">
-            <div class="modal">
-                <button class="close-modal">&times;</button>
-                <h3>İletişim</h3>
-                <form class="contact-form" id="contactForm">
-                    <input type="text" placeholder="Adınız" required>
-                    <input type="email" placeholder="E-posta Adresiniz" required>
-                    <textarea placeholder="Mesajınız" required></textarea>
-                    <button type="submit">Gönder</button>
-                </form>
-            </div>
-        </div>
-
-        <section class="feedback-section">
-            <p>Yazılarım hakkında ne düşünüyorsunuz?</p>
-            <div class="emoji-rating">
-                <span>😞</span>
-                <span>😐</span>
-                <span>😊</span>
-                <span>🤩</span>
-            </div>
-        </section>
-
-        <main class="post-grid" id="postGrid">
-            </main>
-
-        <div class="pagination" id="pagination">
-            <button id="prevPage">Önceki</button>
-            <div id="pageNumbers"></div>
-            <button id="nextPage">Sonraki</button>
-        </div>
-
-        <div class="post-overlay" id="postOverlay">
-            <div class="post-container">
-                <button class="close-post">&times;</button>
-                <div class="post-header">
-                    <h2 id="postTitle"></h2>
-                    <div class="post-meta">
-                        <time id="postDate"></time>
-                        <span id="postAuthor"></span>
-                    </div>
-                </div>
-                <img id="postImage" class="post-image-large" src="" alt="">
-                <div class="post-content" id="postContent"></div>
-                <div class="post-actions">
-                    <button class="like-btn"><i class="far fa-heart"></i> Beğen</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <footer>
-        <div>© 2023 İrem BUĞA. Tüm hakları saklıdır.</div>
-        <div class="footer-links">
-            <a href="#">Gizlilik Politikası</a>
-            <a href="#">Kullanım Şartları</a>
-        </div>
-    </footer>
-
-    <script>
         // Yazı verileri
         const posts = [
             {
