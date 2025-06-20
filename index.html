@@ -52,7 +52,7 @@
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Ögeler arası boşluğu koru */
             align-items: center;
             flex-wrap: wrap;
         }
@@ -60,18 +60,25 @@
         .header-left {
             display: flex;
             align-items: center;
-            gap: 1.5rem; /* Gap azaltıldı */
+            gap: 1.5rem;
+            flex-basis: auto; /* İçeriğine göre genişlik */
+            margin-right: auto; /* Sağdaki ögelerle arayı açar */
         }
 
         .header-center {
-            flex-grow: 1; /* Ortadaki başlık için esneklik */
             text-align: center;
+            position: absolute; /* Mutlak konumlandırma */
+            left: 50%; /* Ortaya hizala */
+            transform: translateX(-50%); /* Kendi genişliğinin yarısı kadar geri kaydırarak tam ortaya al */
+            white-space: nowrap; /* Başlığın tek satırda kalmasını sağlar */
         }
         
         .header-right {
             display: flex;
             align-items: center;
             gap: 1.5rem;
+            flex-basis: auto; /* İçeriğine göre genişlik */
+            margin-left: auto; /* Soldaki ögelerle arayı açar */
         }
         
         .main-header h1 {
@@ -414,8 +421,11 @@
             }
             
             .header-left, .header-right, .header-center {
+                position: static; /* Mobilde statik konumlandırma */
+                transform: none; /* Mobilde transform iptali */
                 width: 100%;
                 justify-content: center;
+                margin: 0; /* Mobilde marginleri sıfırla */
             }
             
             .search-box {
