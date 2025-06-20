@@ -15,6 +15,7 @@
             --acik-yazi: #777777;
             --card-blue: #e3f2fd;
             --card-light-blue: #bbdefb;
+            --button-text-color: #ffffff; /* Buton yazı rengi için yeni değişken */
         }
         
         /* Temel Stil */
@@ -59,7 +60,12 @@
         .header-left {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 1.5rem; /* Gap azaltıldı */
+        }
+
+        .header-center {
+            flex-grow: 1; /* Ortadaki başlık için esneklik */
+            text-align: center;
         }
         
         .header-right {
@@ -92,6 +98,23 @@
         
         .nav-link:hover {
             background-color: rgba(255,255,255,0.2);
+        }
+
+        /* Hakkımda butonu */
+        #about-btn {
+            background-color: var(--pastel-lacivert); /* Buton rengi */
+            color: var(--button-text-color); /* Buton yazı rengi */
+            border: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            font-weight: 500;
+        }
+
+        #about-btn:hover {
+            background-color: var(--koyu-lacivert);
+            color: var(--beyaz);
         }
         
         /* Arama Kutusu */
@@ -390,7 +413,7 @@
                 gap: 1rem;
             }
             
-            .header-left, .header-right {
+            .header-left, .header-right, .header-center {
                 width: 100%;
                 justify-content: center;
             }
@@ -415,29 +438,28 @@
 </head>
 <body>
     <div class="main-content">
-        <!-- Ana Başlık -->
         <header class="main-header">
             <div class="header-content">
                 <div class="header-left">
-                    <a href="#" class="nav-link">Anasayfa</a>
-                    <div>
-                        <h1>Nette Yazar</h1>
-                        <p class="subtitle">Yokuş Hikayesi</p>
-                    </div>
-                </div>
-                
-                <div class="header-right">
+                    <a href="#" class="nav-link" id="home-link">Anasayfa</a>
+                    <a href="#" class="nav-link" id="contact-link">İletişim</a>
                     <div class="search-box">
                         <input type="text" placeholder="Şiir ara...">
                         <button><i class="fas fa-search"></i></button>
                     </div>
-                    <a href="#" class="nav-link" id="contact-link">İletişim</a>
+                </div>
+                
+                <div class="header-center">
+                    <h1>Nette Yazar</h1>
+                    <p class="subtitle">Yokuş Hikayesi</p>
+                </div>
+                
+                <div class="header-right">
                     <button class="nav-link" id="about-btn">Hakkımda</button>
                 </div>
             </div>
         </header>
 
-        <!-- Hakkımda Modal -->
         <div class="modal-overlay" id="aboutModal">
             <div class="modal">
                 <button class="close-modal">&times;</button>
@@ -446,7 +468,6 @@
             </div>
         </div>
 
-        <!-- İletişim Modal -->
         <div class="modal-overlay" id="contactModal">
             <div class="modal">
                 <button class="close-modal">&times;</button>
@@ -460,7 +481,6 @@
             </div>
         </div>
 
-        <!-- Memnuniyet Anketi -->
         <section class="feedback-section">
             <p>Yazılarım hakkında ne düşünüyorsunuz?</p>
             <div class="emoji-rating">
@@ -471,9 +491,7 @@
             </div>
         </section>
 
-        <!-- Yazı Listesi -->
         <main class="post-grid" id="postGrid">
-            <!-- Örnek Yazı 1 -->
             <article class="post-card" data-id="1" style="background-color: var(--card-blue);">
                 <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Şiir görseli" class="post-image">
                 <div class="post-preview">
@@ -483,7 +501,6 @@
                 </div>
             </article>
 
-            <!-- Örnek Yazı 2 -->
             <article class="post-card" data-id="2" style="background-color: var(--card-light-blue);">
                 <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Şiir görseli" class="post-image">
                 <div class="post-preview">
@@ -494,7 +511,6 @@
             </article>
         </main>
 
-        <!-- Yazı Detay Gösterimi -->
         <div class="post-overlay" id="postOverlay">
             <div class="post-container">
                 <button class="close-post">&times;</button>
@@ -514,7 +530,6 @@
         </div>
     </div>
     
-    <!-- Footer - SAYFANIN EN ALTINDA -->
     <footer>
         <div>© 2023 İrem BUĞA. Tüm hakları saklıdır.</div>
         <div class="footer-links">
@@ -566,6 +581,13 @@
         const contactLink = document.getElementById('contact-link');
         const contactModal = document.getElementById('contactModal');
         const closeModals = document.querySelectorAll('.close-modal');
+        const homeLink = document.getElementById('home-link');
+
+        // Anasayfa linkine tıklandığında sayfayı yeniden yükle
+        homeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.reload(); // Sayfayı yeniden yükleyerek tüm filtreleri ve açık modalları kapatır
+        });
 
         aboutBtn.addEventListener('click', (e) => {
             e.preventDefault();
