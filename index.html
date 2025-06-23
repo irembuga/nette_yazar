@@ -1,1659 +1,851 @@
 <!DOCTYPE html>
-
 <html lang="tr">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Nette Yazar | Şiir Dünyası</title>
-
-    <style>
-
-        /* Renk Paleti */
-
-        :root {
-
-            --pastel-lacivert: #6a7ba2;
-
-            --koyu-lacivert: #3c4f6e;
-
-            --acik-renk: #f8f9fa;
-
-            --beyaz: #ffffff;
-
-            --yazi-renk: #333333;
-
-            --acik-yazi: #777777;
-
-            --card-blue: #e3f2fd;
-
-            --card-light-blue: #bbdefb;
-
-            --button-text-color: #ffffff; /* Buton yazı rengi için yeni değişken */
-
-        }
-
-        
-
-        /* Temel Stil */
-
-        body {
-
-            font-family: 'Roboto', sans-serif;
-
-            background-color: var(--acik-renk);
-
-            color: var(--yazi-renk);
-
-            margin: 0;
-
-            padding: 0;
-
-            line-height: 1.6;
-
-            min-height: 100vh;
-
-            display: flex;
-
-            flex-direction: column;
-
-            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30,50 Q50,30 70,50 T110,50" fill="none" stroke="%236a7ba2" stroke-width="1.2" opacity="0.15"/></svg>');
-
-            background-size: 150px;
-
-        }
-
-        
-
-        /* Ana İçerik */
-
-        .main-content {
-
-            flex: 1;
-
-            padding-bottom: 2rem;
-
-        }
-
-        
-
-        /* Header */
-
-        .main-header {
-
-            background: linear-gradient(135deg, var(--koyu-lacivert), var(--pastel-lacivert));
-
-            padding: 1.5rem;
-
-            text-align: center;
-
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-
-            position: relative;
-
-        }
-
-        
-
-        .header-content {
-
-            max-width: 1200px;
-
-            margin: 0 auto;
-
-            display: flex;
-
-            justify-content: space-between; /* Ögeler arası boşluğu koru */
-
-            align-items: center;
-
-            flex-wrap: wrap;
-
-        }
-
-        
-
-        .header-left {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 1.5rem;
-
-            flex-basis: auto; /* İçeriğine göre genişlik */
-
-            margin-right: auto; /* Sağdaki ögelerle arayı açar */
-
-        }
-
-
-
-        .header-center {
-
-            text-align: center;
-
-            position: absolute; /* Mutlak konumlandırma */
-
-            left: 50%; /* Ortaya hizala */
-
-            transform: translateX(-50%); /* Kendi genişliğinin yarısı kadar geri kaydırarak tam ortaya al */
-
-            white-space: nowrap; /* Başlığın tek satırda kalmasını sağlar */
-
-        }
-
-        
-
-        .header-right {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 1.5rem;
-
-            flex-basis: auto; /* İçeriğine göre genişlik */
-
-            margin-left: auto; /* Soldaki ögelerle arayı açar */
-
-        }
-
-        
-
-        .main-header h1 {
-
-            margin: 0;
-
-            font-size: 2rem;
-
-            color: white;
-
-        }
-
-        
-
-        .subtitle {
-
-            font-size: 1rem;
-
-            color: rgba(255,255,255,0.9);
-
-            margin: 0.3rem 0;
-
-        }
-
-        
-
-        /* Navigasyon */
-
-        .nav-link {
-
-            color: white;
-
-            text-decoration: none;
-
-            font-weight: 500;
-
-            padding: 0.5rem 1rem;
-
-            border-radius: 4px;
-
-            transition: background-color 0.3s;
-
-        }
-
-        
-
-        .nav-link:hover {
-
-            background-color: rgba(255,255,255,0.2);
-
-        }
-
-
-
-        /* Hakkımda butonu */
-
-        #about-btn {
-
-            background-color: var(--pastel-lacivert); /* Buton rengi */
-
-            color: var(--button-text-color); /* Buton yazı rengi */
-
-            border: none;
-
-            padding: 0.75rem 1.25rem;
-
-            border-radius: 20px;
-
-            cursor: pointer;
-
-            transition: background-color 0.3s, color 0.3s;
-
-            font-weight: 500;
-
-        }
-
-
-
-        #about-btn:hover {
-
-            background-color: var(--koyu-lacivert);
-
-            color: var(--beyaz);
-
-        }
-
-        
-
-        /* Arama Kutusu */
-
-        .search-box {
-
-            display: flex;
-
-            align-items: center;
-
-        }
-
-        
-
-        .search-box input {
-
-            padding: 0.5rem 1rem;
-
-            border: none;
-
-            border-radius: 20px 0 0 20px;
-
-            outline: none;
-
-            width: 200px;
-
-        }
-
-        
-
-        .search-box button {
-
-            background-color: var(--beyaz);
-
-            border: none;
-
-            padding: 0.5rem 1rem;
-
-            border-radius: 0 20px 20px 0;
-
-            cursor: pointer;
-
-        }
-
-        
-
-        /* Modal */
-
-        .modal-overlay {
-
-            display: none;
-
-            position: fixed;
-
-            top: 0;
-
-            left: 0;
-
-            right: 0;
-
-            bottom: 0;
-
-            background: rgba(0,0,0,0.5);
-
-            justify-content: center;
-
-            align-items: center;
-
-            z-index: 1000;
-
-            backdrop-filter: blur(3px);
-
-        }
-
-        
-
-        .modal {
-
-            background: var(--beyaz);
-
-            padding: 2rem;
-
-            border-radius: 10px;
-
-            max-width: 500px;
-
-            width: 90%;
-
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-
-            position: relative;
-
-        }
-
-        
-
-        .close-modal {
-
-            position: absolute;
-
-            top: 1rem;
-
-            right: 1rem;
-
-            font-size: 1.5rem;
-
-            background: none;
-
-            border: none;
-
-            cursor: pointer;
-
-            color: var(--acik-yazi);
-
-        }
-
-        
-
-        /* İletişim Formu */
-
-        .contact-form {
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 1rem;
-
-        }
-
-        
-
-        .contact-form input,
-
-        .contact-form textarea {
-
-            padding: 0.8rem;
-
-            border: 1px solid #ddd;
-
-            border-radius: 4px;
-
-            font-family: 'Roboto', sans-serif;
-
-        }
-
-        
-
-        .contact-form textarea {
-
-            min-height: 120px;
-
-            resize: vertical;
-
-        }
-
-        
-
-        .contact-form button {
-
-            background-color: var(--pastel-lacivert);
-
-            color: white;
-
-            border: none;
-
-            padding: 0.8rem;
-
-            border-radius: 4px;
-
-            cursor: pointer;
-
-            transition: background-color 0.3s;
-
-        }
-
-        
-
-        .contact-form button:hover {
-
-            background-color: var(--koyu-lacivert);
-
-        }
-
-        
-
-        /* Feedback */
-
-        .feedback-section {
-
-            text-align: center;
-
-            margin: 2rem auto;
-
-            max-width: 600px;
-
-            padding: 1rem;
-
-            background: var(--beyaz);
-
-            border-radius: 10px;
-
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-
-        }
-
-        
-
-        .emoji-rating {
-
-            display: flex;
-
-            justify-content: center;
-
-            gap: 1.5rem;
-
-            font-size: 1.8rem;
-
-            margin-top: 1rem;
-
-        }
-
-        
-
-        .emoji-rating span {
-
-            cursor: pointer;
-
-            transition: transform 0.2s;
-
-        }
-
-        
-
-        .emoji-rating span:hover {
-
-            transform: scale(1.3);
-
-        }
-
-        
-
-        /* Yazı Listesi */
-
-        .post-grid {
-
-            display: grid;
-
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-
-            gap: 1.5rem;
-
-            padding: 1.5rem;
-
-            max-width: 1200px;
-
-            margin: 0 auto;
-
-        }
-
-        
-
-        .post-card {
-
-            background: var(--beyaz);
-
-            border-radius: 8px;
-
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-
-            transition: all 0.3s;
-
-            cursor: pointer;
-
-            overflow: hidden;
-
-            border-left: 4px solid var(--pastel-lacivert);
-
-        }
-
-        
-
-        .post-card:hover {
-
-            transform: translateY(-5px);
-
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-
-        }
-
-        
-
-        .post-image {
-
-            width: 100%;
-
-            height: 200px;
-
-            object-fit: cover;
-
-        }
-
-        
-
-        .post-preview {
-
-            padding: 1.5rem;
-
-        }
-
-        
-
-        .post-card h2 {
-
-            font-size: 1.2rem;
-
-            margin: 0 0 0.5rem 0;
-
-            color: var(--koyu-lacivert);
-
-        }
-
-        
-
-        .post-card time {
-
-            font-size: 0.8rem;
-
-            color: var(--acik-yazi);
-
-            display: block;
-
-            margin-bottom: 0.5rem;
-
-        }
-
-        
-
-        .post-card .author {
-
-            font-size: 0.85rem;
-
-            color: var(--acik-yazi);
-
-            font-style: italic;
-
-        }
-
-        
-
-        /* Yazı Detay */
-
-        .post-overlay {
-
-            display: none;
-
-            position: fixed;
-
-            top: 0;
-
-            left: 0;
-
-            right: 0;
-
-            bottom: 0;
-
-            background: rgba(0,0,0,0.7);
-
-            justify-content: center;
-
-            align-items: center;
-
-            z-index: 1000;
-
-            padding: 1rem;
-
-            backdrop-filter: blur(5px);
-
-        }
-
-        
-
-        .post-container {
-
-            background: var(--beyaz);
-
-            border-radius: 10px;
-
-            max-width: 800px;
-
-            width: 100%;
-
-            max-height: 90vh;
-
-            overflow-y: auto;
-
-            padding: 2rem;
-
-            position: relative;
-
-            animation: fadeInUp 0.4s;
-
-        }
-
-        
-
-        @keyframes fadeInUp {
-
-            from { opacity: 0; transform: translateY(20px); }
-
-            to { opacity: 1; transform: translateY(0); }
-
-        }
-
-        
-
-        .close-post {
-
-            position: absolute;
-
-            top: 1rem;
-
-            right: 1rem;
-
-            font-size: 1.5rem;
-
-            background: none;
-
-            border: none;
-
-            cursor: pointer;
-
-            color: var(--acik-yazi);
-
-        }
-
-        
-
-        .post-header {
-
-            margin-bottom: 1.5rem;
-
-            text-align: center;
-
-        }
-
-        
-
-        .post-header h2 {
-
-            font-size: 1.8rem;
-
-            margin: 0 0 0.5rem 0;
-
-            color: var(--koyu-lacivert);
-
-        }
-
-        
-
-        .post-meta {
-
-            font-size: 0.9rem;
-
-            color: var(--acik-yazi);
-
-            margin-bottom: 1rem;
-
-        }
-
-        
-
-        .post-content {
-
-            line-height: 1.8;
-
-            padding-bottom: 2rem;
-
-        }
-
-        
-
-        .post-image-large {
-
-            max-width: 100%;
-
-            height: auto;
-
-            margin-bottom: 1.5rem;
-
-            border-radius: 4px;
-
-        }
-
-        
-
-        .post-actions {
-
-            text-align: center;
-
-            margin-top: 2rem;
-
-        }
-
-        
-
-        .like-btn {
-
-            background: none;
-
-            border: 1px solid var(--pastel-lacivert);
-
-            color: var(--pastel-lacivert);
-
-            padding: 0.5rem 1.5rem;
-
-            border-radius: 20px;
-
-            cursor: pointer;
-
-            transition: all 0.3s;
-
-            font-size: 0.9rem;
-
-        }
-
-        
-
-        .like-btn:hover {
-
-            background: var(--pastel-lacivert);
-
-            color: white;
-
-        }
-
-
-
-        /* Sayfalama Stili */
-
-        .pagination {
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            margin-top: 2rem;
-
-            gap: 0.5rem;
-
-        }
-
-
-
-        .pagination button {
-
-            background-color: var(--pastel-lacivert);
-
-            color: white;
-
-            border: none;
-
-            padding: 0.75rem 1.25rem;
-
-            border-radius: 5px;
-
-            cursor: pointer;
-
-            transition: background-color 0.3s;
-
-            font-size: 1rem;
-
-        }
-
-
-
-        .pagination button:hover:not(.active) {
-
-            background-color: var(--koyu-lacivert);
-
-        }
-
-
-
-        .pagination button.active {
-
-            background-color: var(--koyu-lacivert);
-
-            cursor: default;
-
-        }
-
-
-
-        .pagination span {
-
-            font-weight: bold;
-
-            color: var(--koyu-lacivert);
-
-        }
-
-        
-
-        /* Footer - SAYFANIN EN ALTINDA */
-
-        footer {
-
-            background-color: var(--koyu-lacivert);
-
-            color: white;
-
-            padding: 1.5rem;
-
-            text-align: center;
-
-            margin-top: auto;
-
-            width: 100%;
-
-        }
-
-        
-
-        .footer-links {
-
-            margin-top: 1rem;
-
-        }
-
-        
-
-        .footer-links a {
-
-            color: white;
-
-            margin: 0 1rem;
-
-            text-decoration: none;
-
-            font-size: 0.9rem;
-
-        }
-
-        
-
-        /* Responsive */
-
-        @media (max-width: 768px) {
-
-            .header-content {
-
-                flex-direction: column;
-
-                gap: 1rem;
-
-            }
-
-            
-
-            .header-left, .header-right, .header-center {
-
-                position: static; /* Mobilde statik konumlandırma */
-
-                transform: none; /* Mobilde transform iptali */
-
-                width: 100%;
-
-                justify-content: center;
-
-                margin: 0; /* Mobilde marginleri sıfırla */
-
-            }
-
-            
-
-            .search-box {
-
-                margin-top: 1rem;
-
-                width: 100%;
-
-            }
-
-            
-
-            .search-box input {
-
-                width: 100%;
-
-            }
-
-            
-
-            .post-grid {
-
-                grid-template-columns: 1fr;
-
-                padding: 1rem;
-
-            }
-
-
-
-            .pagination button {
-
-                padding: 0.6rem 1rem;
-
-                font-size: 0.9rem;
-
-            }
-
-        }
-
-    </style>
-
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nette Yazar | Şiir Dünyası</title>
+    <style>
+        /* Renk Paleti */
+        :root {
+            --pastel-lacivert: #6a7ba2;
+            --koyu-lacivert: #3c4f6e;
+            --acik-renk: #f8f9fa;
+            --beyaz: #ffffff;
+            --yazi-renk: #333333;
+            --acik-yazi: #777777;
+            --card-blue: #e3f2fd;
+            --card-light-blue: #bbdefb;
+            --button-text-color: #ffffff; /* Buton yazı rengi için yeni değişken */
+        }
+        
+        /* Temel Stil */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--acik-renk);
+            color: var(--yazi-renk);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30,50 Q50,30 70,50 T110,50" fill="none" stroke="%236a7ba2" stroke-width="1.2" opacity="0.15"/></svg>');
+            background-size: 150px;
+        }
+        
+        /* Ana İçerik */
+        .main-content {
+            flex: 1;
+            padding-bottom: 2rem;
+        }
+        
+        /* Header */
+        .main-header {
+            background: linear-gradient(135deg, var(--koyu-lacivert), var(--pastel-lacivert));
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-basis: auto;
+            margin-right: auto;
+        }
+
+        .header-center {
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-basis: auto;
+            margin-left: auto;
+        }
+        
+        .main-header h1 {
+            margin: 0;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.9);
+            margin: 0.3rem 0;
+        }
+        
+        /* Navigasyon */
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        /* Hakkımda butonu */
+        #about-btn {
+            background-color: var(--pastel-lacivert);
+            color: var(--button-text-color);
+            border: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            font-weight: 500;
+        }
+
+        #about-btn:hover {
+            background-color: var(--koyu-lacivert);
+            color: var(--beyaz);
+        }
+        
+        /* Arama Kutusu */
+        .search-box {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-box input {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px 0 0 20px;
+            outline: none;
+            width: 200px;
+        }
+        
+        .search-box button {
+            background-color: var(--beyaz);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0 20px 20px 0;
+            cursor: pointer;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(3px);
+        }
+        
+        .modal {
+            background: var(--beyaz);
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--acik-yazi);
+        }
+        
+        /* İletişim Formu */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .contact-form button {
+            background-color: var(--pastel-lacivert);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .contact-form button:hover {
+            background-color: var(--koyu-lacivert);
+        }
+        
+        /* Feedback */
+        .feedback-section {
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 600px;
+            padding: 1rem;
+            background: var(--beyaz);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .emoji-rating {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 1.8rem;
+            margin-top: 1rem;
+        }
+        
+        .emoji-rating span {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .emoji-rating span:hover {
+            transform: scale(1.3);
+        }
+        
+        /* Yazı Listesi */
+        .post-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .post-card {
+            background: var(--beyaz);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            overflow: hidden;
+            border-left: 4px solid var(--pastel-lacivert);
+        }
+        
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .post-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .post-preview {
+            padding: 1.5rem;
+        }
+        
+        .post-card h2 {
+            font-size: 1.2rem;
+            margin: 0 0 0.5rem 0;
+            color: var(--koyu-lacivert);
+        }
+        
+        .post-card time {
+            font-size: 0.8rem;
+            color: var(--acik-yazi);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .post-card .author {
+            font-size: 0.85rem;
+            color: var(--acik-yazi);
+            font-style: italic;
+        }
+        
+        /* Yazı Detay */
+        .post-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 1rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        .post-container {
+            background: var(--beyaz);
+            border-radius: 10px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+            animation: fadeInUp 0.4s;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .close-post {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--acik-yazi);
+        }
+        
+        .post-header {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .post-header h2 {
+            font-size: 1.8rem;
+            margin: 0 0 0.5rem 0;
+            color: var(--koyu-lacivert);
+        }
+        
+        .post-meta {
+            font-size: 0.9rem;
+            color: var(--acik-yazi);
+            margin-bottom: 1rem;
+        }
+        
+        .post-content {
+            line-height: 1.8;
+            padding-bottom: 2rem;
+        }
+        
+        .post-image-large {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+        
+        .post-actions {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .like-btn {
+            background: none;
+            border: 1px solid var(--pastel-lacivert);
+            color: var(--pastel-lacivert);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .like-btn:hover {
+            background: var(--pastel-lacivert);
+            color: white;
+        }
+
+        /* Sayfalama Stili */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+            gap: 0.5rem;
+        }
+
+        .pagination button {
+            background-color: var(--pastel-lacivert);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1rem;
+        }
+
+        .pagination button:hover:not(.active) {
+            background-color: var(--koyu-lacivert);
+        }
+
+        .pagination button.active {
+            background-color: var(--koyu-lacivert);
+            cursor: default;
+        }
+
+        .pagination span {
+            font-weight: bold;
+            color: var(--koyu-lacivert);
+        }
+        
+        /* Footer - SAYFANIN EN ALTINDA */
+        footer {
+            background-color: var(--koyu-lacivert);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: auto;
+            width: 100%;
+        }
+        
+        .footer-links {
+            margin-top: 1rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .header-left, .header-right, .header-center {
+                position: static;
+                transform: none;
+                width: 100%;
+                justify-content: center;
+                margin: 0;
+            }
+            
+            .search-box {
+                margin-top: 1rem;
+                width: 100%;
+            }
+            
+            .search-box input {
+                width: 100%;
+            }
+            
+            .post-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .pagination button {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
 <body>
-
-    <div class="main-content">
-
-        <header class="main-header">
-
-            <div class="header-content">
-
-                <div class="header-left">
-
-                    <a href="#" class="nav-link" id="home-link">Anasayfa</a>
-
-                    <a href="#" class="nav-link" id="contact-link">İletişim</a>
-
-                    <div class="search-box">
-
-                        <input type="text" placeholder="Şiir ara...">
-
-                        <button><i class="fas fa-search"></i></button>
-
-                    </div>
-
-                </div>
-
-                
-
-                <div class="header-center">
-
-                    <h1>Nette Yazar</h1>
-
-                    <p class="subtitle">Yokuş Hikayesi</p>
-
-                </div>
-
-                
-
-                <div class="header-right">
-
-                    <button class="nav-link" id="about-btn">Hakkımda</button>
-
-                </div>
-
-            </div>
-
-        </header>
-
-
-
-        <div class="modal-overlay" id="aboutModal">
-
-            <div class="modal">
-
-                <button class="close-modal">&times;</button>
-
-                <h3>Hakkımda</h3>
-
-                <p>Merhaba ben İrem... Yazmak bana şu hayatta en iyi gelen şey... Yazdıklarımı sizlerle paylaşıp, üzerine konuşmak eminim daha da zevkli olacaktır. Daha umutlu yarınlar için... Keyifli Okumalar!</p>
-
-            </div>
-
-        </div>
-
-
-
-        <div class="modal-overlay" id="contactModal">
-
-            <div class="modal">
-
-                <button class="close-modal">&times;</button>
-
-                <h3>İletişim</h3>
-
-                <form class="contact-form" id="contactForm">
-
-                    <input type="text" placeholder="Adınız" required>
-
-                    <input type="email" placeholder="E-posta Adresiniz" required>
-
-                    <textarea placeholder="Mesajınız" required></textarea>
-
-                    <button type="submit">Gönder</button>
-
-                </form>
-
-            </div>
-
-        </div>
-
-
-
-        <section class="feedback-section">
-
-            <p>Yazılarım hakkında ne düşünüyorsunuz?</p>
-
-            <div class="emoji-rating">
-
-                <span>😞</span>
-
-                <span>😐</span>
-
-                <span>😊</span>
-
-                <span>🤩</span>
-
-            </div>
-
-        </section>
-
-
-
-        <main class="post-grid" id="postGrid">
-
-            </main>
-
-
-
-        <div class="pagination" id="pagination">
-
-            <button id="prevPage">Önceki</button>
-
-            <div id="pageNumbers"></div>
-
-            <button id="nextPage">Sonraki</button>
-
-        </div>
-
-
-
-        <div class="post-overlay" id="postOverlay">
-
-            <div class="post-container">
-
-                <button class="close-post">&times;</button>
-
-                <div class="post-header">
-
-                    <h2 id="postTitle"></h2>
-
-                    <div class="post-meta">
-
-                        <time id="postDate"></time>
-
-                        <span id="postAuthor"></span>
-
-                    </div>
-
-                </div>
-
-                <img id="postImage" class="post-image-large" src="" alt="">
-
-                <div class="post-content" id="postContent"></div>
-
-                <div class="post-actions">
-
-                    <button class="like-btn"><i class="far fa-heart"></i> Beğen</button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    
-
-    <footer>
-
-        <div>© 2023 İrem BUĞA. Tüm hakları saklıdır.</div>
-
-        <div class="footer-links">
-
-            <a href="#">Gizlilik Politikası</a>
-
-            <a href="#">Kullanım Şartları</a>
-
-        </div>
-
-    </footer>
-
-
-
-    <script>
-
-        // Yazı verileri
-
-        const posts = [
-
-            {
-
-                id: 1,
-
-                title: "NEYLERSİN BENİM DELİ GÖNLÜM",
-
-                date: "4 Mayıs 2025",
-
-                author: "İrem BUĞA",
-
-                image: "https://i.pinimg.com/736x/7a/d4/32/7ad43256665283555aa0d894289726d9.jpg",
-
-                content: `Dinmedi mi denizindeki dalgalar,<br>
-
-                Bitmedi mi çölündeki fırtınalar?<br>
-
-                Durmadı mı gözündeki yaşlar,<br>
-
-                Batmadı mı ayağına yolundaki taşlar?<br><br>
-
-                Ah, şu benim deli gönlüm...<br>
-
-                Varsın dinmesin dalgalar,<br>
-
-                Varsın batmaya devam etsin taşlar,<br>
-
-                Varsın sürüklesin rüzgârlar hiç bilmediğin yerlere.<br><br>
-
-                <em>~İrem BUĞA</em>`
-
-            },
-
-            {
-
-                id: 2,
-
-                title: "KAYBOLUŞ",
-
-                date: "9 Mart 2025",
-
-                author: "İrem BUĞA",
-
-                image: "https://i.pinimg.com/736x/0e/76/0c/0e760c9aae26c21ae53ca3c17ebd780c.jpg",
-
-                content: `O güzel şiirler neden sustu?<br>
-
-                Hani kalemler ışık olurdu?<br>
-
-                Döner durur aynı çarklar,<br>
-
-                Yol kaybolur, iz unutulur.<br><br>
-
-                Bir rüzgâr eser, silinir ses,<br>
-
-                Bir yağmur yağar, kaybolur yaş gözden,<br>
-
-                Ve zaman derin bir sır olur,<br>
-
-                Akıp gider usul usul...<br><br>
-
-                <em>~İrem BUĞA</em>`
-
-            },
-
-            {
-
-                id: 3,
-
-                title: "İçimde Ilık Bir Hatıra",
-
-                date: "16 Şubat 2025",
-
-                author: "İrem BUĞA",
-
-                image: "https://i.pinimg.com/736x/5b/76/16/5b7616860a446c7eb0ed71760106ad6c.jpg",
-
-                content: `Güneş tepede ama soğuk ağır basıyor,<br>
-
-                ellerim ceplerimde, üşüyorum.<br>
-
-                Ara sokaklarda yankılanıyor ayak seslerim,<br>
-
-                inşaat gürültüsü var,<br>
-
-                kafamın içindeki sesi bastıran.<br><br>
-
-                Bir kafe buldum,<br>
-
-                kapısını araladım,<br>
-
-                içeride kaybolan sohbetler,<br>
-
-                tahta masalara sinmiş kahve kokusu.<br>
-
-                Çay bardağına yansıyan siluetimle göz göze geldim,<br>
-
-                "Merhaba," dedim içimden.<br><br>
-
-                Dışarıda ufak bir koşuşturma,<br>
-
-                zamana yetişmeye çalışan adımlar.<br>
-
-                Bense bir anın içine sığındım.<br>
-
-                Öylesine bir an mıydı?<br><br>
-
-                İçimde ılık bir hatıra,<br>
-
-                ellerimi ısıtan,<br>
-
-                yüzüme bir tebessüm bırakan.<br>
-
-                Koca şehirde, küçük bir an. &nbsp; &nbsp;<br>
-
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ~İrem`
-
-            },
-
-            {
-
-                id: 4,
-
-                title: "Nergis",
-
-                date: "27 Ocak 2025",
-
-                author: "İrem BUĞA",
-
-                image: "https://i.pinimg.com/736x/4b/ef/e0/4befe048177da0bb488aa55b9715127f.jpg",
-
-                content: `Bir çiçek gibi, içimde başlar,<br>
-
-                Bazen kırılgan, bazen yenilik.<br>
-
-                Zaman geçer, ben değişirim,<br>
-
-                Ama içimde büyür, bir nergis,<br>
-
-                Ve kışın içinde, bahar gibi açar.&nbsp; &nbsp;<br>
-
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ~İrem`
-
-            },
-
-            {
-
-                id: 5,
-
-                title: "Yolda Olmak",
-
-                date: "17 Ocak 2025",
-
-                author: "İrem BUĞA",
-
-                image: "https://i.pinimg.com/originals/57/82/d3/5782d3621ece352d9685110c5fa51616.png",
-
-                content: `Bir yol uzar önümde, serin ve berrak,<br>
-
-                Her adımında başka bir hikaye bırak.<br>
-
-                Bilinmezlik, evet, ama korku değil,<br>
-
-                Yüreğimde cesaret, aklımda bin fikir.<br><br>
-
-                Rüzgar yanaklarımı okşar, güneş omzumda,<br>
-
-                Hayatın melodisi yankılanır ruhumda.<br>
-
-                Küçük bir çocuk gibi, merakla bakarım,<br>
-
-                Her köşe bir sır, her taş bir hatıram.<br><br>
-
-                Büyüklerin oyunları, evet, gerçek,<br>
-
-                Ama yolun kendisi hep daha net.<br>
-
-                Mutlu son mu? Kim bilir, önemli mi?<br>
-
-                Yolda olmak yetmez mi zaten insana?<br><br>
-
-                Kalbimle seyrederim, gönlümle yürürüm,<br>
-
-                Düşlerime ses verip, kaybolmak isterim yolda,&nbsp;<br>
-
-                Her an bir fırsat, her nefes bir hediye,<br>
-
-                Yola devam etmek, bu ömrün şiiri diye.<br>
-
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br>
-
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ~İrem`
-
-            },
-
-            
-
-              
-
-            
-
-            {
-
-                id: 6,
-
-                title: "Fırtına",
-
-                date: "21 Aralık 2024",
-
-                author: "İrem BUĞA",
-
-                image: "https://i.pinimg.com/736x/b1/b4/05/b1b4052a1229e0f3398ba34eee154136.jpg",
-
-                content: `Dışarıda bir fırtına,<br>
-
-                Camda titreşen suretim bulanık,<br>
-
-                Yağmur damlalarında bir ezgi,<br>
-
-                Ruhumda yankılanan eski bir şarkı gibi.<br><br>
-
-                Elimdeki telaşı bıraktım, aniden<br>
-
-                Kağıt, kalemle buluştum.<br><br>
-
-                Etrafımda ayak sesleri,<br>
-
-                Her biri başka bir dünyanın sakini,<br>
-
-                Kimisinde neşe, kimisinde hüzün...<br>
-
-                Bense kelimelerden bir şehir kuruyorum.<br><br>
-
-                Fırtına dindi.<br>
-
-                Ama içimdeki esinti,<br>
-
-                Hiçbir zaman...<br>
-
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ~İrem`
-
-            },
-
-            
-
-            {
-
-                id: 8,
-
-                title: "Duyguların Dansı",
-
-                date: "25 Kasım 2024",
-
-                author: "İrem BUĞA",
-
-                image: "https://i.pinimg.com/736x/bb/a1/24/bba1247c46558da68d5156af33a2a1ad.jpg",
-
-                content: `&nbsp;Duygularımın derinliklerinde&nbsp; bir dans var...<br>
-
-                &nbsp;İçimdeki karmaşayı anlamlandırmak,<br>
-
-                &nbsp;Kendi ritmimde yol almak için<br><br>
-
-                Daha doğrusu...&nbsp;<br><br>
-
-                Yazarken kendi hikâyemi;<br>
-
-                Geçmişimle hesaplaşıyorum,&nbsp;<br>
-
-                Hayatın dalgalarında savrulurken kendi limanımı arıyorum,<br>
-
-                &nbsp;Kendi iç dünyamın derinliklerinde yolculuk ediyorum,<nbsp;
-
-                Duygularımın dansında kendimi bulmaya çalışıyor...<br><br>
-
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ~İrem`
-
-            },
-
-            {
-
-                id: 9,
-
-                title: "Bazı Anlar",
-
-                date: "5 Aralık 2024",
-
-                author: "İrem BUĞA",
-
-                image: "https://i.pinimg.com/736x/2b/00/13/2b0013cbebd4550f05d9d36f386e369c.jpg",
-
-                content: `Bazı anlar vardır, zamana dirençli,<br>
-
-                Ruhumun derinlerinde kök salmış gizemli,<br>
-
-                Kimi coşkuyla taşır beni sonsuz ufka,<br>
-
-                Kimi utançla eğer boynunu, sessiz hüzne...<br><br>
-
-                Ve bazıları vardır ki<br>
-
-                Hüznün ince tülüne sarılır,<br>
-
-                Göz kapaklarımda bir ağırlık bırakır...<br><br>
-
-                İyi ki var o anlar,<br>
-
-                Hayatın dokusunda işlenen sırlar,<br>
-
-                Beni ben yapan yaralar ve yarınlar...<br>
-
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br>
-
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ~İrem`
-
-            },
-
-            {
-
-                id: 10,
-
-                title: "Shakespeare Müzikali",
-
-                date: "17 Kasım 2024",
-
-                author: "İrem BUĞA",
-
-                image: "https://i.pinimg.com/736x/fa/17/23/fa17234b7f14cdde0c0f824d01bcab54.jpg",
-
-                content: `Bilinç hepimizi korkak ediyor,<br><br>
-
-                Bir "olmak ya da olmamak" sorusu değil bu,<br><br>
-
-                Yaşamak, her gün aynı perdede,<br><br>
-
-                Sonu belli bir oyunmuş gibi.<br><br>
-
-                Sahnede maskelerimizi parlatıyoruz,<br><br>
-
-                Bir gülüş, bir alkış, bir anlık teselli,<br><br>
-
-                Ama içimizde suskun bir çocuk,<br><br>
-
-                Ellerinde kırık bir tahta kılıç.<br><br>
-
-                Dünya bir tirat gibi yankılanıyor,<br><br>
-
-                Kimi "daha fazla!" diyor, kimi susuyor.<br><br>
-
-                Ve gün, her akşam aynı perdeyle kapanıyor,<br><br>
-
-                Aynı sözler, başka yüzler.<br><br>
-
-                Gözlerimizi kısarak baktığımız yıldızlar,<br><br>
-
-                Hâlâ parlamıyor mu?<br><br>
-
-                Hadi, biri alkışlasın,<br><br>
-
-                Kaldırın perdeyi yeniden,<br><br>
-
-                Şu hayat dediğiniz müzikalde,<br><br>
-
-                Biraz umutla, yeniden başlayalım.<br><br>
-
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ~İrem`
-
-            },
-
-            {
-
-                id: 11,
-
-                title: "Öyleyse",
-
-                date: "27 Ekim 2024",
-
-                author: "İrem BUĞA",
-
-                image: "https://i.pinimg.com/736x/63/b3/66/63b366dce5c4d2af312561ad40ea71c8.jpg",
-
-                content: `&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
-
-                Sükût eden gönüller âh eder mi hâlâ?<br><br>
-
-                Yahut geçtiğin ardından doğar mı lütf-i yâr?<br><br>
-
-                Fikr-i ziyan olmuş bu âlemde,<br><br>
-
-                Sevda bir remz-i giz, bir âlem-i serâb.<br><br>
-
-                Öyleyse veda edelim mi, âvâre dertlere,<br><br>
-
-                Öyleyse yakalım mı bu sessiz geceleri?<br><br>
-
-                Yoksa bir sabah, belki bir rüyâda,<br><br>
-
-                Hasretin peşinde kaybolmuş gözlerde?<br><br>
-
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ~ İrem`
-
-            },
-
-            {
-
-                id: 12,
-
-                title: "Bir Tebessümlük Vakit",
-
-                date: "20 Ekim 2024",
-
-                author: "İrem BUĞA",
-
-                image: "https://i.pinimg.com/736x/29/38/eb/2938eb70e30651b0e667189bb83190fd.jpg",
-
-                content: `Bir tebessümlük vakit,<br><br>
-
-                Etrafta fısıldanan nağmeler,<br><br>
-
-                Başka bir şehirdeyim,<br><br>
-
-                Keşifteyim sürekli,<nbsp;
-
-                Sorarak buluyorum sokakları.<br><br>
-
-                Her adımda yeni bir hikaye oluşuyor zihnimde.<br><br>
-
-                Rafine zevkler ediniyorum,<br><br>
-
-                Sorumluluklar yüklüyorum omuzlarıma,<br><br>
-
-                Artık biraz daha olgunlaştığımı hissediyorum.<br><br>
-
-                Farklı duyguları tadıyorum,<br><br>
-
-                O nadide duyguları...<br><br>
-
-                Aslında bir tebessümle başlıyor her şey,<br><br>
-
-                Hayatın getirdiği tüm renklerde,<br><br>
-
-                Bir gülüş, yeni bir başlangıç,<br><br>
-
-                Yenilenmiş umutlarla dolup taşıyorum...<br><br>
-
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ~ İrem`
-
-            },
-
-            {
-
-                id: 13,
-
-                title: "Kimiz Biz ?",
-
-                date: "17 Ekim 2024",
-
-                author: "İrem BUĞA",
-
-                image: "https://i.pinimg.com/736x/d6/06/7c/d6067c21d4675956c56ec3942767a2e2.jpg",
-
-                content: `Kimiz biz?<br>
-
-                Birer gölgeden mi ibaretiz?<br>
-
-                Geriye dönüp baktığımızda,<br>
-
-                Görmediğimiz o gölgeden...<br><br>
-
-                Yansımamız mı kimliğimiz,<br>
-
-                Toplumun gözlerinde ?<br>
-
-                Bir yansıma, bir maske,<br>
-
-                Bir yüz, bir ses...<br><br>
-
-                Ne zaman bulacağız kimliğimizi ?<br>
-
-                Ya da ne zaman kaybedeceğiz?<br>
-
-                Yoksa bulduk mu?<br>
-
-                Eğer bulduysak, neden sorgularız kendimizi?<br><br>
-
-                Belki de...<br>
-
-                Kimlik, hep bir yolculuktur,<br>
-
-                Bulmak ya da kaybetmek değil,<br>
-
-                Bir dönüşümdür kimlik...<br>
-
-                Tam bulduk derken aslında tekrar kaybettiğimiz andır kimlik...&nbsp;<br>
-
-                &nbsp; &nbsp; &nbsp; &nbsp;<br>
-
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ~ İrem
+    <div class="main-content">
+        <header class="main-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <a href="#" class="nav-link" id="home-link">Anasayfa</a>
+                    <a href="#" class="nav-link" id="contact-link">İletişim</a>
+                    <div class="search-box">
+                        <input type="text" placeholder="Şiir ara...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                
+                <div class="header-center">
+                    <h1>Nette Yazar</h1>
+                    <p class="subtitle">Yokuş Hikayesi</p>
+                </div>
+                
+                <div class="header-right">
+                    <button class="nav-link" id="about-btn">Hakkımda</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="modal-overlay" id="aboutModal">
+            <div class="modal">
+                <button class="close-modal">&times;</button>
+                <h3>Hakkımda</h3>
+                <p>Merhaba ben İrem... Yazmak bana şu hayatta en iyi gelen şey... Yazdıklarımı sizlerle paylaşıp, üzerine konuşmak eminim daha da zevkli olacaktır. Daha umutlu yarınlar için... Keyifli Okumalar!</p>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="contactModal">
+            <div class="modal">
+                <button class="close-modal">&times;</button>
+                <h3>İletişim</h3>
+                <form class="contact-form" id="contactForm">
+                    <input type="text" placeholder="Adınız" required>
+                    <input type="email" placeholder="E-posta Adresiniz" required>
+                    <textarea placeholder="Mesajınız" required></textarea>
+                    <button type="submit">Gönder</button>
+                </form>
+            </div>
+        </div>
+
+        <section class="feedback-section">
+            <p>Yazılarım hakkında ne düşünüyorsunuz?</p>
+            <div class="emoji-rating">
+                <span>😞</span>
+                <span>😐</span>
+                <span>😊</span>
+                <span>🤩</span>
+            </div>
+        </section>
+
+        <main class="post-grid" id="postGrid">
+            <!-- Posts will be dynamically inserted here -->
+        </main>
+
+        <div class="pagination" id="pagination">
+            <button id="prevPage">Önceki</button>
+            <div id="pageNumbers"></div>
+            <button id="nextPage">Sonraki</button>
+        </div>
+
+        <div class="post-overlay" id="postOverlay">
+            <div class="post-container">
+                <button class="close-post">&times;</button>
+                <div class="post-header">
+                    <h2 id="postTitle"></h2>
+                    <div class="post-meta">
+                        <time id="postDate"></time>
+                        <span id="postAuthor"></span>
+                    </div>
+                </div>
+                <img id="postImage" class="post-image-large" src="" alt="">
+                <div class="post-content" id="postContent"></div>
+                <div class="post-actions">
+                    <button class="like-btn"><i class="far fa-heart"></i> Beğen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div>© 2023 İrem BUĞA. Tüm hakları saklıdır.</div>
+        <div class="footer-links">
+            <a href="#">Gizlilik Politikası</a>
+            <a href="#">Kullanım Şartları</a>
+        </div>
+    </footer>
+
+    <script>
+        // Yazı verileri
+        const posts = [
+            {
+                id: 1,
+                title: "NEYLERSİN BENİM DELİ GÖNLÜM",
+                date: "4 Mayıs 2025",
+                author: "İrem BUĞA",
+                image: "https://i.pinimg.com/736x/7a/d4/32/7ad43256665283555aa0d894289726d9.jpg",
+                content: `Dinmedi mi denizindeki dalgalar,<br>
+                Bitmedi mi çölündeki fırtınalar?<br>
+                Durmadı mı gözündeki yaşlar,<br>
+                Batmadı mı ayağına yolundaki taşlar?<br><br>
+                Ah, şu benim deli gönlüm...<br>
+                Varsın dinmesin dalgalar,<br>
+                Varsın batmaya devam etsin taşlar,<br>
+                Varsın sürüklesin rüzgârlar hiç bilmediğin yerlere.<br><br>
+                <em>~İrem BUĞA</em>`
+            },
+            {
+                id: 2,
+                title: "KAYBOLUŞ",
+                date: "9 Mart 2025",
+                author: "İrem BUĞA",
+                image: "https://i.pinimg.com/736x/0e/76/0c/0e760c9aae26c21ae53ca3c17ebd780c.jpg",
+                content: `O güzel şiirler neden sustu?<br>
+                Hani kalemler ışık olurdu?<br>
+                Döner durur aynı çarklar,<br>
+                Yol kaybolur, iz unutulur.<br><br>
+                Bir rüzgâr eser, silinir ses,<br>
+                Bir yağmur yağar, kaybolur yaş gözden,<br>
+                Ve zaman derin bir sır olur,<br>
+                Akıp gider usul usul...<br><br>
+                <em>~İrem BUĞA</em>`
+            },
+            {
+                id: 3,
+                title: "İçimde Ilık Bir Hatıra",
+                date: "16 Şubat 2025",
+                author: "İrem BUĞA",
+                image: "https://i.pinimg.com/736x/5b/76/16/5b7616860a446c7eb0ed71760106ad6c.jpg",
+                content: `Güneş tepede ama soğuk ağır basıyor,<br>
+                ellerim ceplerimde, üşüyorum.<br>
+                Ara sokaklarda yankılanıyor ayak seslerim,<br>
+                inşaat gürültüsü var,<br>
+                kafamın içindeki sesi bastıran.<br><br>
+                Bir kafe buldum,<br>
+                kapısını araladım,<br>
+                içeride kaybolan sohbetler,<br>
+                tahta masalara sinmiş kahve kokusu.<br>
+                Çay bardağına yansıyan siluetimle göz göze geldim,<br>
+                "Merhaba," dedim içimden.<br><br>
+                Dışarıda ufak bir koşuşturma,<br>
+                zamana yetişmeye çalışan adımlar.<br>
+                Bense bir anın içine sığındım.<br>
+                Öylesine bir an mıydı?<br><br>
+                İçimde ılık bir hatıra,<br>
+                ellerimi ısıtan,<br>
+                yüzüme bir tebessüm bırakan.<br>
+                Koca şehirde, küçük bir an.`
+            },
+            {
+                id: 4,
+                title: "Nergis",
+                date: "27 Ocak 2025",
+                author: "İrem BUĞA",
+                image: "https://i.pinimg.com/736x/4b/ef/e0/4befe048177da0bb488aa55b9715127f.jpg",
+                content: `Bir çiçek gibi, içimde başlar,<br>
+                Bazen kırılgan, bazen yenilik.<br>
+                Zaman geçer, ben değişirim,<br>
+                Ama içimde büyür, bir nergis,<br>
+                Ve kışın içinde, bahar gibi açar.`
+            },
+            {
+                id: 5,
+                title: "Yolda Olmak",
+                date: "17 Ocak 2025",
+                author: "İrem BUĞA",
+                image: "https://i.pinimg.com/originals/57/82/d3/5782d3621ece352d9685110c5fa51616.png",
+                content: `Bir yol uzar önümde, serin ve berrak,<br>
+                Her adımında başka bir hikaye bırak.<br>
+                Bilinmezlik, evet, ama korku değil,<br>
+                Yüreğimde cesaret, aklımda bin fikir.<br><br>
+                Rüzgar yanaklarımı okşar, güneş omzumda,<br>
+                Hayatın melodisi yankılanır ruhumda.<br>
+                Küçük bir çocuk gibi, merakla bakarım,<br>
+                Her köşe bir sır, her taş bir hatıram.<br><br>
+                Büyüklerin oyunları, evet, gerçek,<br>
+                Ama yolun kendisi hep daha net.<br>
+                Mutlu son mu? Kim bilir, önemli mi?<br>
+                Yolda olmak yetmez mi zaten insana?<br><br>
+                Kalbimle seyrederim, gönlümle yürürüm,<br>
+                Düşlerime ses verip, kaybolmak isterim yolda,<br>
+                Her an bir fırsat, her nefes bir hediye,<br>
+                Yola devam etmek, bu ömrün şiiri diye.`
+            },
+            {
+                id: 6,
+                title: "Fırtına",
+                date: "21 Aralık 2024",
+                author: "İrem BUĞA",
+                image: "https://i.pinimg.com/736x/b1/b4/05/b1b4052a1229e0f3398ba34eee154136.jpg",
+                content: `Dışarıda bir fırtına,<br>
+                Camda titreşen suretim bulanık,<br>
+                Yağmur damlalarında bir ezgi,<br>
+                Ruhumda yankılanan eski bir şarkı gibi.<br><br>
+                Elimdeki telaşı bıraktım, aniden<br>
+                Kağıt, kalemle buluştum.<br><br>
+                Etrafımda ayak sesleri,<br>
+                Her biri başka bir dünyanın sakini,<br>
+                Kimisinde neşe, kimisinde hüzün...<br>
+                Bense kelimelerden bir şehir kuruyorum.<br><br>
+                Fırtına dindi.<br>
+                Ama içimdeki esinti,<br>
+                Hiçbir zaman...`
+            },
+            {
+                id: 8,
+                title: "Duyguların Dansı",
+                date: "25 Kasım 2024",
+                author: "İrem BUĞA",
+                image: "https://i.pinimg.com/736x/bb/a1/24/bba1247c46558da68d5156af33a2a1ad.jpg",
+                content: `Duygularımın derinliklerinde bir dans var...<br>
+                İçimdeki karmaşayı anlamlandırmak,<br>
+                Kendi ritmimde yol almak için<br><br>
+                Daha doğrusu...<br><br>
+                Yazarken kendi hikâyemi;<br>
+                Geçmişimle hesaplaşıyorum,<br>
+                Hayatın dalgalarında savrulurken kendi limanımı arıyorum,<br>
+                Kendi iç dünyamın derinliklerinde yolculuk ediyorum,<br>
+                Duygularımın dansında kendimi bulmaya çalışıyor...`
+            },
+            {
+                id: 9,
+                title: "Bazı Anlar",
+                date: "5 Aralık 2024",
+                author: "İrem BUĞA",
+                image: "https://i.pinimg.com/736x/2b/00/13/2b0013cbebd4550f05d9d36f386e369c.jpg",
+                content: `Bazı anlar vardır, zamana dirençli,<br>
+                Ruhumun derinliklerinde kök salmış gizemli,<br>
+                Kimi coşkuyla taşır beni sonsuz ufka,<br>
+                Kimi utançla eğer boynunu, sessiz hüzne...<br><br>
+                Ve bazıları vardır ki<br>
+                Hüznün ince tülüne sarılır,<br>
+                Göz kapaklarımda bir ağırlık bırakır...<br><br>
+                İyi ki var o anlar,<br>
+                Hayatın dokusunda işlenen sırlar,<br>
+                Beni ben yapan yaralar ve yarınlar...`
+            },
+            {
+                id: 10,
+                title: "Shakespeare Müzikali",
+                date: "17 Kasım 2024",
+                author: "İrem BUĞA",
+                image: "https://i.pinimg.com/736x/fa/17/23/fa17234b7f14cdde0c0f824d01bcab54.jpg",
+                content: `Bilinç hepimizi korkak ediyor,<br><br>
+                Bir "olmak ya da olmamak" sorusu değil bu,<br><br>
+                Yaşamak, her gün aynı perdede,<br><br>
+                Sonu belli bir oyunmuş gibi.<br><br>
+                Sahnede maskelerimizi parlatıyoruz,<br><br>
+                Bir gülüş, bir alkış, bir anlık teselli,<br><br>
+                Ama içimizde suskun bir çocuk,<br><br>
+                Ellerinde kırık bir tahta kılıç.<br><br>
+                Dünya bir tirat gibi yankılanıyor,<br><br>
+                Kimi "daha fazla!" diyor, kimi susuyor.<br><br>
+                Ve gün, her akşam aynı perdeyle kapanıyor,<br><br>
+                Aynı sözler, başka yüzler.<br><br>
+                Gözlerimizi kısarak baktığımız yıldızlar,<br><br>
+                Hâlâ parlamıyor mu?<br><br>
+                Hadi, biri alkışlasın,<br><br>
+                Kaldırın perdeyi yeniden,<br><br>
+                Şu hayat dediğiniz müzikalde,<br><br>
+                Biraz umutla, yeniden başlayalım.`
+            },
+            {
+                id: 11,
+                title: "Öyleyse",
+                date: "27 Ekim 2024",
+                author: "İrem BUĞA",
+                image: "https://i.pinimg.com/736x/63/b3/66/63b366dce5c4d2af312561ad40ea71c8.jpg",
+                content: `Sükût eden gönüller âh eder mi hâlâ?<br><br>
+                Yahut geçtiğin ardından doğar mı lütf-i yâr?<br><br>
+                Fikr-i ziyan olmuş bu âlemde,<br><br>
+                Sevda bir remz-i giz, bir âlem-i serâb.<br><br>
+                Öyleyse veda edelim mi, âvâre dertlere,<br><br>
+                Öyleyse yakalım mı bu sessiz geceleri?<br><br>
+                Yoksa bir sabah, belki bir rüyâda,<br><br>
+                Hasretin peşinde kaybolmuş gözlerde?`
+            },
+            {
+                id: 12,
+                title: "Bir Tebessümlük Vakit",
+                date: "20 Ekim 2024",
+                author: "İrem BUĞA",
+                image: "https://i.pinimg.com/736x/29/38/eb/2938eb70e30651b0e667189bb83190fd.jpg",
+                content: `Bir tebessümlük vakit,<br><br>
+                Etrafta fısıldanan nağmeler,<br><br>
+                Başka bir şehirdeyim,<br><br>
+                Keşifteyim sürekli,<br>
+                Sorarak buluyorum sokakları.<br><br>
+                Her adımda yeni bir hikaye oluşuyor zihnimde.<br><br>
+                Rafine zevkler ediniyorum,<br><br>
+                Sorumluluklar yüklüyorum omuzlarıma,<br><br>
+                Artık biraz daha olgunlaştığımı hissediyorum.<br><br>
+                Farklı duyguları tadıyorum,<br><br>
+                O nadide duyguları...<br><br>
+                Aslında bir tebessümle başlıyor her şey,<br><br>
+                Hayatın getirdiği tüm renklerde,<br><br>
+                Bir gülüş, yeni bir başlangıç,<br><br>
+                Yenilenmiş umutlarla dolup taşıyorum...`
+            },
+            {
+                id: 13,
+                title: "Kimiz Biz ?",
+                date: "17 Ekim 2024",
+                author: "İrem BUĞA",
+                image: "https://i.pinimg.com/736x/d6/06/7c/d6067c21d4675956c56ec3942767a2e2.jpg",
+                content: `Kimiz biz?<br>
+                Birer gölgeden mi ibaretiz?<br>
+                Geriye dönüp baktığımızda,<br>
+                Görmediğimiz o gölgeden...<br><br>
+                Yansımamız mı kimliğimiz,<br>
+                Toplumun gözlerinde ?<br>
+                Bir yansıma, bir maske,<br>
+                Bir yüz, bir ses...<br><br>
+                Ne zaman bulacağız kimliğimizi ?<br>
+                Ya da ne zaman kaybedeceğiz?<br>
+                Yoksa bulduk mu?<br>
+                Eğer bulduysak, neden sorgularız kendimizi?<br><br>
+                Belki de...<br>
+                Kimlik, hep bir yolculuktur,<br>
+                Bulmak ya da kaybetmek değil,<br>
+                Bir dönüşümdür kimlik...<br>
+                Tam bulduk derken aslında tekrar kaybettiğimiz andır kimlik...`
+            }
+        ];
+
+        // Pagination variables
+        const postsPerPage = 6;
+        let currentPage = 1;
+
+        // Display posts
+        function displayPosts(page) {
+            const postGrid = document.getElementById('postGrid');
+            postGrid.innerHTML = '';
+
+            const startIndex = (page - 1) * postsPerPage;
+            const endIndex = startIndex + postsPerPage;
+            const paginatedPosts = posts.slice(startIndex, endIndex);
+
+            paginatedPosts.forEach(post => {
+                const postCard = document.createElement('div');
+                postCard.className = 'post-card';
+                postCard.innerHTML = `
+                    <img src="${post.image}" alt="${post.title}" class="post-image">
+                    <div class="post-preview">
+                        <h2>${post.title}</h2>
+                        <time>${post.date}</time>
+                        <div class="author">${post.author}</div>
+                    </div>
+                `;
+                postCard.addEventListener('click', () => openPostModal(post));
+                postGrid.appendChild(postCard);
+            });
+
+            updatePagination();
+        }
+
+        // Open post modal
+        function openPostModal(post) {
+            document.getElementById('postTitle').textContent = post.title;
+            document
