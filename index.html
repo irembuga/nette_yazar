@@ -15,7 +15,7 @@
             --acik-yazi: #777777;
             --card-blue: #e3f2fd;
             --card-light-blue: #bbdefb;
-            --button-text-color: #ffffff; /* Buton yazı rengi için yeni değişken */
+            --button-text-color: #ffffff;
         }
         
         /* Temel Stil */
@@ -33,7 +33,6 @@
             background-size: 150px;
         }
         
-        /* Ana İçerik */
         .main-content {
             flex: 1;
             padding-bottom: 2rem;
@@ -426,7 +425,7 @@
             color: var(--koyu-lacivert);
         }
         
-        /* Footer - SAYFANIN EN ALTINDA */
+        /* Footer */
         footer {
             background-color: var(--koyu-lacivert);
             color: white;
@@ -848,4 +847,5 @@
         // Open post modal
         function openPostModal(post) {
             document.getElementById('postTitle').textContent = post.title;
+            document.getElementById('postDate').textContent = post.date;
             document
