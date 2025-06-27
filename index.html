@@ -495,8 +495,7 @@
             </div>
         </section>
         <main class="post-grid" id="postGrid">
-            <!-- Posts will be dynamically inserted here -->
-        </main>
+            </main>
         <div class="pagination" id="pagination">
             <button id="prevPage">Önceki</button>
             <div id="pageNumbers"></div>
@@ -787,6 +786,13 @@
                 document.getElementById('contactModal').style.display = 'none';
             });
         });
+
+        // Post detay modalı kapatma düğmesi düzeltildi
+        document.querySelectorAll('.close-post').forEach(button => {
+            button.addEventListener('click', () => {
+                closePostModal();
+            });
+        });
         
         document.getElementById('prevPage').addEventListener('click', () => {
             if (currentPage > 1) {
@@ -875,8 +881,6 @@
         
         // Initial display
         displayPosts(currentPage);
-        
-        document.getElementById('close-post').addEventListener('click', closePostModal);
     </script>
 </body>
 </html>
