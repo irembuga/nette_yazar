@@ -2,36 +2,140 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nette Yazar | Şiir Dünyası</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --pastel-lacivert: #6a7ba2;
+      --koyu-lacivert: #3c4f6e;
+      --acik-renk: #f8f9fa;
+      --beyaz: #ffffff;
+      --yazi-renk: #333333;
+      --acik-yazi: #777777;
+      --card-blue: #e3f2fd;
+      --card-light-blue: #bbdefb;
+      --button-text-color: #ffffff;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--acik-renk);
+      color: var(--yazi-renk);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .main-header {
+      background: linear-gradient(135deg, var(--koyu-lacivert), var(--pastel-lacivert));
+      padding: 1.5rem;
+      text-align: center;
+      color: white;
+    }
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      margin-right: 1rem;
+    }
+    .search-box input {
+      padding: 0.5rem;
+      border-radius: 20px;
+      border: none;
+    }
+    .feedback-section {
+      text-align: center;
+      margin: 2rem;
+    }
+    .post-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+    .post-card {
+      background: var(--beyaz);
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+    }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+    .pagination button {
+      padding: 0.5rem 1rem;
+      margin: 0 0.25rem;
+      background-color: var(--pastel-lacivert);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    footer {
+      background-color: var(--koyu-lacivert);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: auto;
+    }
+  </style>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <header class="main-header"> <!-- Header kodu buraya --> </header>
+  <div class="main-content">
+    <header class="main-header">
+      <div class="header-content">
+        <div>
+          <a href="#" class="nav-link">Anasayfa</a>
+          <a href="#" class="nav-link">İletişim</a>
+        </div>
+        <div>
+          <input type="text" class="search-box" placeholder="Şiir ara...">
+        </div>
+      </div>
+      <h1>Nette Yazar</h1>
+      <p>Yokuş Hikayesi</p>
+    </header>
 
-  <section class="feedback-section"> <!-- Feedback kodu buraya --> </section>
+    <section class="feedback-section">
+      <p>Yazılarım hakkında ne düşünüyorsunuz?</p>
+      <div>
+        <span>😞</span>
+        <span>😐</span>
+        <span>😊</span>
+        <span>🤩</span>
+      </div>
+    </section>
 
-  <main class="post-grid" id="postGrid"></main>
+    <main class="post-grid">
+      <div class="post-card">
+        <h2>Şiir Başlığı</h2>
+        <p>Buraya şiir özeti gelir...</p>
+      </div>
+    </main>
 
-  <div class="pagination" id="pagination">
-    <button id="prevPage">Önceki</button>
-    <div id="pageNumbers"></div>
-    <button id="nextPage">Sonraki</button>
+    <div class="pagination">
+      <button>Önceki</button>
+      <button>1</button>
+      <button>2</button>
+      <button>Sonraki</button>
+    </div>
   </div>
 
-  <!-- Hakkımda modal -->
-  <div class="modal-overlay" id="aboutModal"> <!-- Hakkımda modal kodu buraya --> </div>
-
-  <!-- İletişim modal -->
-  <div class="modal-overlay" id="contactModal"> <!-- İletişim modal kodu buraya --> </div>
-
-  <!-- Post detay modal -->
-  <div class="post-overlay" id="postOverlay"> <!-- Post detay modal kodu buraya --> </div>
-
-  <footer> <!-- Footer kodu buraya --> </footer>
-
-  <script src="script.js"></script>
+  <footer>
+    <p>© 2023 İrem BUĞA. Tüm hakları saklıdır.</p>
+    <p><a href="#" style="color: white;">Gizlilik Politikasi</a> | <a href="#" style="color: white;">Kullanım Şartları</a></p>
+  </footer>
 </body>
 </html>
