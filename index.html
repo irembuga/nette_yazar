@@ -5,43 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nette Yazar | Şiir Dünyası</title>
     <style>
-        /* Renk Paleti */
+        /* Yeni Renk Paleti */
         :root {
-            --pastel-lacivert: #6a7ba2;
-            --koyu-lacivert: #3c4f6e;
-            --acik-renk: #f8f9fa;
-            --beyaz: #ffffff;
-            --yazi-renk: #333333;
-            --acik-yazi: #777777;
-            --card-blue: #e3f2fd;
-            --card-light-blue: #bbdefb;
-            --button-text-color: #ffffff; /* Buton yazı rengi için yeni değişken */
+            --ana-koyu: #708090; /* SlateGray */
+            --ana-orta: #778899; /* LightSlateGray */
+            --ana-acik: #c0c0c0; /* Silver */
+            --arkaplan-beyaz: #FFFAFA; /* Snow */
+            --yazi-koyu: #696969; /* DimGray */
+            --yazi-orta: #808080; /* Gray */
+            --card-border: #778899; /* LightSlateGray */
         }
         
         /* Temel Stil */
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: var(--acik-renk);
-            color: var(--yazi-renk);
+            background-color: var(--arkaplan-beyaz);
+            color: var(--yazi-koyu);
             margin: 0;
             padding: 0;
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30,50 Q50,30 70,50 T110,50" fill="none" stroke="%236a7ba2" stroke-width="1.2" opacity="0.15"/></svg>');
-            background-size: 150px;
+            background-image: url('istockphoto-889008112-1024x1024.jpg'); /* Yeni arka plan görseli */
+            background-size: cover; /* Arka planı kapla */
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Arka planın kaymasını engelle */
+            background-position: center center;
         }
         
         /* Ana İçerik */
         .main-content {
             flex: 1;
             padding-bottom: 2rem;
+            background-color: rgba(255, 250, 250, 0.85); /* Arka plan görselinin üzerinde hafif şeffaf katman */
         }
         
         /* Header */
         .main-header {
-            background: linear-gradient(135deg, var(--koyu-lacivert), var(--pastel-lacivert));
+            background: linear-gradient(135deg, var(--ana-koyu), var(--ana-orta));
             padding: 1.5rem;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -67,7 +69,8 @@
         .header-center {
             text-align: center;
             position: absolute;
-            left: 50%;
+            /* Hafifçe sola kaydırma */
+            left: 45%; 
             transform: translateX(-50%);
             white-space: nowrap;
         }
@@ -83,7 +86,7 @@
         .main-header h1 {
             margin: 0;
             font-size: 2rem;
-            color: white;
+            color: var(--arkaplan-beyaz); /* Başlık rengi */
         }
         
         .subtitle {
@@ -94,7 +97,7 @@
         
         /* Navigasyon */
         .nav-link {
-            color: white;
+            color: var(--arkaplan-beyaz);
             text-decoration: none;
             font-weight: 500;
             padding: 0.5rem 1rem;
@@ -107,8 +110,8 @@
         }
         /* Hakkımda butonu */
         #about-btn {
-            background-color: var(--pastel-lacivert);
-            color: var(--button-text-color);
+            background-color: var(--ana-orta);
+            color: var(--arkaplan-beyaz);
             border: none;
             padding: 0.75rem 1.25rem;
             border-radius: 20px;
@@ -117,8 +120,8 @@
             font-weight: 500;
         }
         #about-btn:hover {
-            background-color: var(--koyu-lacivert);
-            color: var(--beyaz);
+            background-color: var(--ana-koyu);
+            color: var(--arkaplan-beyaz);
         }
         
         /* Arama Kutusu */
@@ -133,14 +136,16 @@
             border-radius: 20px 0 0 20px;
             outline: none;
             width: 200px;
+            color: var(--yazi-koyu);
         }
         
         .search-box button {
-            background-color: var(--beyaz);
+            background-color: var(--arkaplan-beyaz);
             border: none;
             padding: 0.5rem 1rem;
             border-radius: 0 20px 20px 0;
             cursor: pointer;
+            color: var(--yazi-koyu);
         }
         
         /* Modal */
@@ -159,16 +164,17 @@
         }
         
         .modal {
-            background: var(--beyaz);
+            background: var(--arkaplan-beyaz);
             padding: 2rem;
             border-radius: 10px;
             max-width: 500px;
             width: 90%;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             position: relative;
+            color: var(--yazi-koyu);
         }
         
-        .close-modal {
+        .close-modal, .close-post { /* Her ikisi için aynı stil */
             position: absolute;
             top: 1rem;
             right: 1rem;
@@ -176,7 +182,7 @@
             background: none;
             border: none;
             cursor: pointer;
-            color: var(--acik-yazi);
+            color: var(--yazi-orta);
         }
         
         /* İletişim Formu */
@@ -189,9 +195,11 @@
         .contact-form input,
         .contact-form textarea {
             padding: 0.8rem;
-            border: 1px solid #ddd;
+            border: 1px solid var(--ana-acik);
             border-radius: 4px;
             font-family: 'Roboto', sans-serif;
+            color: var(--yazi-koyu);
+            background-color: var(--arkaplan-beyaz);
         }
         
         .contact-form textarea {
@@ -200,8 +208,8 @@
         }
         
         .contact-form button {
-            background-color: var(--pastel-lacivert);
-            color: white;
+            background-color: var(--ana-orta);
+            color: var(--arkaplan-beyaz);
             border: none;
             padding: 0.8rem;
             border-radius: 4px;
@@ -210,7 +218,7 @@
         }
         
         .contact-form button:hover {
-            background-color: var(--koyu-lacivert);
+            background-color: var(--ana-koyu);
         }
         
         /* Feedback */
@@ -219,9 +227,10 @@
             margin: 2rem auto;
             max-width: 600px;
             padding: 1rem;
-            background: var(--beyaz);
+            background: var(--arkaplan-beyaz);
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            color: var(--yazi-koyu);
         }
         
         .emoji-rating {
@@ -252,13 +261,13 @@
         }
         
         .post-card {
-            background: var(--beyaz);
+            background: var(--arkaplan-beyaz);
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: all 0.3s;
             cursor: pointer;
             overflow: hidden;
-            border-left: 4px solid var(--pastel-lacivert);
+            border-left: 4px solid var(--card-border);
         }
         
         .post-card:hover {
@@ -279,19 +288,19 @@
         .post-card h2 {
             font-size: 1.2rem;
             margin: 0 0 0.5rem 0;
-            color: var(--koyu-lacivert);
+            color: var(--ana-koyu);
         }
         
         .post-card time {
             font-size: 0.8rem;
-            color: var(--acik-yazi);
+            color: var(--yazi-orta);
             display: block;
             margin-bottom: 0.5rem;
         }
         
         .post-card .author {
             font-size: 0.85rem;
-            color: var(--acik-yazi);
+            color: var(--yazi-orta);
             font-style: italic;
         }
         
@@ -312,7 +321,7 @@
         }
         
         .post-container {
-            background: var(--beyaz);
+            background: var(--arkaplan-beyaz);
             border-radius: 10px;
             max-width: 800px;
             width: 100%;
@@ -321,6 +330,7 @@
             padding: 2rem;
             position: relative;
             animation: fadeInUp 0.4s;
+            color: var(--yazi-koyu);
         }
         
         @keyframes fadeInUp {
@@ -342,8 +352,8 @@
         
         .like-btn {
             background: none;
-            border: 1px solid var(--pastel-lacivert);
-            color: var(--pastel-lacivert);
+            border: 1px solid var(--ana-orta);
+            color: var(--ana-orta);
             padding: 0.5rem 1.5rem;
             border-radius: 20px;
             cursor: pointer;
@@ -352,8 +362,8 @@
         }
         
         .like-btn:hover {
-            background: var(--pastel-lacivert);
-            color: white;
+            background: var(--ana-orta);
+            color: var(--arkaplan-beyaz);
         }
         /* Sayfalama Stili */
         .pagination {
@@ -364,8 +374,8 @@
             gap: 0.5rem;
         }
         .pagination button {
-            background-color: var(--pastel-lacivert);
-            color: white;
+            background-color: var(--ana-orta);
+            color: var(--arkaplan-beyaz);
             border: none;
             padding: 0.75rem 1.25rem;
             border-radius: 5px;
@@ -374,21 +384,21 @@
             font-size: 1rem;
         }
         .pagination button:hover:not(.active) {
-            background-color: var(--koyu-lacivert);
+            background-color: var(--ana-koyu);
         }
         .pagination button.active {
-            background-color: var(--koyu-lacivert);
+            background-color: var(--ana-koyu);
             cursor: default;
         }
         .pagination span {
             font-weight: bold;
-            color: var(--koyu-lacivert);
+            color: var(--ana-koyu);
         }
         
         /* Footer - SAYFANIN EN ALTINDA */
         footer {
-            background-color: var(--koyu-lacivert);
-            color: white;
+            background-color: var(--ana-koyu);
+            color: var(--arkaplan-beyaz);
             padding: 1.5rem;
             text-align: center;
             margin-top: auto;
@@ -400,7 +410,7 @@
         }
         
         .footer-links a {
-            color: white;
+            color: var(--arkaplan-beyaz);
             margin: 0 1rem;
             text-decoration: none;
             font-size: 0.9rem;
@@ -771,6 +781,13 @@
         }
         
         // Event listeners
+        document.getElementById('home-link').addEventListener('click', (e) => {
+            // Eğer anasayfa linki sadece sayfayı yenileyecekse, preventDefault'a gerek yok.
+            // Eğer belirli bir bölüme kaydırılacaksa (örneğin en üste), e.preventDefault() kullanılmalı.
+            // Örneğin: window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Şu anki durumda, sadece # kaldırıldığı için varsayılan davranış sayfayı yenilemek olacaktır.
+        });
+
         document.getElementById('about-btn').addEventListener('click', () => {
             document.getElementById('aboutModal').style.display = 'flex';
             createConfetti();
@@ -826,7 +843,7 @@
         // Konfeti efekti
         function createConfetti() {
             const confettiContainer = document.getElementById('aboutModal');
-            const colors = ['#6a7ba2', '#3c4f6e', '#e3f2fd', '#bbdefb'];
+            const colors = ['#778899', '#708090', '#c0c0c0', '#696969'];
             
             for (let i = 0; i < 50; i++) {
                 const confetti = document.createElement('div');
