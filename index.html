@@ -453,6 +453,124 @@
                 font-size: 0.9rem;
             }
         }
+        
+        /* Yeni eklenen haftanın müziği bölümü */
+        .music-widget {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            background-color: var(--koyu-lacivert);
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .music-widget:hover {
+            transform: translateY(-50%) scale(1.05);
+        }
+        
+        .music-widget h3 {
+            margin-top: 0;
+            color: var(--beyaz);
+            font-size: 1rem;
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--pastel-lacivert);
+            margin-bottom: 0.5rem;
+        }
+        
+        .music-widget .song-info {
+            color: var(--acik-yazi);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .music-widget .quote {
+            font-style: italic;
+            font-size: 0.85rem;
+            color: var(--acik-yazi);
+            text-align: center;
+            margin-top: 1rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--pastel-lacivert);
+        }
+        
+        .music-widget button {
+            display: block;
+            width: 100%;
+            background-color: var(--pastel-lacivert);
+            color: var(--beyaz);
+            border: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .music-widget button:hover {
+            background-color: #555;
+        }
+        
+        .music-widget .now-playing {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+        
+        .music-widget .now-playing .album-cover {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            margin-right: 0.5rem;
+            object-fit: cover;
+        }
+        
+        .music-widget .now-playing .play-pause {
+            width: 20px;
+            height: 20px;
+            background-color: var(--pastel-lacivert);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        /* Yeni eklenen şiir bölümü */
+        .poem-section {
+            text-align: center;
+            background-color: var(--pastel-lacivert);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 800px;
+            color: var(--beyaz);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .poem-section h2 {
+            margin-top: 0;
+            color: var(--beyaz);
+        }
+        
+        .poem-section p {
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 1rem 0;
+        }
+        
+        .poem-section .author {
+            font-weight: bold;
+            margin-bottom: 0;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -471,7 +589,7 @@
                 </div>
                 
                 <div class="header-center">
-                    <h1>Nette Yazar</h1>
+                    <h1>Nette Yokuş</h1>
                 </div>
                 
                 <div class="header-right">
@@ -479,25 +597,39 @@
                 </div>
             </div>
         </header>
-        <div class="modal-overlay" id="aboutModal">
-            <div class="modal">
-                <button class="close-modal">&times;</button>
-                <h3>Hakkımda</h3>
-                <p>Merhaba ben İrem... Yazmak bana şu hayatta en iyi gelen şey... Yazdıklarımı sizlerle paylaşıp, üzerine konuşmak eminim daha da zevkli olacaktır. Daha umutlu yarınlar için... Keyifli Okumalar!</p>
-            </div>
-        </div>
-        <div class="modal-overlay" id="contactModal">
-            <div class="modal">
-                <button class="close-modal">&times;</button>
-                <h3>İletişim</h3>
-                <form class="contact-form" id="contactForm">
-                    <input type="text" placeholder="Adınız" required>
-                    <input type="email" placeholder="E-posta Adresiniz" required>
-                    <textarea placeholder="Mesajınız" required></textarea>
-                    <button type="submit">Gönder</button>
-                </form>
-            </div>
-        </div>
+        
+        <!-- Yeni eklenen şiir bölümü -->
+        <section class="poem-section">
+            <h2>Bir Yokuş Hikayesi</h2>
+            <p>
+                Yokuşlar hayatın en güzel kısmıdır,<br>
+                Yüksek tırmanan, derin düşen,<br>
+                Her adımda yeni bir manzara,<br>
+                Her nefeste farklı bir duygu.<br><br>
+                
+                Yokuş yukarı tırmanırken,<br>
+                Bedenimiz ağır düşer,<br>
+                Nefeslerimiz kesilir,<br>
+                Yine de yukarı,<br>
+                Yine de özgürlük için.<br><br>
+                
+                Yokuş aşağı inerken,<br>
+                Hız alır yüreğimiz,<br>
+                Zaman hızlanır,<br>
+                Yine de aşağı,<br>
+                Yine de huzur için.<br><br>
+                
+                Yokuşun ortasında durduğumuzda,<br>
+                Geride bıraktıklarımızı görürüz,<br>
+                Önümüzdeki yolları sezeriz,<br>
+                Ve anlarız ki,<br>
+                Yolculuk bizi yaratır,<br>
+                Yaratılmaz bizi.<br><br>
+                
+                <em>İrem BUĞA</em>
+            </p>
+        </section>
+        
         <section class="feedback-section">
             <p>Yazılarım hakkında ne düşünüyorsunuz?</p>
             <div class="emoji-rating">
@@ -507,13 +639,16 @@
                 <span>🤩</span>
             </div>
         </section>
+        
         <main class="post-grid" id="postGrid">
             </main>
+        
         <div class="pagination" id="pagination">
             <button id="prevPage">Önceki</button>
             <div id="pageNumbers"></div>
             <button id="nextPage">Sonraki</button>
         </div>
+        
         <div class="post-overlay" id="postOverlay">
             <div class="post-container">
                 <button class="close-post">&times;</button>
@@ -529,6 +664,46 @@
                 <div class="post-actions">
                     <button class="like-btn"><i class="far fa-heart"></i> Beğen</button>
                 </div>
+            </div>
+        </div>
+        
+        <!-- Yeni eklenen haftanın müziği widget'i -->
+        <div class="music-widget" id="musicWidget">
+            <h3>Haftanın Müziği</h3>
+            <div class="song-info">
+                <div id="songTitle">Unknown</div>
+                <div id="songArtist">Unknown</div>
+            </div>
+            <div class="now-playing">
+                <img src="https://picsum.photos/seed/album1/40/40.jpg" class="album-cover" alt="Album Cover">
+                <div class="play-pause" id="playPauseBtn">
+                    <i class="fas fa-play" id="playIcon"></i>
+                </div>
+            </div>
+            <div class="quote" id="musicQuote">
+                Müzik, kelimelerin yetemediği yerde konuşan dil...
+            </div>
+            <button id="changeMusicBtn">Değiştir</button>
+        </div>
+        
+        <div class="modal-overlay" id="aboutModal">
+            <div class="modal">
+                <button class="close-modal">&times;</button>
+                <h3>Hakkımda</h3>
+                <p>Merhaba ben İrem... Yazmak bana şu hayatta en iyi gelen şey... Yazdıklarımı sizlerle paylaşıp, üzerine konuşmak eminim daha da zevkli olacaktır. Daha umutlu yarınlar için... Keyifli Okumalar!</p>
+            </div>
+        </div>
+        
+        <div class="modal-overlay" id="contactModal">
+            <div class="modal">
+                <button class="close-modal">&times;</button>
+                <h3>İletişim</h3>
+                <form class="contact-form" id="contactForm">
+                    <input type="text" placeholder="Adınız" required>
+                    <input type="email" placeholder="E-posta Adresiniz" required>
+                    <textarea placeholder="Mesajınız" required></textarea>
+                    <button type="submit">Gönder</button>
+                </form>
             </div>
         </div>
     </div>
@@ -551,7 +726,7 @@
                 image: "https://i.pinimg.com/736x/7a/d4/32/7ad43256665283555aa0d894289726d9.jpg",
                 content: `Dinmedi mi denizindeki dalgalar,<br>
                 Bitmedi mi çölündeki fırtınalar?<br>
-                Durmadı mı gözünd yaşlar,<br>
+                Durmadı mı gözündüş yaşlar,<br>
                 Batmadı mı ayağına yolundaki taşlar?<br><br>
                 Ah, şu benim deli gönlüm...<br>
                 Varsın dinmesin dalgalar,<br>
@@ -865,7 +1040,7 @@
         // Confetti efekti
         function createConfetti() {
             const confettiContainer = document.getElementById('aboutModal');
-            const colors = ['#6a6a6a', '#333333', '#e3f2fd', '#bbdefb'];
+            const colors = ['##a6a6a6', '#333333', '#e3f2fd', '#bbdefb'];
             
             for (let i = 0; i < 50; i++) {
                 const confetti = document.createElement('div');
@@ -875,32 +1050,13 @@
                 confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 confetti.style.borderRadius = '50%';
                 confetti.style.top = '10px';
-                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.left = Math.random() * 100 + '%',
                 confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
                 confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear`;
                 
                 confettiContainer.appendChild(confetti);
             }
         }
-        
-        // Modal'ın arka planına tıklayarak kapatılması
-        document.getElementById('aboutModal').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('aboutModal')) {
-                document.getElementById('aboutModal').style.display = 'none';
-            }
-        });
-        
-        document.getElementById('contactModal').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('contactModal')) {
-                document.getElementById('contactModal').style.display = 'none';
-            }
-        });
-        
-        document.getElementById('postOverlay').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('postOverlay')) {
-                closePostModal();
-            }
-        });
         
         // Confetti animasyonu için stil ekleyelim
         const style = document.createElement('style');
@@ -918,8 +1074,75 @@
         `;
         document.head.appendChild(style);
         
+        // Haftanın müziği widget'i için veriler
+        const musicList = [
+            {
+                title: "Aşkın En Güzel Hali",
+                artist: "İrem BUĞA",
+                albumCover: "https://picsum.photos/seed/album1/200/200.jpg",
+                quote: "Müzik, kelimelerin yetemediği yerde konuşan dil..."
+            },
+            {
+                title: "Yaz Günü",
+                artist: "İrem BUĞA",
+                albumCover: "https://picsum.photos/seed/album2/200/200.jpg",
+                quote: "Müzikle birlikte her an daha güzel..."
+            },
+            {
+                title: "Sessizlik",
+                artist: "İrem BUĞA",
+                albumCover: "https://picsum.photos/seed/album3/200/200.jpg",
+                quote: "Sessizlikteki en güzel ses, kendi düşüncelerimizdir..."
+            },
+            {
+                title: "Gece Yarısı",
+                artist: "İrem BUĞA",
+                albumCover: "https://picsum.photos/seed/album4/200/200.jpg",
+                quote: "Gece yarısı düşüncelerimiz daha netleşir..."
+            },
+            {
+                title: "Ufuk",
+                artist: "İrem BUĞA",
+                albumCover: "https://picsum.photos/seed/album5/200/200.jpg",
+                quote: "Ufukta yeni başlangıçlar var..."
+            }
+        ];
+        
+        let currentSongIndex = 0;
+        
+        // Haftanın müziği widget'ı için fonksiyonlar
+        function updateMusicWidget() {
+            const song = musicList[currentSongIndex];
+            document.getElementById('songTitle').textContent = song.title;
+            document.getElementById('songArtist').textContent = song.artist;
+            document.getElementById('musicQuote').textContent = song.quote;
+            document.querySelector('.album-cover').src = song.albumCover;
+        }
+        
+        function togglePlayPause() {
+            const playIcon = document.getElementById('playIcon');
+            if (playIcon.classList.contains('fa-play')) {
+                playIcon.classList.remove('fa-play');
+                playIcon.classList.add('fa-pause');
+            } else {
+                playIcon.classList.remove('fa-pause');
+                playIcon.classList.add('fa-play');
+            }
+        }
+        
+        function changeMusic() {
+            currentSongIndex = (currentSongIndex + 1) % musicList.length;
+            updateMusicWidget();
+            togglePlayPause();
+        }
+        
+        // Haftanın müziği widget'ı için olay dinleyicileri
+        document.getElementById('playPauseBtn').addEventListener('click', togglePlayPause);
+        document.getElementById('changeMusicBtn').addEventListener('click', changeMusic);
+        
         // Initial display
         displayPosts(currentPage);
+        updateMusicWidget();
     </script>
 </body>
 </html>
