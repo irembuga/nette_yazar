@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://irembuga.github.io/nette_yazar/</loc>
-    <lastmod>2025-06-04</lastmod>
-  </url>
-  <url>
-    <loc>https://irembuga.github.io/nette_yazar/yazi1.html</loc>
-    <lastmod>2025-06-04</lastmod>
-  </url>
-  <url>
-    <loc>https://irembuga.github.io/nette_yazar/yazi2.html</loc>
-    <lastmod>2025-06-04</lastmod>
-  </url>
-  <url>
-    <loc>https://irembuga.github.io/nette_yazar/yazi3.html</loc>
-    <lastmod>2025-06-04</lastmod>
+    <loc>https://kullaniciadiniz.github.io/proje-adi/</loc>
+    <lastmod>2025-06-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
   </url>
 </urlset>
