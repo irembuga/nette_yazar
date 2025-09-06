@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haftanın Sözü</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #333;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      background: #444;
+    }
+    nav a {
+      color: #fff;
+      padding: 14px 20px;
+      text-decoration: none;
+      display: block;
+    }
+    nav a:hover {
+      background: #666;
+    }
+    main {
+      padding: 20px;
+    }
+    blockquote {
+      font-size: 20px;
+      font-style: italic;
+      border-left: 4px solid #333;
+      padding-left: 10px;
+      margin: 20px 0;
+    }
+    form {
+      margin-top: 20px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 15px;
+      background: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #555;
+    }
+    .yorumlar {
+      margin-top: 20px;
+    }
+    .yorum {
+      border-bottom: 1px solid #ccc;
+      padding: 10px 0;
+    }
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Haftanın Sözü</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Anasayfa</a>
+    <a href="music.html">Haftanın Müziği</a>
+    <a href="quote.html">Haftanın Sözü</a>
+    <a href="#">İletişim</a>
+    <a href="#">Hakkımda</a>
+  </nav>
+
+  <main>
+    <blockquote>"Başarı, hazırlanma ile fırsatın buluştuğu yerdir."</blockquote>
+
+    <h3>Yorum Bırak</h3>
+    <form id="yorumForm">
+      <input type="text" id="isim" placeholder="Adınız" required>
+      <textarea id="yorum" placeholder="Yorumunuz" required></textarea>
+      <button type="submit">Gönder</button>
+    </form>
+
+    <div class="yorumlar" id="yorumlar"></div>
+  </main>
+
+  <footer>
+    <p>© 2025 Benim Sitem</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById("yorumForm");
+    const yorumlarDiv = document.getElementById("yorumlar");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const isim = document.getElementById("isim").value;
+      const yorum = document.getElementById("yorum").value;
+
+      if (isim && yorum) {
+        const yorumEl = document.createElement("div");
+        yorumEl.classList.add("yorum");
+        yorumEl.innerHTML = `<strong>${isim}</strong>: ${yorum}`;
+        yorumlarDiv.appendChild(yorumEl);
+
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
