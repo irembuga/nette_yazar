@@ -1,18 +1,74 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="author" content="İrem BUĞA" />
-  <meta name="description" content="İrem BUĞA'nın şiir ve düşünce yazılarını paylaştığı kişisel blog sitesi." />
-  <meta property="og:title" content="Nette Yazar" />
-  <meta property="og:description" content="İrem BUĞA'nın şiir günlüğü." />
-  <meta property="og:image" content="https://irembuga.github.io/nette_yazar/assets/kapak1.jpg" />
-  <meta property="og:url" content="https://irembuga.github.io/nette_yazar/" />
-  <title>Nette Yazar</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benim Sitem</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #333;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      background: #444;
+    }
+    nav a {
+      color: #fff;
+      padding: 14px 20px;
+      text-decoration: none;
+      display: block;
+    }
+    nav a:hover {
+      background: #666;
+    }
+    main {
+      padding: 20px;
+    }
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+    }
+    /* Mobil uyumluluk */
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Aynı kalan kısım -->
+  <header>
+    <h1>Benim Sitem</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Anasayfa</a>
+    <a href="music.html">Haftanın Müziği</a>
+    <a href="quote.html">Haftanın Sözü</a>
+    <a href="#">İletişim</a>
+    <a href="#">Hakkımda</a>
+  </nav>
+
+  <main>
+    <h2>Hoş geldiniz!</h2>
+    <p>Burası benim kişisel sitem. Menüden diğer sayfalara ulaşabilirsiniz.</p>
+  </main>
+
+  <footer>
+    <p>© 2025 Benim Sitem</p>
+  </footer>
 </body>
 </html>
